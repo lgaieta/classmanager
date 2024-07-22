@@ -42,5 +42,7 @@ fun RegisterPage(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.bodyLarge
             )
         }
+        Spacer(modifier = Modifier.height(48.dp))
+        RegisterForm()
     }
 }
