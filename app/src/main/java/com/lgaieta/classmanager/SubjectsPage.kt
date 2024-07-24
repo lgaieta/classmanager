@@ -1,7 +1,6 @@
 package com.lgaieta.classmanager
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,27 +14,44 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.lgaieta.classmanager.ui.theme.Background200
+import com.lgaieta.classmanager.ui.theme.Background100
 
-data class Subject(val name: String, val details: String, val startTime: String, val endTime: String)
+
+
+data class Subject(val name: String, val details: String, val firstTime: String, val secondTime: String)
 
 @Composable
 fun SubjectsPage(modifier: Modifier = Modifier) {
     var subjects by remember { mutableStateOf(
         listOf(
-            Subject("Modelos y sistemas", "7mo 2da E.E.S.T. Nª1", "10:00", "14:00")
+            Subject("Modelos y sistemas", "7mo 2da E.E.S.T. Nª1", "Lunes 10:00", "Jueves 14:00")
         )
     ) }
+
+    Column(
+        modifier = Modifier
+            .padding(32.dp)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Materias",
+            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
+        )
+    }
 
     Box(modifier = modifier.fillMaxSize()) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 72.dp) // espacio para el botón fijo
+                .padding(vertical = 72.dp)
         ) {
             items(subjects.size) { index ->
                 SubjectItem(subjects[index])
             }
         }
+
         IconButton(
             onClick = {
                 subjects = subjects + Subject("Nueva Materia", "Curso al que pertenece", "09:00", "11:00")
@@ -54,29 +70,45 @@ fun SubjectsPage(modifier: Modifier = Modifier) {
 fun SubjectItem(subject: Subject) {
     Column(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(24.dp)
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary ,  shape = MaterialTheme.shapes.medium)
-            .padding(16.dp),
-
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(Background200, shape = RoundedCornerShape(16.dp))
+            .padding(20.dp),
+        horizontalAlignment = Alignment.Start
     ) {
         Text(
             text = subject.name,
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
         )
+
         Text(
-            text = subject.details,
-            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium)
+                text = subject.details,
+                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium)
         )
+
         Row(
             modifier = Modifier.padding(top = 8.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = subject.startTime, style = MaterialTheme.typography.labelLarge)
+            Box(
+                modifier = Modifier
+                    .background(Background100 , shape = RoundedCornerShape(8.dp))
+                    .padding(8.dp)
+            ) {
+                Text(text = subject.firstTime, style = MaterialTheme.typography.labelLarge)
+            }
+
             Spacer(modifier = Modifier.padding(8.dp))
-            Text(text = subject.endTime, style = MaterialTheme.typography.labelLarge)
-        }
+
+            Box(
+                modifier = Modifier
+                    .background(Background100, shape = RoundedCornerShape(8.dp))
+                    .padding(8.dp)
+            ) {
+
+                Text(text = subject.secondTime, style = MaterialTheme.typography.labelLarge)
+            }
+            }
     }
 }
 
