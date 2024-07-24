@@ -25,7 +25,7 @@ data class Subject(val name: String, val details: String, val firstTime: String,
 fun SubjectsPage(modifier: Modifier = Modifier) {
     var subjects by remember { mutableStateOf(
         listOf(
-            Subject("Modelos y sistemas", "7mo 2da E.E.S.T. Nª1", "Lunes 10:00", "Jueves 14:00")
+            Subject("Modelo y sistemas", "7mo 2da E.E.S.T. Nª1", "Lunes 10:00", "Jueves 14:00")
         )
     ) }
 
