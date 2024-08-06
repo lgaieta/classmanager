@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ClassManager</string>
+    <string name="app_subtitle">Tu trabajo organizado en un solo lugar.</string>
+    <string name="register_form_title">Cree su cuenta para empezar</string>
+    <string name="email_label">Correo electrónico</string>
+    <string name="password_label">Contraseña</string>
+    <string name="register_button_text">Crear cuenta</string>
+    <string name="change_to_login_text">¿Ya tenés una cuenta? Iniciá sesión</string>
+    <string name="forgot_password_text">Olvidé mi contraseña</string>
 </resources>

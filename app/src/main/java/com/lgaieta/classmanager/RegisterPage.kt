@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
@@ -33,12 +34,12 @@ fun RegisterPage(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "ClassManager",
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Tu trabajo organizado en un solo lugar.",
+                text = stringResource(R.string.app_subtitle),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
