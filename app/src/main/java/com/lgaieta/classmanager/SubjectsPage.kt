@@ -72,7 +72,7 @@ fun SubjectItem(subject: Subject) {
         modifier = Modifier
             .padding(24.dp)
             .fillMaxWidth()
-            .background(Background200, shape = RoundedCornerShape(16.dp))
+            .background(Background100, shape = RoundedCornerShape(16.dp))
             .padding(20.dp),
         horizontalAlignment = Alignment.Start
     ) {
@@ -80,19 +80,19 @@ fun SubjectItem(subject: Subject) {
             text = subject.name,
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
         )
+        Spacer(modifier = Modifier.height(16.dp))
 
         Text(
                 text = subject.details,
                 style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium)
         )
-
+        Spacer(modifier = Modifier.height(16.dp))
         Row(
-            modifier = Modifier.padding(top = 8.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             Box(
                 modifier = Modifier
-                    .background(Background100 , shape = RoundedCornerShape(8.dp))
+                    .background(Background200 , shape = RoundedCornerShape(8.dp))
                     .padding(8.dp)
             ) {
                 Text(text = subject.firstTime, style = MaterialTheme.typography.labelLarge)
@@ -102,7 +102,7 @@ fun SubjectItem(subject: Subject) {
 
             Box(
                 modifier = Modifier
-                    .background(Background100, shape = RoundedCornerShape(8.dp))
+                    .background(Background200, shape = RoundedCornerShape(8.dp))
                     .padding(8.dp)
             ) {
 

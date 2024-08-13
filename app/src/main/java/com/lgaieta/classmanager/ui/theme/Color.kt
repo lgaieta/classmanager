@@ -13,4 +13,6 @@ val Pink40 = Color(0xFF7D5260)
 val Background100 = Color(0xFFF0EEF9)
 val Background200 = Color(0xFFE4E0F4)
 
+val Buttons200 = Color(0xFF6200EE)
+
 

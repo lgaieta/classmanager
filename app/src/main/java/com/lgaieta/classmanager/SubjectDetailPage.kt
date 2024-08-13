@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,7 +34,6 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.CenterHorizontally) .padding(top = 40.dp)
         )
-
         // Curso
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -46,7 +44,7 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 16.dp) // Espacio entre la columna y los botones
+                    .padding(end = 16.dp)
             ) {
                 Text(
                     text = "Curso",
@@ -62,7 +60,7 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
             IconButton(
                 onClick = { /* Editar curso */ },
                 modifier = Modifier
-                    .background(Background200) // Usa el color que prefieras
+                    .background(Background200)
                     .size(48.dp)
             ) {
                 Icon(imageVector = Icons.Default.Edit, contentDescription = "Editar", tint = MaterialTheme.colorScheme.primary)
@@ -160,8 +158,7 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
             modifier = Modifier.align(Alignment.Start).padding(top = 16.dp)
         )
         Column(modifier = Modifier.fillMaxWidth()) {
-            // Ejemplo de alumno
-            repeat(3) { // Reemplaza con el número real de alumnos
+            repeat(6) { 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
