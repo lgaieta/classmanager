@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -26,11 +27,11 @@ fun RegisterForm(modifier: Modifier = Modifier) {
 
     Column(verticalArrangement = Arrangement.spacedBy(24.dp), modifier = modifier) {
         Text(
-            text = "Cree su cuenta para empezar",
+            text = stringResource(R.string.register_form_title),
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
         )
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(text = "Correo electrónico")
+            Text(text = stringResource(R.string.email_label))
             OutlinedTextField(
                 value = email,
                 modifier = Modifier.fillMaxWidth(),
@@ -39,7 +40,7 @@ fun RegisterForm(modifier: Modifier = Modifier) {
             )
         }
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(text = "Contraseña")
+            Text(text = stringResource(R.string.password_label))
             OutlinedTextField(
                 value = password,
                 shape = RoundedCornerShape(12.dp),
@@ -54,7 +55,7 @@ fun RegisterForm(modifier: Modifier = Modifier) {
             contentPadding = PaddingValues(16.dp),
         ) {
             Text(
-                text = "Crear cuenta",
+                text = stringResource(R.string.register_button_text),
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
             )
         }
@@ -63,13 +64,13 @@ fun RegisterForm(modifier: Modifier = Modifier) {
                 onClick = { /* Handle go to login action */ },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "¿Ya tenés una cuenta? Iniciá sesión")
+                Text(text = stringResource(R.string.change_to_login_text))
             }
             TextButton(
                 onClick = { /* Handle forgot password action */ },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Olvidé mi contraseña")
+                Text(text = stringResource(R.string.forgot_password_text))
             }
         }
     }
