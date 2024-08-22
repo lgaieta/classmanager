@@ -14,6 +14,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,14 +23,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun RegisterForm(modifier: Modifier = Modifier) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
 
     Column(verticalArrangement = Arrangement.spacedBy(24.dp), modifier = modifier) {
-        Text(
-            text = stringResource(R.string.register_form_title),
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
-        )
+        RegisterFormTitle()
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(text = stringResource(R.string.email_label))
             OutlinedTextField(
@@ -59,19 +57,14 @@ fun RegisterForm(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
             )
         }
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            TextButton(
-                onClick = { /* Handle go to login action */ },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = stringResource(R.string.change_to_login_text))
-            }
-            TextButton(
-                onClick = { /* Handle forgot password action */ },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = stringResource(R.string.forgot_password_text))
-            }
-        }
     }
+}
+
+@Composable
+fun RegisterFormTitle(modifier: Modifier = Modifier) {
+    Text(
+        text = stringResource(R.string.register_form_title),
+        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+        modifier = modifier
+    )
 }

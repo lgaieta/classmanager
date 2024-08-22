@@ -1,5 +1,6 @@
 package com.lgaieta.classmanager
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +31,7 @@ fun RegisterPage(modifier: Modifier = Modifier) {
     ) {
         // Title and subtitle container
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -45,5 +47,29 @@ fun RegisterPage(modifier: Modifier = Modifier) {
         }
         Spacer(modifier = Modifier.height(48.dp))
         RegisterForm()
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            ForgotPassword()
+            AlreadyLoggedLink()
+        }
+    }
+}
+
+@Composable
+fun AlreadyLoggedLink(modifier: Modifier = Modifier) {
+    TextButton(
+        onClick = { /* Handle go to login action */ },
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Text(text = stringResource(R.string.change_to_login_text))
+    }
+}
+
+@Composable
+fun ForgotPassword(modifier: Modifier = Modifier) {
+    TextButton(
+        onClick = { /* Handle forgot password action */ },
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Text(text = stringResource(R.string.forgot_password_text))
     }
 }

@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -13,8 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.lgaieta.classmanager.ui.theme.Background200
-import com.lgaieta.classmanager.ui.theme.Background100
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +30,9 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
         Text(
             text = subject.name,
             style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.align(Alignment.CenterHorizontally) .padding(top = 40.dp)
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 40.dp)
         )
 
         // Curso
@@ -62,10 +61,13 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
             IconButton(
                 onClick = { /* Editar curso */ },
                 modifier = Modifier
-                    .background(Background200) // Usa el color que prefieras
                     .size(48.dp)
             ) {
-                Icon(imageVector = Icons.Default.Edit, contentDescription = "Editar", tint = MaterialTheme.colorScheme.primary)
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Editar",
+                    tint = MaterialTheme.colorScheme.primary
+                )
             }
 
             Spacer(modifier = Modifier.width(16.dp))
@@ -73,17 +75,22 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
             IconButton(
                 onClick = { /* Eliminar curso */ },
                 modifier = Modifier
-                    .background(Background200)
                     .size(48.dp)
             ) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription = "Eliminar", tint = MaterialTheme.colorScheme.primary)
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Eliminar",
+                    tint = MaterialTheme.colorScheme.primary
+                )
             }
-}
+        }
         // Horarios
         Text(
             text = "Horarios",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.align(Alignment.Start).padding(top = 16.dp)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(top = 16.dp)
         )
         // Lista de horarios
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -93,7 +100,6 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .background(Background100, shape = RoundedCornerShape(8.dp))
                         .padding(8.dp)
                 ) {
                     Text(
@@ -110,7 +116,9 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
         Text(
             text = "Exámenes y trabajos prácticos",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.align(Alignment.Start).padding(top = 16.dp)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(top = 16.dp)
         )
         Column(modifier = Modifier.fillMaxWidth()) {
             // Ejemplo de tarea
@@ -118,13 +126,11 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
-                    .background(Background100, shape = RoundedCornerShape(8.dp))
                     .padding(16.dp)
             ) {
                 Column {
                     Box(
                         modifier = Modifier
-                            .background(Color(0xFFE0E0E0), shape = RoundedCornerShape(4.dp))
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
                         Text(
@@ -157,7 +163,9 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
         Text(
             text = "Alumnos",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.align(Alignment.Start).padding(top = 16.dp)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(top = 16.dp)
         )
         Column(modifier = Modifier.fillMaxWidth()) {
             // Ejemplo de alumno
@@ -167,7 +175,6 @@ fun SubjectDetailPage(subject: Subject, modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .background(Background100, shape = RoundedCornerShape(8.dp))
                         .padding(8.dp)
                 ) {
                     Text(

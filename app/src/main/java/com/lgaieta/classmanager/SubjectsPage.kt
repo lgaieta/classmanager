@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,10 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.lgaieta.classmanager.ui.theme.Background200
-import com.lgaieta.classmanager.ui.theme.Background100
-
-
 
 data class Subject(val name: String, val details: String, val firstTime: String, val secondTime: String)
 
@@ -59,7 +54,6 @@ fun SubjectsPage(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
-                .background(MaterialTheme.colorScheme.primary, shape = MaterialTheme.shapes.extraLarge)
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar Materia", tint = Color.White)
         }
@@ -72,7 +66,6 @@ fun SubjectItem(subject: Subject) {
         modifier = Modifier
             .padding(24.dp)
             .fillMaxWidth()
-            .background(Background200, shape = RoundedCornerShape(16.dp))
             .padding(20.dp),
         horizontalAlignment = Alignment.Start
     ) {
@@ -92,7 +85,6 @@ fun SubjectItem(subject: Subject) {
         ) {
             Box(
                 modifier = Modifier
-                    .background(Background100 , shape = RoundedCornerShape(8.dp))
                     .padding(8.dp)
             ) {
                 Text(text = subject.firstTime, style = MaterialTheme.typography.labelLarge)
@@ -102,7 +94,6 @@ fun SubjectItem(subject: Subject) {
 
             Box(
                 modifier = Modifier
-                    .background(Background100, shape = RoundedCornerShape(8.dp))
                     .padding(8.dp)
             ) {
 
