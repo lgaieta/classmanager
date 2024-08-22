@@ -41,6 +41,6 @@ fun NameField(value: String, onValueChange: (value: String) -> Unit) {
 @Composable
 fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(onClick = onClick, modifier = modifier) {
-        Text(text = stringResource(R.string.crear_materia))
+        Text(text = stringResource(R.string.create_subject))
     }
 }

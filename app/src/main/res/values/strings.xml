@@ -7,4 +7,6 @@
     <string name="register_button_text">Crear cuenta</string>
     <string name="change_to_login_text">¿Ya tenés una cuenta? Iniciá sesión</string>
     <string name="forgot_password_text">Olvidé mi contraseña</string>
+    <string name="create_subject">Crear materia</string>
+    <string name="new_subject">Nueva materia</string>
 </resources>

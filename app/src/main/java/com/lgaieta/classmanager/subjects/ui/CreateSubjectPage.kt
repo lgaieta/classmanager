@@ -53,7 +53,7 @@ fun CreateSubjectHeader() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.nuevo_producto),
+            text = stringResource(R.string.new_subject),
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
         )
     }
