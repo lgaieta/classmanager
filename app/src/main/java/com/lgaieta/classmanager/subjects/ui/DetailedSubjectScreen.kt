@@ -14,13 +14,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.lgaieta.classmanager.subjects.ui.Subject
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.lgaieta.classmanager.subjects.ui.DetailedSubjectViewModel
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
-
+@Preview
 @Composable
-fun DetailedSubjectScreen(subject: Subject, modifier: Modifier = Modifier) {
+fun DetailedSubjectScreen(
+    modifier: Modifier = Modifier,
+    DetailedSubjectViewModel: DetailedSubjectViewModel = viewModel(),
+) {
     Column(
         modifier = Modifier
             .padding(
@@ -33,48 +37,11 @@ fun DetailedSubjectScreen(subject: Subject, modifier: Modifier = Modifier) {
         DetailedSubjectHeader()
         DetailsCourse()
         DetailsTime()
-
-
+        DetailTasks()
+        StudentsList()
     }
-
-    // Alumnos
-    Text(
-        text = "Alumnos",
-        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-        modifier = Modifier
-            .padding(top = 16.dp)
-    )
-    Column(modifier = Modifier.fillMaxWidth()) {
-        // Ejemplo de alumno
-        repeat(3) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp)
-                    .padding(8.dp)
-            ) {
-                Text(
-                    text = "Aieta Luciano",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        }
-
-        // Botón para agregar nuevo alumno
-        Button(
-            onClick = { },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp)
-                .padding(8.dp)
-        ) {
-            Text(text = "+ Nuevo alumno")
-        }
-    }
-
 }
+
 
 @Composable
 fun DetailedSubjectHeader() {
@@ -105,12 +72,12 @@ fun DetailsCourse() {
                 .padding(end = 16.dp)
         ) {
             Text(
-                text = "Curso",
+                text = stringResource(R.string.course_subject),
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                 modifier = Modifier.align(Alignment.Start)
             )
             Text(
-                text = "Subject details",
+                text = "course details",
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
             )
         }
@@ -148,7 +115,6 @@ fun DetailsTime() {
         modifier = Modifier
             .padding(top = 16.dp)
     )
-    // Lista de horarios
     Box(modifier = Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -213,5 +179,40 @@ fun TaskState() {
             text = "Evaluación",
             style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
         )
+    }
+}
+
+@Composable
+fun StudentsList() {
+    Text(
+        text = "Alumnos",
+        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+        modifier = Modifier
+            .padding(top = 16.dp)
+    )
+    Column(modifier = Modifier.fillMaxWidth()) {
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp)
+                .padding(8.dp)
+        ) {
+            Text(
+                text = "Aieta Luciano",
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.weight(1f)
+            )
+        }
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .padding(8.dp)
+        ) {
+            Text(text = "+ Nuevo alumno")
+        }
     }
 }

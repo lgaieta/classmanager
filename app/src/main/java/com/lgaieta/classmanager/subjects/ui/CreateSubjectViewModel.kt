@@ -18,7 +18,6 @@ class CreateSubjectViewModel(
             it.copy(name = newName)
         }
     }
-
     private fun validateName() {
         return with(_uiState.value) {
             name.isNotBlank()
