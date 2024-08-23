@@ -25,11 +25,11 @@ data class Subject(val name: String, val details: String, val firstTime: String,
 @Preview1
 @Composable
 fun PreviewContent() {
-    SubjectsPage(SubjectViewModel())
+    SubjectsScreen(SubjectViewModel())
 }
 
 @Composable
-fun SubjectsPage(
+fun SubjectsScreen(
     SubjectViewModel: SubjectViewModel
 
 ) {    val uiState by SubjectViewModel.uiState.collectAsState()
