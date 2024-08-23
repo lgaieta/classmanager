@@ -2,6 +2,7 @@ package com.lgaieta.classmanager.subjects.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -30,17 +31,22 @@ fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(text = stringResource(R.string.email_label))
         OutlinedTextField(
-            value = "",
+            value = value,
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            onValueChange = { }
+            onValueChange = onValueChange
         )
     }
 }
 
 @Composable
 fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Button(onClick = onClick, modifier = modifier) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        contentPadding = PaddingValues(16.dp),
+    ) {
         Text(text = stringResource(R.string.create_subject))
     }
 }

@@ -29,7 +29,7 @@ fun CreateSubjectScreen(
     val uiState by createSubjectViewModel.uiState.collectAsState()
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(
                 start = HorizontalPagePadding,
                 end = HorizontalPagePadding,
