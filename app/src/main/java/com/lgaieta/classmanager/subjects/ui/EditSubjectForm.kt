@@ -64,13 +64,11 @@ fun NameFieldEdit(value: String, onValueChange: (value: String) -> Unit) {
             placeholder = { Text("Nombre de materia") },
             onValueChange = onValueChange
         )
-
     }
 }
 @Composable
 fun CourseFieldEdit(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-
         Text(text = stringResource(R.string.course_subject))
         OutlinedTextField(
             value = value,
@@ -79,7 +77,6 @@ fun CourseFieldEdit(value: String, onValueChange: (value: String) -> Unit) {
             placeholder = { Text("Curso de materia") },
             onValueChange = onValueChange
         )
-
     }
 }
 
