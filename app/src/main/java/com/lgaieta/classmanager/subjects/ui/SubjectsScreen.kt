@@ -16,9 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.lgaieta.classmanager.R
-
 import androidx.compose.ui.tooling.preview.Preview as Preview1
 
+
+// Data class for example
 data class Subject(val name: String, val details: String, val firstTime: String, val secondTime: String)
 
 @Preview1
@@ -68,4 +69,4 @@ fun SubjectHeader() {
         )
     }
 }
-
+// Prueba

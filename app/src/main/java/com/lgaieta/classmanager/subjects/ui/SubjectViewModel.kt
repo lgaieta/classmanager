@@ -10,22 +10,16 @@ class SubjectViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(SubjectState())
     val uiState: StateFlow<SubjectState> = _uiState.asStateFlow()
 
-    fun changeName(newName: String) {
-        _uiState.update {
-            it.copy(name = newName)
-        }
-    }
-    fun changeTime(newTime: Int) {
-        _uiState.update {
-            it.copy(time = newTime)
-        }
-    }
-    suspend fun submitSubject() {
+    fun showDataSubjects(){
 
     }
+
 }
 
 data class SubjectState (
     val name: String = "",
-    val time: Int = 0
+    val details: String = "",
+    val time: Int = 0,
+
 )
+// Prueba
