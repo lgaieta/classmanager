@@ -7,31 +7,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SubjectForm(
-    onSubmit: () -> Unit,
-) {
-    Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
-        NewSubjectButton(onClick = onSubmit)
-    }
-}
-
-
-@Composable
- fun SubjectItem(subject: Subject) {
+fun SubjectItem(subject: Subject) {
     Column(
         modifier = Modifier
             .padding(24.dp)
@@ -70,25 +56,11 @@ fun SubjectForm(
                 Text(text = subject.secondTime, style = MaterialTheme.typography.labelLarge)
             }
         }
+
     }
 }
 
 
-@Composable
-fun NewSubjectButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Box(modifier = Modifier
-            .fillMaxWidth(),
-        contentAlignment = Alignment.BottomCenter)
-    {
-       
-    IconButton(onClick =onClick ,
-        modifier = Modifier
-            .padding(16.dp),
-    ) {
-        Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar Materia", tint = Color.White)
-    }
-   }
-}
 
 
 // Prueba

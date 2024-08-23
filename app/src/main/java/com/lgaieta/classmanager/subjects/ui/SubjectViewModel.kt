@@ -6,20 +6,20 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class SubjectViewModel: ViewModel() {
+class SubjectViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(SubjectState())
     val uiState: StateFlow<SubjectState> = _uiState.asStateFlow()
 
-    fun showDataSubjects(){
+    fun showDataSubjects() {
 
     }
 
 }
 
-data class SubjectState (
+data class SubjectState(
     val name: String = "",
     val details: String = "",
     val time: Int = 0,
 
-)
+    )
 // Prueba

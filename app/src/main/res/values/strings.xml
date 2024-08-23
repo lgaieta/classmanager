@@ -9,4 +9,11 @@
     <string name="forgot_password_text">Olvidé mi contraseña</string>
     <string name="create_subject">Crear materia</string>
     <string name="new_subject">Nueva materia</string>
+    <string name="edit_subject">Editar materia</string>
+    <string name="course_subject">Curso</string>
+    <string name="time_label">Horario</string>
+    <string name="subject">Materia</string>
+    <string name="new_time_label">Nuevo horario</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save_subject">Guardar materia</string>
 </resources>
