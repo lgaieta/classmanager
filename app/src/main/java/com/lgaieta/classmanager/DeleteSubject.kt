@@ -9,23 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.lgaieta.classmanager.ui.theme.Background200
-import com.lgaieta.classmanager.ui.theme.Background100
-import com.lgaieta.classmanager.ui.theme.Buttons200
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import androidx.compose.runtime.*
-import androidx.compose.foundation.border
 
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.ui.graphics.Color.Companion.Black
+import com.lgaieta.classmanager.subjects.ui.Subject
 
 
 @Composable
@@ -41,7 +33,6 @@ fun DeleteSubject(subject: Subject, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(32.dp)
-                    .background(Background100)
             ){
                 Box(modifier = Modifier
                     .padding(16.dp)
@@ -58,7 +49,6 @@ fun DeleteSubject(subject: Subject, modifier: Modifier = Modifier) {
                         Button(
                             onClick = { /* Acción para cancelar */ },
                             shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Background200),
                             modifier = Modifier
                                 .padding(top =  60.dp)
 
@@ -68,7 +58,6 @@ fun DeleteSubject(subject: Subject, modifier: Modifier = Modifier) {
                         Button(
                             onClick = { /* Acción para eliminar  */ },
                             shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Background200),
                             modifier = Modifier
                                 .padding(top =  60.dp)
                         ) {

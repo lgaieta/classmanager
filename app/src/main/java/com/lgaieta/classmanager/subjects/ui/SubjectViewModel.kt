@@ -22,3 +22,4 @@ data class SubjectState (
     val time: Int = 0,
 
 )
+// Prueba
