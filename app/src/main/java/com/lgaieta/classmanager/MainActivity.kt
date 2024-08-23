@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ClassManagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    RegisterPage(modifier = Modifier.padding(innerPadding))
+                    ClassManagerApp(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

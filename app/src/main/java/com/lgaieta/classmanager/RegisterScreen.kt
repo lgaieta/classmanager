@@ -19,7 +19,7 @@ import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
 @Composable
-fun RegisterPage(modifier: Modifier = Modifier) {
+fun RegisterScreen(modifier: Modifier = Modifier, onRegister: () -> Unit = {}) {
     Column(
         modifier = modifier
             .padding(
@@ -46,7 +46,7 @@ fun RegisterPage(modifier: Modifier = Modifier) {
             )
         }
         Spacer(modifier = Modifier.height(48.dp))
-        RegisterForm()
+        RegisterForm(onRegister = onRegister)
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             ForgotPassword()
             AlreadyLoggedLink()

@@ -21,8 +21,10 @@ import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
 @Composable
-fun CreateSubjectPage(
-    createSubjectViewModel: CreateSubjectViewModel = viewModel()
+fun CreateSubjectScreen(
+    modifier: Modifier = Modifier,
+    createSubjectViewModel: CreateSubjectViewModel = viewModel(),
+    onCreate: () -> Unit = {}
 ) {
     val uiState by createSubjectViewModel.uiState.collectAsState()
 
@@ -40,7 +42,7 @@ fun CreateSubjectPage(
         CreateSubjectForm(
             nameValue = uiState.name,
             onNameChange = { createSubjectViewModel.changeName(it) },
-            onSubmit = {}
+            onSubmit = onCreate
         )
     }
 }

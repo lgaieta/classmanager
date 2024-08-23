@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RegisterForm(modifier: Modifier = Modifier) {
+fun RegisterForm(onRegister: () -> Unit, modifier: Modifier = Modifier) {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -47,7 +47,7 @@ fun RegisterForm(modifier: Modifier = Modifier) {
             )
         }
         Button(
-            onClick = { /* Handle register action */ },
+            onClick = onRegister,
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
             contentPadding = PaddingValues(16.dp),
