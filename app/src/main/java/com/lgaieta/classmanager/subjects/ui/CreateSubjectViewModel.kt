@@ -16,6 +16,12 @@ class CreateSubjectViewModel: ViewModel() {
         }
     }
 
+    private fun validateName() {
+        return with(_uiState.value) {
+            name.isNotBlank()
+        }
+    }
+
     suspend fun submitSubject() {
 
     }
