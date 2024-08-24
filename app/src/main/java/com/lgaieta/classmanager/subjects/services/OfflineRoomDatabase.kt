@@ -6,16 +6,16 @@ import androidx.room.RoomDatabase
 import androidx.room.Database
 
 @Database(entities = [SubjectRoomEntity::class], version = 1, exportSchema = false)
-abstract class OfflineDatabase : RoomDatabase() {
+abstract class OfflineRoomDatabase : RoomDatabase() {
     abstract fun subjectDao(): SubjectRoomDao
 
     companion object {
         @Volatile
-        private var Instance: OfflineDatabase? = null
+        private var Instance: OfflineRoomDatabase? = null
 
-        fun getDatabase(context: Context): OfflineDatabase {
+        fun getDatabase(context: Context): OfflineRoomDatabase {
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, OfflineDatabase::class.java, "offline_classmanager")
+                Room.databaseBuilder(context, OfflineRoomDatabase::class.java, "offline_classmanager")
                     .build().also { Instance = it }
             }
         }

@@ -1,6 +1,6 @@
 package com.lgaieta.classmanager.subjects.models
 
-interface Subject {
-    val id: Int
+data class Subject(
+    val id: Int,
     val name: String
-}
+)

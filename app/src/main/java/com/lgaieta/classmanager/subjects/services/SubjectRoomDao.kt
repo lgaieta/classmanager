@@ -12,18 +12,18 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface SubjectRoomDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(subject: Subject)
+    suspend fun insert(subject: SubjectRoomEntity)
 
     @Update
-    suspend fun update(subject: Subject)
+    suspend fun update(subject: SubjectRoomEntity)
 
     @Delete
-    suspend fun delete(subject: Subject)
+    suspend fun delete(subject: SubjectRoomEntity)
 
     @Query("SELECT * from subject WHERE id = :id")
-    fun getSubject(id: Int): Flow<Subject>
+    fun getSubject(id: Int): Flow<SubjectRoomEntity>
 
     @Query("SELECT * from subject ORDER BY name ASC")
-    fun getAllSubjects(): Flow<List<Subject>>
+    fun getAllSubjects(): Flow<List<SubjectRoomEntity>>
 
 }

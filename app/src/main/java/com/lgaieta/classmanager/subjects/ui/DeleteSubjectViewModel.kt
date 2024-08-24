@@ -1,13 +1,13 @@
 package com.lgaieta.classmanager.subjects.ui
 
-import OfflineSubjectRepository
+import OfflineRoomSubjectRepository
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class DeleteSubjectViewModel(
-    private val offlineSubjectRepository: OfflineSubjectRepository
+    private val offlineSubjectRepository: OfflineRoomSubjectRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DeleteSubjectState())
     val uiState: StateFlow<DeleteSubjectState> = _uiState.asStateFlow()

@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.subjects.ui
+package com.lgaieta.classmanager.subjects.ui.new
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,12 +21,12 @@ import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
 @Composable
-fun CreateSubjectScreen(
+fun NewSubjectScreen(
     modifier: Modifier = Modifier,
-    createSubjectViewModel: CreateSubjectViewModel = viewModel(),
+    newSubjectViewModel: NewSubjectViewModel,
     onCreate: () -> Unit = {}
 ) {
-    val uiState by createSubjectViewModel.uiState.collectAsState()
+    val uiState by newSubjectViewModel.uiState.collectAsState()
 
     Column(
         modifier = modifier
@@ -37,18 +37,18 @@ fun CreateSubjectScreen(
             )
             .fillMaxWidth()
     ) {
-        CreateSubjectHeader()
+        NewSubjectHeader()
         Spacer(modifier = Modifier.height(48.dp))
-        CreateSubjectForm(
+        NewSubjectForm(
             nameValue = uiState.name,
-            onNameChange = { createSubjectViewModel.changeName(it) },
+            onNameChange = { newSubjectViewModel.changeName(it) },
             onSubmit = onCreate
         )
     }
 }
 
 @Composable
-fun CreateSubjectHeader() {
+fun NewSubjectHeader() {
     Column(
         modifier = Modifier
             .fillMaxWidth(),

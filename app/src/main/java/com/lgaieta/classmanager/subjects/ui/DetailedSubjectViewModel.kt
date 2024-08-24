@@ -1,13 +1,13 @@
 package com.lgaieta.classmanager.subjects.ui
 
-import OfflineSubjectRepository
+import OfflineRoomSubjectRepository
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class DetailedSubjectViewModel(
-    private val offlineSubjectRepository: OfflineSubjectRepository
+    private val offlineSubjectRepository: OfflineRoomSubjectRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DetailedSubjectState())
     val uiState: StateFlow<DetailedSubjectState> = _uiState.asStateFlow()
