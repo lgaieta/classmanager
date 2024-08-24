@@ -29,7 +29,7 @@ fun NewSubjectForm(
 @Composable
 fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(text = stringResource(R.string.email_label))
+        Text(text = stringResource(R.string.subject_name_label))
         OutlinedTextField(
             value = value,
             modifier = Modifier.fillMaxWidth(),

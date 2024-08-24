@@ -10,15 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
+import kotlinx.coroutines.launch
 
 @Composable
 fun NewSubjectScreen(
@@ -27,6 +28,7 @@ fun NewSubjectScreen(
     onCreate: () -> Unit = {}
 ) {
     val uiState by newSubjectViewModel.uiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = modifier
@@ -42,7 +44,12 @@ fun NewSubjectScreen(
         NewSubjectForm(
             nameValue = uiState.name,
             onNameChange = { newSubjectViewModel.changeName(it) },
-            onSubmit = onCreate
+            onSubmit = {
+                coroutineScope.launch {
+                    newSubjectViewModel.saveSubject()
+                }
+                onCreate()
+            }
         )
     }
 }
