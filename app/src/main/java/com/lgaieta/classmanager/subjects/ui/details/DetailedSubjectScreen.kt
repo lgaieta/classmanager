@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager
+package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.lgaieta.classmanager.subjects.ui.DetailedSubjectViewModel
+import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 

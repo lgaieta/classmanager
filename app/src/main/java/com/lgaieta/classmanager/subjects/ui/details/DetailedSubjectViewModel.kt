@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.subjects.ui
+package com.lgaieta.classmanager.subjects.ui.details
 
 import OfflineRoomSubjectRepository
 import androidx.lifecycle.ViewModel

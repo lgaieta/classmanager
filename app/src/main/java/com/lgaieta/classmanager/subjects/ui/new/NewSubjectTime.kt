@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager
+package com.lgaieta.classmanager.subjects.ui.new
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,10 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
-import androidx.compose.runtime.*
 
 import androidx.compose.ui.graphics.Color.Companion.Black
-import com.lgaieta.classmanager.subjects.ui.Subject
+import com.lgaieta.classmanager.subjects.ui.list.Subject
 
 
 @Composable

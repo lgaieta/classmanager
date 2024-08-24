@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.subjects.ui
+package com.lgaieta.classmanager.subjects.ui.edit
 
 
 import androidx.compose.foundation.background

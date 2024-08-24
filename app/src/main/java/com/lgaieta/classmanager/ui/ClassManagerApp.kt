@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager
+package com.lgaieta.classmanager.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

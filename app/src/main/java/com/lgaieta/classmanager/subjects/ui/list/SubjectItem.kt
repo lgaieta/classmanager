@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.subjects.ui
+package com.lgaieta.classmanager.subjects.ui.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
