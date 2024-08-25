@@ -8,11 +8,12 @@ import com.lgaieta.classmanager.subjects.models.Subject
 data class SubjectRoomEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String
+    val name: String,
+    val course: String,
 ) {
-    fun toSubject() = Subject(id, name)
+    fun toSubject() = Subject(id, name, course)
 
     companion object {
-        fun fromSubject(subject: Subject) = SubjectRoomEntity(subject.id, subject.name)
+        fun fromSubject(subject: Subject) = SubjectRoomEntity(subject.id, subject.name, subject.course)
     }
 }

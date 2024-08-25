@@ -44,6 +44,8 @@ fun NewSubjectScreen(
         NewSubjectForm(
             nameValue = uiState.name,
             onNameChange = { newSubjectViewModel.changeName(it) },
+            courseValue = uiState.course,
+            onCourseChange = { newSubjectViewModel.changeCourse(it) },
             onSubmit = {
                 coroutineScope.launch {
                     newSubjectViewModel.saveSubject()

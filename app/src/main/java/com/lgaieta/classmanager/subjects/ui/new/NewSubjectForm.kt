@@ -18,10 +18,13 @@ import com.lgaieta.classmanager.R
 fun NewSubjectForm(
     nameValue: String,
     onNameChange: (name: String) -> Unit,
+    courseValue: String,
+    onCourseChange: (course: String) -> Unit,
     onSubmit: () -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameField(value = nameValue, onValueChange = onNameChange)
+        CourseField(value = courseValue, onValueChange = onCourseChange)
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }
@@ -39,6 +42,18 @@ fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     }
 }
 
+@Composable
+fun CourseField(value: String, onValueChange: (value: String) -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(text = stringResource(R.string.course_label))
+        OutlinedTextField(
+            value = value,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            onValueChange = onValueChange
+        )
+    }
+}
 @Composable
 fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
