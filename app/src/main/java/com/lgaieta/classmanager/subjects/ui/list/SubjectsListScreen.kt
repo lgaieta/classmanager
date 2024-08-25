@@ -33,7 +33,8 @@ import com.lgaieta.classmanager.ui.theme.TopPagePadding
 fun SubjectsListScreen(
     modifier: Modifier = Modifier,
     subjectsListViewModel: SubjectsListViewModel,
-    onNewSubjectClick: () -> Unit = {}
+    onNewSubjectClick: () -> Unit = {},
+    onSubjectClick: (id: Int) -> Unit = {}
 ) {
     val listState by subjectsListViewModel.subjectListState.collectAsState()
     Scaffold(
@@ -62,7 +63,7 @@ fun SubjectsListScreen(
                     .fillMaxSize()
             ) {
                 items(listState.subjects) { subject ->
-                    SubjectItem(subject)
+                    SubjectItem(subject, onClick = onSubjectClick)
                 }
             }
             Spacer(modifier = Modifier.height(48.dp))

@@ -13,18 +13,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
-@Preview
 @Composable
-fun DetailedSubjectScreen(
+fun SubjectDetailsScreen(
+    subjectDetailsViewModel: SubjectDetailsViewModel,
     modifier: Modifier = Modifier,
-    DetailedSubjectViewModel: DetailedSubjectViewModel = viewModel(),
 ) {
+    val subjectDetailsState by subjectDetailsViewModel.subjectDetailsState.collectAsState()
     Column(
         modifier = Modifier
             .padding(
@@ -34,11 +35,8 @@ fun DetailedSubjectScreen(
             )
             .fillMaxWidth()
     ) {
-        DetailedSubjectHeader()
-        DetailsCourse()
-        DetailsTime()
-        DetailTasks()
-        StudentsList()
+        if (subjectDetailsState.subject == null) Text(text = "La materia que estás buscando no existe.")
+        else Text(text = subjectDetailsState.subject!!.name)
     }
 }
 
