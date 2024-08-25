@@ -54,6 +54,9 @@ fun SubjectsListScreen(
         ) {
             SubjectHeader()
             Spacer(modifier = Modifier.height(48.dp))
+            if (listState.subjects.isEmpty()) {
+                Text(text = stringResource(R.string.empty_subjects_list))
+            }
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()

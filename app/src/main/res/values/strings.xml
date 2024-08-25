@@ -24,4 +24,5 @@
     <string name="course_label">Curso</string>
     <string name="subjects_list_title">Materias</string>
     <string name="new_subject_fab_description">Nueva materia</string>
+    <string name="empty_subjects_list">No hay materias creadas aún, presiona el botón + para crear una.</string>
 </resources>
