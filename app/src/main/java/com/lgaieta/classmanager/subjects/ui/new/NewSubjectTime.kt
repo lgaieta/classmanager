@@ -14,9 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
-
 import androidx.compose.ui.graphics.Color.Companion.Black
-import com.lgaieta.classmanager.subjects.ui.list.Subject
+import com.lgaieta.classmanager.subjects.models.Subject
 
 
 @Composable
@@ -150,10 +149,9 @@ fun NewSubjectTime(subject: Subject, modifier: Modifier = Modifier) {
 fun PreviewNewSubjectTimePage() {
     NewSubjectTime(
         subject = Subject(
+            id = 50,
             name = "Modelos y sistemas",
-            details = "7mo 2da E.E.S.T. Nª1",
-            firstTime = "13:00",
-            secondTime = "15:00"
+            course = "7mo 2da E.E.S.T. Nª1",
         )
     )
 }

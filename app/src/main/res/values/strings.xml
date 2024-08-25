@@ -22,4 +22,6 @@
     <string name="tasks_label">Tareas y exámenes</string>
     <string name="subject_name_label">Nombre de la materia</string>
     <string name="course_label">Curso</string>
+    <string name="subjects_list_title">Materias</string>
+    <string name="new_subject_fab_description">Nueva materia</string>
 </resources>

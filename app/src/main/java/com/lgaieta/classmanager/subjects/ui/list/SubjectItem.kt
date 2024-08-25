@@ -1,64 +1,41 @@
 package com.lgaieta.classmanager.subjects.ui.list
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.lgaieta.classmanager.subjects.models.Subject
 
 @Composable
-fun SubjectItem(subject: Subject) {
-    Column(
-        modifier = Modifier
-            .padding(24.dp)
-            .fillMaxWidth()
-            .padding(20.dp),
-        horizontalAlignment = Alignment.Start
+fun SubjectItem(subject: Subject, modifier: Modifier = Modifier) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
     ) {
         Text(
             text = subject.name,
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
+            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(top = 24.dp, start = 24.dp, end = 24.dp)
         )
-
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = subject.details,
-            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium)
+            text = subject.course,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
         )
-
-        Row(
-            modifier = Modifier.padding(top = 8.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(8.dp)
-            ) {
-                Text(text = subject.firstTime, style = MaterialTheme.typography.labelLarge)
-            }
-
-            Spacer(modifier = Modifier.padding(8.dp))
-
-            Box(
-                modifier = Modifier
-                    .padding(8.dp)
-            ) {
-
-                Text(text = subject.secondTime, style = MaterialTheme.typography.labelLarge)
-            }
-        }
-
     }
 }
-
-
-// Prueba

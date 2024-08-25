@@ -8,12 +8,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.register.ui.RegisterScreen
+import com.lgaieta.classmanager.subjects.ui.list.SubjectsListScreen
+import com.lgaieta.classmanager.subjects.ui.list.SubjectsListViewModel
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectScreen
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectViewModel
 
 enum class ClassManagerScreen {
     SubjectsList,
-    CreateSubject,
+    NewSubject,
     Login,
     Register,
     Home,
@@ -29,18 +31,35 @@ fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = M
             RegisterScreen(
                 modifier = modifier,
                 onRegister = {
-                    navController.navigate(ClassManagerScreen.CreateSubject.name)
+                    navController.navigate(ClassManagerScreen.SubjectsList.name)
                 }
             )
         }
-        composable(route = ClassManagerScreen.CreateSubject.name) {
+        composable(route = ClassManagerScreen.SubjectsList.name) {
+            val subjectsListViewModel =
+                viewModel<SubjectsListViewModel>(factory = viewModelFactory {
+                    SubjectsListViewModel(
+                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository
+                    )
+                })
+            SubjectsListScreen(
+                modifier = modifier,
+                subjectsListViewModel = subjectsListViewModel,
+                onNewSubjectClick = { navController.navigate(ClassManagerScreen.NewSubject.name) }
+            )
+        }
+        composable(route = ClassManagerScreen.NewSubject.name) {
             val newSubjectViewModel =
                 viewModel<NewSubjectViewModel>(factory = viewModelFactory {
                     NewSubjectViewModel(
-                        ClassManagerApplication.newSubjectContainer.offlineSubjectRepository
+                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository
                     )
                 })
-            NewSubjectScreen(modifier = modifier, newSubjectViewModel = newSubjectViewModel)
+            NewSubjectScreen(
+                modifier = modifier,
+                newSubjectViewModel = newSubjectViewModel,
+                afterCreate = { navController.navigate(ClassManagerScreen.SubjectsList.name) }
+            )
         }
     }
 }

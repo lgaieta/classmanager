@@ -1,3 +1,4 @@
+/*
 package com.lgaieta.classmanager.subjects.ui.delete
 
 import androidx.compose.foundation.layout.*
@@ -15,7 +16,6 @@ import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color.Companion.Black
-import com.lgaieta.classmanager.subjects.ui.list.Subject
 
 
 @Composable
@@ -78,3 +78,4 @@ fun PreviewDeleteSubjectComponent() {
         )
     )
 }
+*/
