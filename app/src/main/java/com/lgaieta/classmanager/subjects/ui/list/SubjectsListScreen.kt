@@ -41,7 +41,6 @@ fun SubjectsListScreen(
         floatingActionButton = {
             NewSubjectButton(
                 onClick = onNewSubjectClick,
-                modifier = Modifier.fillMaxSize()
             )
         },
         floatingActionButtonPosition = FabPosition.Center
