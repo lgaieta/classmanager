@@ -11,10 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
+import kotlinx.coroutines.launch
 
 @Composable
 fun SubjectDetailsScreen(
@@ -23,6 +25,7 @@ fun SubjectDetailsScreen(
 ) {
     val subjectDetailsState by subjectDetailsViewModel.subjectDetailsState.collectAsState()
     val isNotFound = subjectDetailsState.subject == null
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold { innerPadding ->
         Column(
@@ -48,7 +51,7 @@ fun SubjectDetailsScreen(
                     )
                     SubjectDetailsButtons(
                         onEdit = { subjectDetailsViewModel.onEdit() },
-                        onDelete = { subjectDetailsViewModel.onDelete() }
+                        onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
                     )
                 }
             }

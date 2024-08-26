@@ -9,9 +9,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class SubjectDetailsViewModel(
-    offlineSubjectRepository: SubjectRepository,
+    private val offlineSubjectRepository: SubjectRepository,
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
     private val afterDelete: (id: Int) -> Unit = {}
@@ -31,7 +32,10 @@ class SubjectDetailsViewModel(
     }
 
     fun onDelete() {
-        afterDelete(subjectDetailsState.value.subject!!.id)
+        if (subjectDetailsState.value.subject != null) viewModelScope.launch {
+            offlineSubjectRepository.delete(subjectDetailsState.value.subject!!)
+            afterDelete(subjectDetailsState.value.subject!!.id)
+        }
     }
 }
 

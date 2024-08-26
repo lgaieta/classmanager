@@ -23,7 +23,10 @@ import com.lgaieta.classmanager.R
 fun SubjectDetailsDeleteButton(onDelete: () -> Unit) {
     var openDialog by rememberSaveable { mutableStateOf(false) }
     if (openDialog) ConfirmDeleteDialog(
-        onConfirmation = onDelete,
+        onConfirmation = {
+            onDelete()
+            openDialog = false
+        },
         onDismissRequest = {
             openDialog = false
         },
