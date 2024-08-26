@@ -14,6 +14,7 @@ import com.lgaieta.classmanager.ui.navigation.SubjectNavigationScreens
 enum class ClassManagerScreen {
     SubjectsList,
     NewSubject,
+    EditSubject,
     SubjectDetails,
     Register,
 }
@@ -23,7 +24,7 @@ enum class ClassManagerScreen {
 fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = ClassManagerScreen.Register.name,
+        startDestination = ClassManagerScreen.SubjectsList.name,
     ) {
         composable(route = ClassManagerScreen.Register.name) {
             RegisterScreen(
@@ -44,6 +45,16 @@ fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = M
             arguments = listOf(navArgument(SUBJECT_ID_ARGUMENT) { type = NavType.IntType })
         ) { backStackEntry ->
             SubjectNavigationScreens.SubjectDetailsScreenInitializer(
+                navController = navController,
+                backStackEntry = backStackEntry,
+                modifier = modifier
+            )
+        }
+        composable(
+            route = "${ClassManagerScreen.EditSubject.name}/{${SUBJECT_ID_ARGUMENT}}",
+            arguments = listOf(navArgument(SUBJECT_ID_ARGUMENT) { type = NavType.IntType })
+        ) { backStackEntry ->
+            SubjectNavigationScreens.EditSubjectScreenInitializer(
                 navController = navController,
                 backStackEntry = backStackEntry,
                 modifier = modifier

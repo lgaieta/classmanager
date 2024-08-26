@@ -88,7 +88,7 @@ fun SubjectDetailsCourse(course: String, modifier: Modifier = Modifier) {
             .padding(end = 16.dp)
     ) {
         Text(
-            text = stringResource(R.string.course_subject),
+            text = stringResource(R.string.course_subject_label),
             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.Start)
         )
