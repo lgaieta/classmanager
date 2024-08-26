@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -30,15 +29,8 @@ fun SubjectDetailsButtons(onEdit: () -> Unit, onDelete: () -> Unit, modifier: Mo
             )
         }
         Spacer(modifier = Modifier.width(8.dp))
-        FloatingActionButton(
-            onClick = onDelete,
-            elevation = FloatingActionButtonDefaults.elevation(0.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = stringResource(R.string.delete_subject_fab_description),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
+        SubjectDetailsDeleteButton(
+            onDelete = onDelete
+        )
     }
 }

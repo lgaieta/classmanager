@@ -28,4 +28,8 @@
     <string name="subject_not_found">La materia que estás buscando no existe.</string>
     <string name="delete_subject_fab_description">Eliminar materia</string>
     <string name="edit_subject_fab_description">Editar materia</string>
+    <string name="confirm_delete_subject_button">Borrar</string>
+    <string name="cancel_delete_subject">Cancelar</string>
+    <string name="confirm_delete_subject_title">Estás seguro de querer borrar la materia?</string>
+    <string name="confirm_delete_subject_description">Al borrar la materia no podrás recuperarla.</string>
 </resources>
