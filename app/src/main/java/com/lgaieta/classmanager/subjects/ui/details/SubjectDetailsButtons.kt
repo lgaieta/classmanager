@@ -1,0 +1,44 @@
+package com.lgaieta.classmanager.subjects.ui.details
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.lgaieta.classmanager.R
+
+@Composable
+fun SubjectDetailsButtons(onEdit: () -> Unit, onDelete: () -> Unit, modifier: Modifier = Modifier) {
+    Row(modifier = modifier) {
+        FloatingActionButton(
+            onClick = onEdit,
+            elevation = FloatingActionButtonDefaults.elevation(0.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Edit,
+                contentDescription = stringResource(R.string.edit_subject_fab_description),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+        Spacer(modifier = Modifier.width(8.dp))
+        FloatingActionButton(
+            onClick = onDelete,
+            elevation = FloatingActionButtonDefaults.elevation(0.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = stringResource(R.string.delete_subject_fab_description),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}

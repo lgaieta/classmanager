@@ -2,18 +2,12 @@ package com.lgaieta.classmanager.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.register.ui.RegisterScreen
-import com.lgaieta.classmanager.subjects.ui.list.SubjectsListScreen
-import com.lgaieta.classmanager.subjects.ui.list.SubjectsListViewModel
-import com.lgaieta.classmanager.subjects.ui.new.NewSubjectScreen
-import com.lgaieta.classmanager.subjects.ui.new.NewSubjectViewModel
 import com.lgaieta.classmanager.ui.navigation.SUBJECT_ID_ARGUMENT
 import com.lgaieta.classmanager.ui.navigation.SubjectNavigationScreens
 
@@ -21,9 +15,7 @@ enum class ClassManagerScreen {
     SubjectsList,
     NewSubject,
     SubjectDetails,
-    Login,
     Register,
-    Home,
 }
 
 
@@ -31,7 +23,7 @@ enum class ClassManagerScreen {
 fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = ClassManagerScreen.Register.name
+        startDestination = ClassManagerScreen.Register.name,
     ) {
         composable(route = ClassManagerScreen.Register.name) {
             RegisterScreen(

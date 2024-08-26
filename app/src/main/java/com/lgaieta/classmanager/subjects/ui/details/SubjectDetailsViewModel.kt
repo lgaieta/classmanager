@@ -8,12 +8,13 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.flow.stateIn
 
 class SubjectDetailsViewModel(
-    private val offlineSubjectRepository: SubjectRepository,
-    private val subjectId: Int,
+    offlineSubjectRepository: SubjectRepository,
+    subjectId: Int,
+    private val afterEdit: (id: Int) -> Unit = {},
+    private val afterDelete: (id: Int) -> Unit = {}
 ) : ViewModel() {
     val subjectDetailsState: StateFlow<SubjectDetailsState> =
         offlineSubjectRepository.getSubjectStream(subjectId)
@@ -24,6 +25,14 @@ class SubjectDetailsViewModel(
                 started = SharingStarted.WhileSubscribed(5000),
                 initialValue = SubjectDetailsState()
             )
+
+    fun onEdit() {
+        afterEdit(subjectDetailsState.value.subject!!.id)
+    }
+
+    fun onDelete() {
+        afterDelete(subjectDetailsState.value.subject!!.id)
+    }
 }
 
 data class SubjectDetailsState(
