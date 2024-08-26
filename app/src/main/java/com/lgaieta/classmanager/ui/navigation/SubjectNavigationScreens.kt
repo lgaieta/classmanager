@@ -53,6 +53,7 @@ class SubjectNavigationScreens {
                         offlineSubjectRepository =
                         ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
                         subjectId = subjectId,
+                        afterDelete = { navController.navigate(ClassManagerScreen.SubjectsList.name)}
                     )
                 })
 
