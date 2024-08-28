@@ -7,7 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.lgaieta.classmanager.home.ui.HomeScreen
 import com.lgaieta.classmanager.register.ui.RegisterScreen
+import com.lgaieta.classmanager.students.ui.StudentsListScreen
 import com.lgaieta.classmanager.ui.navigation.SUBJECT_ID_ARGUMENT
 import com.lgaieta.classmanager.ui.navigation.SubjectNavigationScreens
 
@@ -17,7 +19,15 @@ enum class ClassManagerScreen {
     EditSubject,
     SubjectDetails,
     Register,
+    Home,
+    StudentsList
 }
+
+fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(
+    onHomeClick = { navController.navigate(ClassManagerScreen.Home.name) },
+    onSubjectsClick = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
+    onStudentsClick = { navController.navigate(ClassManagerScreen.StudentsList.name) }
+)
 
 
 @Composable
@@ -26,6 +36,18 @@ fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = M
         navController = navController,
         startDestination = ClassManagerScreen.SubjectsList.name,
     ) {
+        composable(route = ClassManagerScreen.Home.name) {
+            HomeScreen(
+                modifier = modifier,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
+            )
+        }
+        composable(route = ClassManagerScreen.StudentsList.name) {
+            StudentsListScreen(
+                modifier = modifier,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
+            )
+        }
         composable(route = ClassManagerScreen.Register.name) {
             RegisterScreen(
                 modifier = modifier,

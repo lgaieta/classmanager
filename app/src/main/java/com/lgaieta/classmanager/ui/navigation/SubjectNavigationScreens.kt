@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.subjects.ui.details.SubjectDetailsScreen
 import com.lgaieta.classmanager.subjects.ui.details.SubjectDetailsViewModel
@@ -15,6 +16,7 @@ import com.lgaieta.classmanager.subjects.ui.list.SubjectsListViewModel
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectScreen
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectViewModel
 import com.lgaieta.classmanager.ui.ClassManagerScreen
+import com.lgaieta.classmanager.ui.getDefaultBottomNavBarActions
 import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val SUBJECT_ID_ARGUMENT = "id"
@@ -23,7 +25,7 @@ class SubjectNavigationScreens {
     companion object {
         @Composable
         fun SubjectsListScreenInitializer(
-            navController: NavController,
+            navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
             val subjectsListViewModel =
@@ -36,13 +38,14 @@ class SubjectNavigationScreens {
                 modifier = modifier,
                 subjectsListViewModel = subjectsListViewModel,
                 onNewSubjectClick = { navController.navigate(ClassManagerScreen.NewSubject.name) },
-                onSubjectClick = { id -> navController.navigate("${ClassManagerScreen.SubjectDetails.name}/${id}") }
+                onSubjectClick = { id -> navController.navigate("${ClassManagerScreen.SubjectDetails.name}/${id}") },
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
 
         @Composable
         fun SubjectDetailsScreenInitializer(
-            navController: NavController,
+            navController: NavHostController,
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
@@ -68,7 +71,7 @@ class SubjectNavigationScreens {
 
         @Composable
         fun NewSubjectScreenInitializer(
-            navController: NavController,
+            navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
             val newSubjectViewModel =
