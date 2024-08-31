@@ -33,4 +33,7 @@
     <string name="confirm_delete_subject_title">¿Estás seguro de querer borrar la materia?</string>
     <string name="confirm_delete_subject_description">Al borrar la materia no podrás recuperarla.</string>
     <string name="subject_name_placeholder">Nombre de materia</string>
+    <string name="subject_list_nav_item_label">Materias</string>
+    <string name="students_list_nav_item_label">Alumnos</string>
+    <string name="home_nav_item_label">Inicio</string>
 </resources>

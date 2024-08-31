@@ -29,7 +29,6 @@ fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavB
     onStudentsClick = { navController.navigate(ClassManagerScreen.StudentsList.name) }
 )
 
-
 @Composable
 fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
