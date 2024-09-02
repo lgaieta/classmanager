@@ -21,4 +21,7 @@
     <string name="_label">Tareas y exámenes</string>
     <string name="tasks_label">Tareas y exámenes</string>
     <string name="subject_name_label">Nombre de la materia</string>
+    <string name="create_task">Crear tarea</string>
+    <string name="task_name_label">Nombre de la tarea</string>
+    <string name="new_task">Nueva tarea</string>
 </resources>
