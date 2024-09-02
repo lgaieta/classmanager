@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -21,7 +20,7 @@ interface SubjectRoomDao {
     suspend fun delete(subject: SubjectRoomEntity)
 
     @Query("SELECT * from subject WHERE id = :id")
-    fun getSubject(id: Int): Flow<SubjectRoomEntity>
+    fun getSubject(id: Int): Flow<SubjectRoomEntity?>
 
     @Query("SELECT * from subject ORDER BY name ASC")
     fun getAllSubjects(): Flow<List<SubjectRoomEntity>>

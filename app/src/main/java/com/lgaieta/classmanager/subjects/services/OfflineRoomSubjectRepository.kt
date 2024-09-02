@@ -7,10 +7,14 @@ import kotlinx.coroutines.flow.map
 
 class OfflineRoomSubjectRepository(private val subjectDao: SubjectRoomDao) : SubjectRepository {
     override fun getAllSubjectsStream(): Flow<List<Subject>> =
-        subjectDao.getAllSubjects().map { list -> list.map { it.toSubject() } }
+        subjectDao.getAllSubjects().map { list ->
+            list.map {
+                it.toSubject()
+            }
+        }
 
     override fun getSubjectStream(id: Int): Flow<Subject?> =
-        subjectDao.getSubject(id).map { it.toSubject() }
+        subjectDao.getSubject(id).map { it?.toSubject() }
 
     override suspend fun insert(subject: Subject) =
         subjectDao.insert(SubjectRoomEntity.fromSubject(subject))

@@ -1,16 +1,16 @@
 package com.lgaieta.classmanager
 
 import android.app.Application
-import com.lgaieta.classmanager.subjects.ui.new.DefaultNewSubjectContainer
-import com.lgaieta.classmanager.subjects.ui.new.NewSubjectContainer
+import com.lgaieta.classmanager.subjects.ui.DefaultSubjectModelsContainer
+import com.lgaieta.classmanager.subjects.ui.SubjectModelsContainer
 
 class ClassManagerApplication : Application() {
     companion object {
-        lateinit var newSubjectContainer: NewSubjectContainer
+        lateinit var subjectModelsContainer: SubjectModelsContainer
     }
 
     override fun onCreate() {
         super.onCreate()
-        newSubjectContainer = DefaultNewSubjectContainer(this)
+        subjectModelsContainer = DefaultSubjectModelsContainer(this)
     }
 }

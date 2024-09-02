@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,32 +26,36 @@ import kotlinx.coroutines.launch
 fun NewSubjectScreen(
     modifier: Modifier = Modifier,
     newSubjectViewModel: NewSubjectViewModel,
-    onCreate: () -> Unit = {}
+    afterCreate: () -> Unit = {}
 ) {
     val uiState by newSubjectViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        modifier = modifier
-            .padding(
-                start = HorizontalPagePadding,
-                end = HorizontalPagePadding,
-                top = TopPagePadding
-            )
-            .fillMaxWidth()
-    ) {
-        NewSubjectHeader()
-        Spacer(modifier = Modifier.height(48.dp))
-        NewSubjectForm(
-            nameValue = uiState.name,
-            onNameChange = { newSubjectViewModel.changeName(it) },
-            onSubmit = {
-                coroutineScope.launch {
-                    newSubjectViewModel.saveSubject()
+    Scaffold {innerPadding ->
+        Column(
+            modifier = modifier
+                .padding(
+                    start = HorizontalPagePadding,
+                    end = HorizontalPagePadding,
+                    top = TopPagePadding + innerPadding.calculateTopPadding(),
+                )
+                .fillMaxWidth()
+        ) {
+            NewSubjectHeader()
+            Spacer(modifier = Modifier.height(48.dp))
+            NewSubjectForm(
+                nameValue = uiState.name,
+                onNameChange = { newSubjectViewModel.changeName(it) },
+                courseValue = uiState.course,
+                onCourseChange = { newSubjectViewModel.changeCourse(it) },
+                onSubmit = {
+                    coroutineScope.launch {
+                        newSubjectViewModel.saveSubject()
+                    }
+                    afterCreate()
                 }
-                onCreate()
-            }
-        )
+            )
+        }
     }
 }
 
