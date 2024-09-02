@@ -36,4 +36,7 @@
     <string name="subject_list_nav_item_label">Materias</string>
     <string name="students_list_nav_item_label">Alumnos</string>
     <string name="home_nav_item_label">Inicio</string>
+    <string name="create_task">Crear tarea</string>
+    <string name="task_name_label">Nombre de la tarea</string>
+    <string name="new_task">Nueva tarea</string>
 </resources>
