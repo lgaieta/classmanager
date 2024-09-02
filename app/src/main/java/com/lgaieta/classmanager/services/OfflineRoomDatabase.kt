@@ -1,9 +1,11 @@
-package com.lgaieta.classmanager.subjects.services
+package com.lgaieta.classmanager.services
 
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Database
+import com.lgaieta.classmanager.subjects.services.SubjectRoomDao
+import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
 
 @Database(entities = [SubjectRoomEntity::class], version = 2, exportSchema = false)
 abstract class OfflineRoomDatabase : RoomDatabase() {
