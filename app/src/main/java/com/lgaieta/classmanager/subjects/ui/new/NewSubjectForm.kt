@@ -21,10 +21,12 @@ fun NewSubjectForm(
     courseValue: String,
     onCourseChange: (course: String) -> Unit,
     onSubmit: () -> Unit,
+    onNewTime: () -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameField(value = nameValue, onValueChange = onNameChange)
         CourseField(value = courseValue, onValueChange = onCourseChange)
+        TimeField(onClick = onNewTime)
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }
@@ -54,6 +56,21 @@ fun CourseField(value: String, onValueChange: (value: String) -> Unit) {
         )
     }
 }
+
+@Composable
+fun TimeField(onClick: () -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(text = stringResource(R.string.times_label))
+        Button(
+            onClick = onClick,
+            shape = RoundedCornerShape(12.dp),
+            contentPadding = PaddingValues(16.dp),
+        ) {
+            Text(text = stringResource(R.string.new_time))
+        }
+    }
+}
+
 @Composable
 fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(

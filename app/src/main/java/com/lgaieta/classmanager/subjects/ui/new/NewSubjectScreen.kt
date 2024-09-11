@@ -26,12 +26,13 @@ import kotlinx.coroutines.launch
 fun NewSubjectScreen(
     modifier: Modifier = Modifier,
     newSubjectViewModel: NewSubjectViewModel,
+    onNewTime: () -> Unit,
     afterCreate: () -> Unit = {}
 ) {
     val uiState by newSubjectViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold {innerPadding ->
+    Scaffold { innerPadding ->
         Column(
             modifier = modifier
                 .padding(
@@ -48,6 +49,7 @@ fun NewSubjectScreen(
                 onNameChange = { newSubjectViewModel.changeName(it) },
                 courseValue = uiState.course,
                 onCourseChange = { newSubjectViewModel.changeCourse(it) },
+                onNewTime = onNewTime,
                 onSubmit = {
                     coroutineScope.launch {
                         newSubjectViewModel.saveSubject()
