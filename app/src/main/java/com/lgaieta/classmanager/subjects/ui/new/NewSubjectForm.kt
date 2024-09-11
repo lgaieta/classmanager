@@ -26,7 +26,7 @@ fun NewSubjectForm(
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameField(value = nameValue, onValueChange = onNameChange)
         CourseField(value = courseValue, onValueChange = onCourseChange)
-        TimeField(onClick = onNewTime)
+        // TimeField(onClick = onNewTime)
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }
