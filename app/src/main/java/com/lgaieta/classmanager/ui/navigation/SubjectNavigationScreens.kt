@@ -19,8 +19,6 @@ import com.lgaieta.classmanager.subjects.ui.list.SubjectsListViewModel
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectScreen
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectTimeScreen
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectViewModel
-import com.lgaieta.classmanager.ui.ClassManagerScreen
-import com.lgaieta.classmanager.ui.getDefaultBottomNavBarActions
 import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val SUBJECT_ID_ARGUMENT = "id"

@@ -25,7 +25,7 @@ fun StudentsListScreen(bottomNavBarActions: BottomNavBarActions, modifier: Modif
                 top = TopPagePadding + innerPadding.calculateTopPadding()
             )
         ) {
-            Text(text = "Estudiantes")
+            Text(text = "Alumnos")
         }
     }
 }
