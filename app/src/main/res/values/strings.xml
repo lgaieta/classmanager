@@ -41,4 +41,5 @@
     <string name="task_name_label">Nombre de la tarea</string>
     <string name="new_task">Nueva tarea</string>
     <string name="new_time">Nuevo horario</string>
+    <string name="students_list_title">Alumnos</string>
 </resources>

@@ -1,11 +1,17 @@
 package com.lgaieta.classmanager.students.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
@@ -25,7 +31,22 @@ fun StudentsListScreen(bottomNavBarActions: BottomNavBarActions, modifier: Modif
                 top = TopPagePadding + innerPadding.calculateTopPadding()
             )
         ) {
-            Text(text = "Alumnos")
+            StudentHeader()
         }
+    }
+}
+
+
+@Composable
+private fun StudentHeader() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(R.string.students_list_title),
+            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+        )
     }
 }
