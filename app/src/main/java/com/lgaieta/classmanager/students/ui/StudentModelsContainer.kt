@@ -2,8 +2,13 @@ package com.lgaieta.classmanager.students.ui
 
 import android.content.Context
 import com.lgaieta.classmanager.services.OfflineRoomDatabase
+import com.lgaieta.classmanager.students.models.Student
 import com.lgaieta.classmanager.students.models.StudentRepository
 import com.lgaieta.classmanager.students.services.OfflineRoomStudentRepository
+import com.lgaieta.classmanager.subjects.models.Subject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 interface StudentModelsContainer {
     val offlineStudentRepository: StudentRepository
@@ -14,5 +19,15 @@ class DefaultStudentModelsContainer(private val context: Context) : StudentModel
         OfflineRoomStudentRepository(
             OfflineRoomDatabase.getDatabase(context).studentDao()
         )
+    }
+
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            val subject1 = Student(id = 1, name = "Aieta Luciano")
+            val subject2 = Student(id = 2, name = "Tello Elias")
+
+            offlineStudentRepository.insert(subject1)
+            offlineStudentRepository.insert(subject2)
+        }
     }
 }

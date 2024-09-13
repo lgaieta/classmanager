@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.students.ui
+package com.lgaieta.classmanager.students.ui.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,7 +24,13 @@ import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
 @Composable
-fun StudentsListScreen(bottomNavBarActions: BottomNavBarActions, modifier: Modifier = Modifier) {
+fun StudentsListScreen(
+    bottomNavBarActions: BottomNavBarActions,
+    studentsListViewModel: StudentsListViewModel,
+    modifier: Modifier = Modifier
+) {
+    val listState by studentsListViewModel.studentsListState.collectAsState()
+
     Scaffold(
         bottomBar = {
             BottomNavBar(actions = bottomNavBarActions)
@@ -37,10 +45,12 @@ fun StudentsListScreen(bottomNavBarActions: BottomNavBarActions, modifier: Modif
         ) {
             StudentHeader()
             Spacer(modifier = Modifier.height(48.dp))
-            Text(
-                text = stringResource(R.string.empty_students_list),
-                textAlign = TextAlign.Center,
-            )
+            if (listState.students.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.empty_students_list),
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
     }
 }

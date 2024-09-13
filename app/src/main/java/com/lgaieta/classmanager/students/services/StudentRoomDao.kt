@@ -20,9 +20,9 @@ interface StudentRoomDao {
     @Delete
     suspend fun delete(task: StudentRoomEntity)
 
-    @Query("SELECT * from task WHERE id = :id")
-    fun getStudent(id: Int): Flow<StudentRoomEntity>
+    @Query("SELECT * from student WHERE id = :id")
+    fun getStudent(id: Int): Flow<StudentRoomEntity?>
 
-    @Query("SELECT * from task ORDER BY name ASC")
+    @Query("SELECT * from student ORDER BY name ASC")
     fun getAllStudents(): Flow<List<StudentRoomEntity>>
 }

@@ -7,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lgaieta.classmanager.home.ui.HomeScreen
 import com.lgaieta.classmanager.register.ui.RegisterScreen
-import com.lgaieta.classmanager.students.ui.StudentsListScreen
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 
 enum class ClassManagerScreen {
