@@ -51,7 +51,10 @@ class StudentNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
-            NewStudentScreen()
+            NewStudentScreen(
+                modifier = modifier,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
+            )
         }
     }
 }
