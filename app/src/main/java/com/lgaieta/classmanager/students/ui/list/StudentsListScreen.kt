@@ -8,6 +8,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
-import com.lgaieta.classmanager.subjects.ui.list.SubjectItem
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
@@ -32,6 +36,7 @@ fun StudentsListScreen(
     bottomNavBarActions: BottomNavBarActions,
     studentsListViewModel: StudentsListViewModel,
     onStudentClick: (id: Int) -> Unit = {},
+    onNewStudentClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val listState by studentsListViewModel.studentsListState.collectAsState()
@@ -39,7 +44,13 @@ fun StudentsListScreen(
     Scaffold(
         bottomBar = {
             BottomNavBar(actions = bottomNavBarActions)
-        }
+        },
+        floatingActionButton = {
+            NewStudentButton(
+                onClick = onNewStudentClick,
+            )
+        },
+        floatingActionButtonPosition = FabPosition.Center,
     ) { innerPadding ->
         Column(
             modifier = modifier.padding(
@@ -82,5 +93,12 @@ private fun StudentHeader() {
             text = stringResource(R.string.students_list_title),
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
         )
+    }
+}
+
+@Composable
+fun NewStudentButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    FloatingActionButton(onClick = onClick, modifier = modifier) {
+        Icon(Icons.Filled.Add, stringResource(R.string.new_student_fab_description))
     }
 }
