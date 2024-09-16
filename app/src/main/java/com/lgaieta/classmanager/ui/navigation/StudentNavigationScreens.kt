@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.students.ui.list.StudentsListScreen
 import com.lgaieta.classmanager.students.ui.list.StudentsListViewModel
+import com.lgaieta.classmanager.students.ui.new.NewStudentScreen
 import com.lgaieta.classmanager.ui.viewModelFactory
 
 fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
@@ -16,6 +17,9 @@ fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
         StudentNavigationScreens.StudentsListScreenInitializer(
             navController = navController,
         )
+    }
+    composable(route = ClassManagerScreen.NewStudent.name) {
+        StudentNavigationScreens.NewStudentScreenInitializer(navController = navController)
     }
 }
 
@@ -37,8 +41,17 @@ class StudentNavigationScreens {
             StudentsListScreen(
                 modifier = modifier,
                 bottomNavBarActions = getDefaultBottomNavBarActions(navController),
+                onNewStudentClick = { navController.navigate(ClassManagerScreen.NewStudent.name) },
                 studentsListViewModel = studentsListViewModel
             )
+        }
+
+        @Composable
+        fun NewStudentScreenInitializer(
+            navController: NavHostController,
+            modifier: Modifier = Modifier
+        ) {
+            NewStudentScreen()
         }
     }
 }

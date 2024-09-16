@@ -17,7 +17,8 @@ enum class ClassManagerScreen {
     SubjectDetails,
     Register,
     Home,
-    StudentsList
+    StudentsList,
+    NewStudent
 }
 
 fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(
