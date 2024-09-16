@@ -25,6 +25,7 @@ import com.lgaieta.classmanager.ui.theme.TopPagePadding
 fun NewStudentScreen(
     modifier: Modifier = Modifier,
     afterCreate: () -> Unit = {},
+    newStudentViewModel: NewStudentViewModel,
     bottomNavBarActions: BottomNavBarActions
 ) {
     val coroutineScope = rememberCoroutineScope()

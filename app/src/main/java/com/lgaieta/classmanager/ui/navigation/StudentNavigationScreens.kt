@@ -10,6 +10,7 @@ import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.students.ui.list.StudentsListScreen
 import com.lgaieta.classmanager.students.ui.list.StudentsListViewModel
 import com.lgaieta.classmanager.students.ui.new.NewStudentScreen
+import com.lgaieta.classmanager.students.ui.new.NewStudentViewModel
 import com.lgaieta.classmanager.ui.viewModelFactory
 
 fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
@@ -51,9 +52,18 @@ class StudentNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
+            val newStudentViewModel =
+                viewModel<NewStudentViewModel>(factory = viewModelFactory {
+                    NewStudentViewModel(
+                        offlineStudentRepository =
+                        ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                    )
+                })
+
             NewStudentScreen(
                 modifier = modifier,
-                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController),
+                newStudentViewModel = newStudentViewModel
             )
         }
     }
