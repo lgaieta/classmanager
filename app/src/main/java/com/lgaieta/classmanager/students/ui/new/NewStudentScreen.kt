@@ -9,6 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +22,7 @@ import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
+import kotlinx.coroutines.launch
 
 @Composable
 fun NewStudentScreen(
@@ -28,6 +31,7 @@ fun NewStudentScreen(
     newStudentViewModel: NewStudentViewModel,
     bottomNavBarActions: BottomNavBarActions
 ) {
+    val uiState by newStudentViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -44,6 +48,16 @@ fun NewStudentScreen(
         ) {
             NewStudentHeader()
             Spacer(modifier = Modifier.height(48.dp))
+            NewStudentForm(
+                nameValue = uiState.name,
+                onNameChange = { newStudentViewModel.changeName(it) },
+                onSubmit = {
+                    coroutineScope.launch {
+                        newStudentViewModel.saveStudent()
+                    }
+                    afterCreate()
+                }
+            )
         }
     }
 }

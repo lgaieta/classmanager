@@ -45,4 +45,6 @@
     <string name="students_list_title">Alumnos</string>
     <string name="new_student_fab_description">Nuevo alumno</string>
     <string name="new_student">Nuevo alumno</string>
+    <string name="student_name_label">Nombre del alumno</string>
+    <string name="create_student">Guardar Alumno</string>
 </resources>

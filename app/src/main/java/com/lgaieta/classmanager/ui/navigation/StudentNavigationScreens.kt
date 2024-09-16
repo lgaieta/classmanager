@@ -63,7 +63,8 @@ class StudentNavigationScreens {
             NewStudentScreen(
                 modifier = modifier,
                 bottomNavBarActions = getDefaultBottomNavBarActions(navController),
-                newStudentViewModel = newStudentViewModel
+                newStudentViewModel = newStudentViewModel,
+                afterCreate = { navController.popBackStack() }
             )
         }
     }

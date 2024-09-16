@@ -20,22 +20,12 @@ class NewStudentViewModel(
         }
     }
 
-    fun changeCourse(newCourse: String) {
-        _uiState.update {
-            it.copy(course = newCourse)
-        }
-    }
-
     private fun isNameValid(): Boolean {
         return _uiState.value.name.isNotBlank()
     }
 
-    private fun isCourseValid(): Boolean {
-        return _uiState.value.course.isNotBlank()
-    }
-
     suspend fun saveStudent() {
-        if (isNameValid() && isCourseValid()) {
+        if (isNameValid()) {
             offlineStudentRepository.insert(uiState.value.toStudent())
             _uiState.update {
                 it.copy(name = "")
@@ -46,7 +36,6 @@ class NewStudentViewModel(
 
 data class NewStudentState(
     val name: String = "",
-    val course: String = ""
 ) {
     fun toStudent() = Student(id = 0, name = name)
 }
