@@ -38,5 +38,5 @@ class NewTaskViewModel(
 data class NewTaskState(
     val name: String = ""
 ) {
-    fun toTask() = Task(id = 0, name = name)
+    fun toTask() = Subject(id = 0, name = name, "asdasd")
 }

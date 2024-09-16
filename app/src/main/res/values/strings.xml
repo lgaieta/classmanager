@@ -12,6 +12,7 @@
     <string name="edit_subject">Editar materia</string>
     <string name="course_subject_label">Curso</string>
     <string name="time_label">Horario</string>
+    <string name="times_label">Horarios</string>
     <string name="subject">Materia</string>
     <string name="new_time_label">Nuevo horario</string>
     <string name="cancel">Cancelar</string>
@@ -39,6 +40,7 @@
     <string name="create_task">Crear tarea</string>
     <string name="task_name_label">Nombre de la tarea</string>
     <string name="new_task">Nueva tarea</string>
+    <string name="new_time">Nuevo horario</string>
     <string name="save_task">Guardar tarea</string>
     <string name="edit_task">Editar tarea</string>
     <string name="edit_task_fab_description">Editar tarea</string>
