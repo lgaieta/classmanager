@@ -23,10 +23,10 @@ import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
 
 @Composable
-fun NewSubjectScreen(
+fun NewTaskScreen(
     modifier: Modifier = Modifier,
     newTaskViewModel: NewTaskViewModel,
-    onCreate: () -> Unit = {}
+    afterCreate: () -> Unit = {}
 ) {
     val uiState by newTaskViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
@@ -49,7 +49,7 @@ fun NewSubjectScreen(
                 coroutineScope.launch {
                     newTaskViewModel.saveTask()
                 }
-                onCreate()
+                afterCreate()
             }
         )
     }

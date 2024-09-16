@@ -39,4 +39,13 @@
     <string name="create_task">Crear tarea</string>
     <string name="task_name_label">Nombre de la tarea</string>
     <string name="new_task">Nueva tarea</string>
+    <string name="save_task">Guardar tarea</string>
+    <string name="edit_task">Editar tarea</string>
+    <string name="edit_task_fab_description">Editar tarea</string>
+    <string name="confirm_delete_task_title">¿Estás seguro de querer borrar la tarea?</string>
+    <string name="confirm_delete_task_description">Al borrar la tarea no podrás recuperarla.</string>
+    <string name="delete_task_fab_description">Eliminar tarea</string>
+    <string name="confirm_delete_task_button">Borrar</string>
+    <string name="cancel_delete_task">Cancelar</string>
+    <string name="task_not_found">La tarea que estás buscando no existe.</string>
 </resources>

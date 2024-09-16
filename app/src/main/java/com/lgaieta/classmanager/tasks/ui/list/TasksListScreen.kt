@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.subjects.ui.list
+package com.lgaieta.classmanager.tasks.ui.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,18 +32,18 @@ import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
 @Composable
-fun SubjectsListScreen(
+fun TasksListScreen(
     modifier: Modifier = Modifier,
-    subjectsListViewModel: SubjectsListViewModel,
-    onNewSubjectClick: () -> Unit = {},
-    onSubjectClick: (id: Int) -> Unit = {},
+    tasksListViewModel: TasksListViewModel,
+    onNewTaskClick: () -> Unit = {},
+    onTaskClick: (id: Int) -> Unit = {},
     bottomNavBarActions: BottomNavBarActions
 ) {
-    val listState by subjectsListViewModel.subjectListState.collectAsState()
+    val listState by tasksListViewModel.taskListState.collectAsState()
     Scaffold(
         floatingActionButton = {
-            NewSubjectButton(
-                onClick = onNewSubjectClick,
+            NewTaskButton(
+                onClick = onNewTaskClick,
             )
         },
         floatingActionButtonPosition = FabPosition.Center,
@@ -58,9 +58,9 @@ fun SubjectsListScreen(
                 vertical = TopPagePadding + innerPadding.calculateTopPadding()
             )
         ) {
-            SubjectHeader()
+            TaskHeader()
             Spacer(modifier = Modifier.height(48.dp))
-            if (listState.subjects.isEmpty()) {
+            if (listState.tasks.isEmpty()) {
                 Text(
                     text = stringResource(R.string.empty_subjects_list),
                     textAlign = TextAlign.Center,
@@ -68,11 +68,12 @@ fun SubjectsListScreen(
             }
             LazyColumn(
                 modifier = Modifier
+
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(listState.subjects) { subject ->
-                    SubjectItem(subject, onClick = onSubjectClick)
+                items(listState.tasks) { task ->
+                    TaskItem(task, onClick = onTaskClick)
                 }
             }
             Spacer(modifier = Modifier.height(48.dp))
@@ -81,22 +82,22 @@ fun SubjectsListScreen(
 }
 
 @Composable
-fun SubjectHeader() {
+fun TaskHeader() {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.subjects_list_title),
+            text = stringResource(R.string.task_name_label),
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
         )
     }
 }
 
 @Composable
-fun NewSubjectButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     FloatingActionButton(onClick = onClick, modifier = modifier) {
-        Icon(Icons.Filled.Add, stringResource(R.string.new_subject_fab_description))
+        Icon(Icons.Filled.Add, stringResource(R.string.new_task))
     }
 }
