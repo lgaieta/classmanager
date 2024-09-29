@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsScreen
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsViewModel
+import com.lgaieta.classmanager.students.ui.edit.EditStudentScreen
 import com.lgaieta.classmanager.students.ui.list.StudentsListScreen
 import com.lgaieta.classmanager.students.ui.list.StudentsListViewModel
 import com.lgaieta.classmanager.students.ui.new.NewStudentScreen
@@ -38,6 +39,14 @@ fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
     }
     composable(route = ClassManagerScreen.NewStudent.name) {
         StudentNavigationScreens.NewStudentScreenInitializer(navController = navController)
+    }
+    composable(
+        route = "${ClassManagerScreen.EditStudent.name}/{$SUBJECT_ID_ARGUMENT}",
+        arguments = listOf(navArgument(STUDENT_ID_ARGUMENT) {
+            type = androidx.navigation.NavType.IntType
+        })
+    ) {
+        StudentNavigationScreens.EditStudentScreenInitializer()
     }
 }
 
@@ -80,7 +89,8 @@ class StudentNavigationScreens {
                         offlineStudentRepository =
                         ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
                         studentId = studentId,
-                        afterDelete = { navController.popBackStack() }
+                        afterDelete = { navController.popBackStack() },
+                        afterEdit = { navController.navigate("${ClassManagerScreen.EditStudent.name}/$studentId") }
                     )
                 })
 
@@ -109,6 +119,11 @@ class StudentNavigationScreens {
                 newStudentViewModel = newStudentViewModel,
                 afterCreate = { navController.popBackStack() }
             )
+        }
+
+        @Composable
+        fun EditStudentScreenInitializer() {
+            EditStudentScreen()
         }
     }
 }
