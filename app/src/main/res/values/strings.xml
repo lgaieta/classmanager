@@ -49,4 +49,8 @@
     <string name="create_student">Guardar Alumno</string>
     <string name="student_not_found">El alumno que estás buscando no existe.</string>
     <string name="edit">Editar</string>
+    <string name="confirm_delete_student_title">¿Estás seguro de borrar el alumno?\n</string>
+    <string name="confirm_delete_student_description">Los datos se eliminarán permanentemente.</string>
+    <string name="delete_student_fab_description">Eliminar alumno</string>
+
 </resources>
