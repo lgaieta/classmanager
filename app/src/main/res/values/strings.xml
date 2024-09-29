@@ -52,5 +52,8 @@
     <string name="confirm_delete_student_title">¿Estás seguro de borrar el alumno?\n</string>
     <string name="confirm_delete_student_description">Los datos se eliminarán permanentemente.</string>
     <string name="delete_student_fab_description">Eliminar alumno</string>
+    <string name="edit_student">Editar alumno</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="student_name_placeholder">Aieta Luciano</string>
 
 </resources>

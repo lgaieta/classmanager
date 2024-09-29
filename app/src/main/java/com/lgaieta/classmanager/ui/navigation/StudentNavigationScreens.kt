@@ -12,6 +12,7 @@ import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsScreen
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsViewModel
 import com.lgaieta.classmanager.students.ui.edit.EditStudentScreen
+import com.lgaieta.classmanager.students.ui.edit.EditStudentViewModel
 import com.lgaieta.classmanager.students.ui.list.StudentsListScreen
 import com.lgaieta.classmanager.students.ui.list.StudentsListViewModel
 import com.lgaieta.classmanager.students.ui.new.NewStudentScreen
@@ -22,7 +23,7 @@ const val STUDENT_ID_ARGUMENT = "id"
 
 fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
     composable(
-        route = "${ClassManagerScreen.StudentDetails.name}/{$SUBJECT_ID_ARGUMENT}",
+        route = "${ClassManagerScreen.StudentDetails.name}/{$STUDENT_ID_ARGUMENT}",
         arguments = listOf(navArgument(STUDENT_ID_ARGUMENT) {
             type = androidx.navigation.NavType.IntType
         })
@@ -41,12 +42,15 @@ fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
         StudentNavigationScreens.NewStudentScreenInitializer(navController = navController)
     }
     composable(
-        route = "${ClassManagerScreen.EditStudent.name}/{$SUBJECT_ID_ARGUMENT}",
+        route = "${ClassManagerScreen.EditStudent.name}/{$STUDENT_ID_ARGUMENT}",
         arguments = listOf(navArgument(STUDENT_ID_ARGUMENT) {
             type = androidx.navigation.NavType.IntType
         })
-    ) {
-        StudentNavigationScreens.EditStudentScreenInitializer()
+    ) { backstackEntry ->
+        StudentNavigationScreens.EditStudentScreenInitializer(
+            navController = navController,
+            backStackEntry = backstackEntry
+        )
     }
 }
 
@@ -90,7 +94,7 @@ class StudentNavigationScreens {
                         ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
                         studentId = studentId,
                         afterDelete = { navController.popBackStack() },
-                        afterEdit = { navController.navigate("${ClassManagerScreen.EditStudent.name}/$studentId") }
+                        afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditStudent.name}/$id") }
                     )
                 })
 
@@ -122,8 +126,23 @@ class StudentNavigationScreens {
         }
 
         @Composable
-        fun EditStudentScreenInitializer() {
-            EditStudentScreen()
+        fun EditStudentScreenInitializer(
+            backStackEntry: NavBackStackEntry,
+            navController: NavHostController
+        ) {
+            val studentId = backStackEntry.arguments?.getInt(STUDENT_ID_ARGUMENT) ?: return
+
+            val editStudentViewModel = viewModel<EditStudentViewModel>(factory = viewModelFactory {
+                EditStudentViewModel(
+                    offlineStudentRepository =
+                    ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                    studentId = studentId,
+                )
+            })
+
+            EditStudentScreen(
+                editStudentViewModel = editStudentViewModel
+            )
         }
     }
 }
