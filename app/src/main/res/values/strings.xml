@@ -47,4 +47,6 @@
     <string name="new_student">Nuevo alumno</string>
     <string name="student_name_label">Nombre del alumno</string>
     <string name="create_student">Guardar Alumno</string>
+    <string name="student_not_found">El alumno que estás buscando no existe.</string>
+    <string name="edit">Editar</string>
 </resources>

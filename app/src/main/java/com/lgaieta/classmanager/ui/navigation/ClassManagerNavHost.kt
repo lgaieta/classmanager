@@ -18,6 +18,7 @@ enum class ClassManagerScreen {
     Register,
     Home,
     StudentsList,
+    StudentDetails,
     NewStudent
 }
 
