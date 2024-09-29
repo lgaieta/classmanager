@@ -74,16 +74,20 @@ class StudentNavigationScreens {
             val studentId =
                 backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
 
-            val studentDetailsViewModel = viewModel<StudentDetailsViewModel>(factory = viewModelFactory {
-                StudentDetailsViewModel(
-                    offlineStudentRepository =
-                    ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
-                    studentId = studentId,
-                    afterDelete = { navController.popBackStack() }
-                )
-            })
+            val studentDetailsViewModel =
+                viewModel<StudentDetailsViewModel>(factory = viewModelFactory {
+                    StudentDetailsViewModel(
+                        offlineStudentRepository =
+                        ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                        studentId = studentId,
+                        afterDelete = { navController.popBackStack() }
+                    )
+                })
 
-            StudentDetailsScreen(studentDetailsViewModel = studentDetailsViewModel)
+            StudentDetailsScreen(
+                studentDetailsViewModel = studentDetailsViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
+            )
         }
 
         @Composable

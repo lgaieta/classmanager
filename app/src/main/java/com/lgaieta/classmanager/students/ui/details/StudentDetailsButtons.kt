@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 
-
 @Composable
 fun StudentDetailsButtons(onEdit: () -> Unit, onDelete: () -> Unit) {
     Row(

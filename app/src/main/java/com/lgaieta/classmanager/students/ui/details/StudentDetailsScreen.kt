@@ -1,9 +1,6 @@
 package com.lgaieta.classmanager.students.ui.details
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +14,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.ui.BottomNavBar
+import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
@@ -24,11 +23,14 @@ import com.lgaieta.classmanager.ui.theme.TopPagePadding
 fun StudentDetailsScreen(
     studentDetailsViewModel: StudentDetailsViewModel,
     modifier: Modifier = Modifier,
+    bottomNavBarActions: BottomNavBarActions
 ) {
     val studentDetailsState by studentDetailsViewModel.studentDetailsState.collectAsState()
     val isNotFound = studentDetailsState.student == null
 
-    Scaffold { innerPadding ->
+    Scaffold(
+        bottomBar = { BottomNavBar(actions = bottomNavBarActions) }
+    ) { innerPadding ->
         Column(
             modifier = modifier
                 .padding(
