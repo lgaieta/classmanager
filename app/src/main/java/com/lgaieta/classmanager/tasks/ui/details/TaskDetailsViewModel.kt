@@ -36,6 +36,7 @@ class TaskDetailsViewModel(
             offlineTaskRepository.delete(taskDetailsState.value.task!!)
             afterDelete(taskDetailsState.value.task!!.id)
         }
+
     }
 }
 

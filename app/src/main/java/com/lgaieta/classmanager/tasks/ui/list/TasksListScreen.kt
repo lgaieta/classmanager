@@ -60,9 +60,9 @@ fun TasksListScreen(
         ) {
             TaskHeader()
             Spacer(modifier = Modifier.height(48.dp))
-            if (listState.tasks.isEmpty()) {
+            if (listState.tasks.isEmpty())  {
                 Text(
-                    text = stringResource(R.string.empty_subjects_list),
+                    text = stringResource(R.string.empty_tasks_list),
                     textAlign = TextAlign.Center,
                 )
             }
@@ -89,7 +89,7 @@ fun TaskHeader() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.task_name_label),
+            text = stringResource(R.string.tasks_label),
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
         )
     }

@@ -40,7 +40,7 @@ class TaskNavigationScreens {
                 modifier = modifier,
                 tasksListViewModel = tasksListViewModel,
                 onNewTaskClick = { navController.navigate(ClassManagerScreen.NewTask.name) },
-//                onTaskClick = { id -> navController.navigate("${ClassManagerScreen.TaskDetails.name}/${id}") },
+                onTaskClick = { id -> navController.navigate("${ClassManagerScreen.TaskDetails.name}/${id}") },
                 bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
@@ -52,7 +52,7 @@ class TaskNavigationScreens {
             modifier: Modifier = Modifier
         ) {
             val taskId =
-                backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
+                backStackEntry.arguments?.getInt(TASK_ID_ARGUMENT) ?: return
 
             val taskDetailsViewModel =
                 viewModel<TaskDetailsViewModel>(factory = viewModelFactory {

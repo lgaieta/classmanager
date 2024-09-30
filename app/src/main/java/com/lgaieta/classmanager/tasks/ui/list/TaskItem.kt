@@ -1,8 +1,6 @@
 package com.lgaieta.classmanager.tasks.ui.list
 
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,7 +27,7 @@ fun TaskItem(task: Task, modifier: Modifier = Modifier, onClick: (id: Int) -> Un
             style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
             modifier = modifier
                 .fillMaxWidth()
-                .padding(top = 24.dp, start = 24.dp, end = 24.dp)
+                .padding( top = 12.dp, bottom = 12.dp, start = 12.dp, end = 12.dp)
         )
     }
 }

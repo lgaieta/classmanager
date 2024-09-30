@@ -3,8 +3,10 @@ package com.lgaieta.classmanager.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.lgaieta.classmanager.home.ui.HomeScreen
 import com.lgaieta.classmanager.register.ui.RegisterScreen
 import com.lgaieta.classmanager.students.ui.StudentsListScreen
@@ -33,7 +35,7 @@ enum class ClassManagerScreen {
 }
 
 fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(
-    onHomeClick = { navController.navigate(ClassManagerScreen.NewTask.name) },
+    onHomeClick = { navController.navigate(ClassManagerScreen.TaskList.name) },
     onSubjectsClick = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
     onStudentsClick = { navController.navigate(ClassManagerScreen.StudentsList.name) }
 )
@@ -93,7 +95,6 @@ fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = M
         composable(route = ClassManagerScreen.NewSubject.name) {
             SubjectNavigationScreens.NewSubjectScreenInitializer(navController = navController)
         }
-
 
 
         composable(route = ClassManagerScreen.TaskList.name) {

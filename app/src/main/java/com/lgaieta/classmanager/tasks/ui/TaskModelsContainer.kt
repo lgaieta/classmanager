@@ -6,7 +6,7 @@ import OfflineRoomTaskRepository
 import android.content.Context
 import com.lgaieta.classmanager.tasks.models.Task
 import com.lgaieta.classmanager.tasks.models.TaskRepository
-import com.lgaieta.classmanager.subjects.services.OfflineRoomDatabase
+import com.lgaieta.classmanager.services.OfflineRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
