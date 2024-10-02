@@ -1,11 +1,11 @@
 package com.lgaieta.classmanager.ui.navigation
 
 
-import EditSubjectViewModel
 import EditTaskViewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -19,7 +19,6 @@ import com.lgaieta.classmanager.tasks.ui.new.NewTaskScreen
 import com.lgaieta.classmanager.tasks.ui.new.NewTaskViewModel
 import com.lgaieta.classmanager.ui.ClassManagerScreen
 import com.lgaieta.classmanager.ui.getDefaultBottomNavBarActions
-import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val TASK_ID_ARGUMENT = "id"
 

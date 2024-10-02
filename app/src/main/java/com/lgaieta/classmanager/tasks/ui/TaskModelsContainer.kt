@@ -24,12 +24,20 @@ class DefaultTaskModelsContainer(private val context: Context) : TaskModelsConta
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            val task1 = Task(id = 1, name = "Matemáticas")
-            val task2 = Task(id = 2, name = "Ciencias")
+            val task1 = Task(id = 1, name = "Trabajo práctico de sistemas digitales")
+            val task2 = Task(id = 2, name = "Tarea de matemática II")
+            val task3 = Task(id = 3, name = "Tarea de ciencias sociales")
+            val task4 = Task(id = 4, name = "Tarea de organigramas")
+            val task5 = Task(id = 5, name = "Tarea evaluativa de ESI")
+
 
 
             offlineTaskRepository.insert(task1)
             offlineTaskRepository.insert(task2)
+            offlineTaskRepository.insert(task3)
+            offlineTaskRepository.insert(task4)
+            offlineTaskRepository.insert(task5)
+
         }
     }
 }
