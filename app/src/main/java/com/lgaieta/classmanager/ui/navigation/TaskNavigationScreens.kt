@@ -1,26 +1,63 @@
 package com.lgaieta.classmanager.ui.navigation
 
 
-import EditTaskViewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
 import com.lgaieta.classmanager.tasks.ui.details.TaskDetailsScreen
 import com.lgaieta.classmanager.tasks.ui.details.TaskDetailsViewModel
 import com.lgaieta.classmanager.tasks.ui.edit.EditTaskScreen
+import com.lgaieta.classmanager.tasks.ui.edit.EditTaskViewModel
 import com.lgaieta.classmanager.tasks.ui.list.TasksListScreen
 import com.lgaieta.classmanager.tasks.ui.list.TasksListViewModel
 import com.lgaieta.classmanager.tasks.ui.new.NewTaskScreen
 import com.lgaieta.classmanager.tasks.ui.new.NewTaskViewModel
 import com.lgaieta.classmanager.ui.ClassManagerScreen
 import com.lgaieta.classmanager.ui.getDefaultBottomNavBarActions
+import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val TASK_ID_ARGUMENT = "id"
+
+fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController) {
+    composable(route = ClassManagerScreen.TaskList.name) {
+        TaskNavigationScreens.TasksListScreenInitializer(
+            navController = navController,
+        )
+    }
+    composable(
+        route = "${ClassManagerScreen.TaskDetails.name}/{$TASK_ID_ARGUMENT}",
+        arguments = listOf(navArgument(TASK_ID_ARGUMENT) {
+            type = androidx.navigation.NavType.IntType
+        })
+    ) { backStackEntry ->
+        TaskNavigationScreens.TaskDetailsScreenInitializer(
+            navController = navController,
+            backStackEntry = backStackEntry,
+        )
+    }
+    composable(
+        route = "${ClassManagerScreen.EditTask.name}/{$TASK_ID_ARGUMENT}",
+        arguments = listOf(navArgument(TASK_ID_ARGUMENT) {
+            type = androidx.navigation.NavType.IntType
+        })
+    ) { backStackEntry ->
+        TaskNavigationScreens.EditTaskScreenInitializer(
+            navController = navController,
+            backStackEntry = backStackEntry,
+        )
+    }
+    composable(route = ClassManagerScreen.NewTask.name) {
+        TaskNavigationScreens.NewTaskScreenInitializer(navController = navController)
+    }
+}
+
 
 class TaskNavigationScreens {
     companion object {

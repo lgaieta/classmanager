@@ -1,3 +1,5 @@
+package com.lgaieta.classmanager.tasks.ui.edit
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.tasks.models.Task

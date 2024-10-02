@@ -104,8 +104,10 @@ fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = M
             )
         }
         composable(
-            route = "${ClassManagerScreen.TaskDetails.name}/{${TASK_ID_ARGUMENT}}",
-            arguments = listOf(navArgument(TASK_ID_ARGUMENT) { type = NavType.IntType })
+            route = "${ClassManagerScreen.TaskDetails.name}/{$TASK_ID_ARGUMENT}",
+            arguments = listOf(navArgument(TASK_ID_ARGUMENT) {
+                type = androidx.navigation.NavType.IntType
+            })
         ) { backStackEntry ->
             TaskNavigationScreens.TaskDetailsScreenInitializer(
                 navController = navController,
