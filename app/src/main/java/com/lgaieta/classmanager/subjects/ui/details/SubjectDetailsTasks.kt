@@ -1,11 +1,8 @@
 package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
@@ -33,9 +30,8 @@ fun SubjectDetailsTasks(tasks: List<Task> = emptyList(), modifier: Modifier = Mo
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-
         items(tasks) { task ->
-            Card() {
+            Card {
                 Text(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,

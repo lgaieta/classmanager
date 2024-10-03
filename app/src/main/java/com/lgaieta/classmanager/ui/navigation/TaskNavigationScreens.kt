@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager.ui.navigation
 
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,7 +23,10 @@ import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val TASK_ID_ARGUMENT = "id"
 
-fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController, modifier: Modifier = Modifier) {
+fun NavGraphBuilder.taskNavigationScreens(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     composable(route = ClassManagerScreen.TaskList.name) {
         TaskNavigationScreens.TasksListScreenInitializer(
             navController = navController,
@@ -34,7 +36,7 @@ fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController, modi
     composable(
         route = "${ClassManagerScreen.TaskDetails.name}/{$TASK_ID_ARGUMENT}",
         arguments = listOf(navArgument(TASK_ID_ARGUMENT) {
-            type = androidx.navigation.NavType.IntType
+            type = NavType.IntType
         })
     ) { backStackEntry ->
         TaskNavigationScreens.TaskDetailsScreenInitializer(
@@ -53,8 +55,11 @@ fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController, modi
             modifier = modifier
         )
     }
-    composable(route = ClassManagerScreen.NewTask.name) {
-       backStackEntry -> TaskNavigationScreens.NewTaskScreenInitializer(
+    composable(
+        route = "${ClassManagerScreen.NewTask.name}/{${TASK_ID_ARGUMENT}}",
+        arguments = listOf(navArgument(TASK_ID_ARGUMENT) { type = NavType.IntType })
+    ) { backStackEntry ->
+        TaskNavigationScreens.NewTaskScreenInitializer(
             navController = navController,
             backStackEntry = backStackEntry,
         )

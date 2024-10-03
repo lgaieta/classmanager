@@ -25,8 +25,7 @@ import kotlinx.coroutines.launch
 fun SubjectDetailsScreen(
     modifier: Modifier = Modifier,
     subjectDetailsViewModel: SubjectDetailsViewModel,
-    onNewTaskClick: () -> Unit = {},
-    ) {
+) {
     val subjectDetailsState by subjectDetailsViewModel.subjectDetailsState.collectAsState()
     val tasksState by subjectDetailsViewModel.tasksState.collectAsState()
     val isNotFound = subjectDetailsState.subject == null
@@ -62,7 +61,7 @@ fun SubjectDetailsScreen(
                 Spacer(modifier = Modifier.height(40.dp))
                 SubjectDetailsTasks(tasks = tasksState)
                 NewTaskButton(
-                    onClick = onNewTaskClick,
+                    onClick = { subjectDetailsViewModel.onNewTask() },
                 )
             }
         }
@@ -114,8 +113,11 @@ fun SubjectDetailsCourse(course: String, modifier: Modifier = Modifier) {
 fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(onClick = onClick, modifier = modifier) {
         Row {
-        Icon(Icons.Filled.Add, stringResource(R.string.new_task))
-        Text(text = stringResource(R.string.new_task), style = MaterialTheme.typography.bodySmall)
+            Icon(Icons.Filled.Add, stringResource(R.string.new_task))
+            Text(
+                text = stringResource(R.string.new_task),
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }

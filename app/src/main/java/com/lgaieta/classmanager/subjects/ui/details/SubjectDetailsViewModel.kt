@@ -17,7 +17,8 @@ class SubjectDetailsViewModel(
     private val offlineSubjectRepository: SubjectRepository,
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
-    private val afterDelete: (id: Int) -> Unit = {}
+    private val afterDelete: (id: Int) -> Unit = {},
+    private val onNewTaskClick: () -> Unit = {}
 ) : ViewModel() {
     val subjectDetailsState: StateFlow<SubjectDetailsState> =
         offlineSubjectRepository.getSubjectStream(subjectId)
@@ -47,6 +48,10 @@ class SubjectDetailsViewModel(
             offlineSubjectRepository.delete(subjectDetailsState.value.subject!!)
             afterDelete(subjectDetailsState.value.subject!!.id)
         }
+    }
+
+    fun onNewTask() {
+        onNewTaskClick()
     }
 }
 

@@ -97,14 +97,14 @@ class SubjectNavigationScreens {
                         ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
                         subjectId = subjectId,
                         afterDelete = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
-                        afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditSubject.name}/${id}") }
+                        afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditSubject.name}/${id}") },
+                        onNewTaskClick = { navController.navigate("${ClassManagerScreen.NewTask.name}/$subjectId") },
                     )
                 })
 
             SubjectDetailsScreen(
                 modifier = modifier,
                 subjectDetailsViewModel = subjectDetailsViewModel,
-                onNewTaskClick = { navController.navigate(ClassManagerScreen.NewTask.name) },
             )
         }
 
