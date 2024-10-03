@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
+import com.lgaieta.classmanager.tasks.models.Task
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -25,6 +26,15 @@ class SubjectDetailsViewModel(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
                 initialValue = SubjectDetailsState()
+            )
+
+    val tasksState: StateFlow<List<Task>> =
+        offlineSubjectRepository.getTasksStream(subjectId)
+            .filterNotNull()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
             )
 
     fun onEdit() {

@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -25,4 +26,6 @@ interface SubjectRoomDao {
     @Query("SELECT * from subject ORDER BY name ASC")
     fun getAllSubjects(): Flow<List<SubjectRoomEntity>>
 
+    @Query("SELECT * FROM task WHERE subjectId = :subjectId")
+    fun getTasks(subjectId: Int): Flow<List<TaskRoomEntity>>
 }

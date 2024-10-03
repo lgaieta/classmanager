@@ -25,6 +25,7 @@ fun SubjectDetailsScreen(
     modifier: Modifier = Modifier,
 ) {
     val subjectDetailsState by subjectDetailsViewModel.subjectDetailsState.collectAsState()
+    val tasksState by subjectDetailsViewModel.tasksState.collectAsState()
     val isNotFound = subjectDetailsState.subject == null
     val coroutineScope = rememberCoroutineScope()
 
@@ -56,7 +57,7 @@ fun SubjectDetailsScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(40.dp))
-                SubjectDetailsTasks()
+                SubjectDetailsTasks(tasks = tasksState)
             }
         }
     }
