@@ -8,6 +8,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
@@ -23,10 +24,11 @@ import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val TASK_ID_ARGUMENT = "id"
 
-fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController) {
+fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController, modifier: Modifier = Modifier) {
     composable(route = ClassManagerScreen.TaskList.name) {
         TaskNavigationScreens.TasksListScreenInitializer(
             navController = navController,
+            modifier = modifier
         )
     }
     composable(
@@ -38,17 +40,17 @@ fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController) {
         TaskNavigationScreens.TaskDetailsScreenInitializer(
             navController = navController,
             backStackEntry = backStackEntry,
+            modifier = modifier
         )
     }
     composable(
-        route = "${ClassManagerScreen.EditTask.name}/{$TASK_ID_ARGUMENT}",
-        arguments = listOf(navArgument(TASK_ID_ARGUMENT) {
-            type = androidx.navigation.NavType.IntType
-        })
+        route = "${ClassManagerScreen.EditTask.name}/{${TASK_ID_ARGUMENT}}",
+        arguments = listOf(navArgument(TASK_ID_ARGUMENT) { type = NavType.IntType })
     ) { backStackEntry ->
         TaskNavigationScreens.EditTaskScreenInitializer(
             navController = navController,
             backStackEntry = backStackEntry,
+            modifier = modifier
         )
     }
     composable(route = ClassManagerScreen.NewTask.name) {

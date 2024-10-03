@@ -25,8 +25,6 @@ enum class ClassManagerScreen {
     NewTask,
     EditTask,
     TaskDetails,
-
-
 }
 
 fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(
@@ -61,68 +59,7 @@ fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = M
                 }
             )
         }
-        composable(route = ClassManagerScreen.SubjectsList.name) {
-            SubjectNavigationScreens.SubjectsListScreenInitializer(
-                navController = navController,
-                modifier = modifier
-            )
-        }
-        composable(
-            route = "${ClassManagerScreen.SubjectDetails.name}/{${SUBJECT_ID_ARGUMENT}}",
-            arguments = listOf(navArgument(SUBJECT_ID_ARGUMENT) { type = NavType.IntType })
-        ) { backStackEntry ->
-            SubjectNavigationScreens.SubjectDetailsScreenInitializer(
-                navController = navController,
-                backStackEntry = backStackEntry,
-                modifier = modifier
-            )
-        }
-        composable(
-            route = "${ClassManagerScreen.EditSubject.name}/{${SUBJECT_ID_ARGUMENT}}",
-            arguments = listOf(navArgument(SUBJECT_ID_ARGUMENT) { type = NavType.IntType })
-        ) { backStackEntry ->
-            SubjectNavigationScreens.EditSubjectScreenInitializer(
-                navController = navController,
-                backStackEntry = backStackEntry,
-                modifier = modifier
-            )
-        }
-        composable(route = ClassManagerScreen.NewSubject.name) {
-            SubjectNavigationScreens.NewSubjectScreenInitializer(navController = navController)
-        }
-
-
-        composable(route = ClassManagerScreen.TaskList.name) {
-            TaskNavigationScreens.TasksListScreenInitializer(
-                navController = navController,
-                modifier = modifier
-            )
-        }
-        composable(
-            route = "${ClassManagerScreen.TaskDetails.name}/{$TASK_ID_ARGUMENT}",
-            arguments = listOf(navArgument(TASK_ID_ARGUMENT) {
-                type = androidx.navigation.NavType.IntType
-            })
-        ) { backStackEntry ->
-            TaskNavigationScreens.TaskDetailsScreenInitializer(
-                navController = navController,
-                backStackEntry = backStackEntry,
-                modifier = modifier
-            )
-        }
-        composable(
-            route = "${ClassManagerScreen.EditTask.name}/{${TASK_ID_ARGUMENT}}",
-            arguments = listOf(navArgument(TASK_ID_ARGUMENT) { type = NavType.IntType })
-        ) { backStackEntry ->
-            TaskNavigationScreens.EditTaskScreenInitializer(
-                navController = navController,
-                backStackEntry = backStackEntry,
-                modifier = modifier
-            )
-        }
-        composable(route = ClassManagerScreen.NewTask.name) {
-            TaskNavigationScreens.NewTaskScreenInitializer(navController = navController)
-        }
+        taskNavigationScreens(navController)
         subjectNavigationScreens(navController)
     }
 }
