@@ -26,6 +26,7 @@ fun StudentDetailsScreen(
     bottomNavBarActions: BottomNavBarActions
 ) {
     val studentDetailsState by studentDetailsViewModel.studentDetailsState.collectAsState()
+    val subjectsState by studentDetailsViewModel.subjectsState.collectAsState()
     val isNotFound = studentDetailsState.student == null
 
     Scaffold(
@@ -53,6 +54,8 @@ fun StudentDetailsScreen(
                         onDelete = { studentDetailsViewModel.onDelete() }
                     )
                 }
+                Spacer(modifier = Modifier.height(40.dp))
+                StudentDetailsSubjects(subjects = subjectsState)
             }
         }
     }

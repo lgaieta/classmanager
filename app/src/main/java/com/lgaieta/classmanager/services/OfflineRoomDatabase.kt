@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Database
+import com.lgaieta.classmanager.students.services.StudentRoomDao
 import com.lgaieta.classmanager.students.services.StudentRoomEntity
 import com.lgaieta.classmanager.students.services.SubjectStudentCrossRef
 import com.lgaieta.classmanager.subjects.services.SubjectRoomDao
 import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
-import com.lgaieta.classmanager.tasks.services.StudentRoomDao
 
 @Database(
     entities = [SubjectRoomEntity::class, StudentRoomEntity::class, SubjectStudentCrossRef::class],

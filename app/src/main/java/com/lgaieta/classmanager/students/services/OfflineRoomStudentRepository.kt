@@ -2,7 +2,7 @@ package com.lgaieta.classmanager.students.services
 
 import com.lgaieta.classmanager.students.models.StudentRepository
 import com.lgaieta.classmanager.students.models.Student
-import com.lgaieta.classmanager.tasks.services.StudentRoomDao
+import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -16,6 +16,9 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
 
     override fun getStudentStream(id: Int): Flow<Student?> =
         studentDao.getStudent(id).map { it?.toStudent() }
+
+    override fun getSubjectsStream(studentId: Int): Flow<List<Subject>> =
+        studentDao.getSubjects(studentId)
 
     override suspend fun insert(student: Student) =
         studentDao.insert(StudentRoomEntity.fromStudent(student))
