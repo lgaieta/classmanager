@@ -31,15 +31,6 @@ fun BottomNavBar(actions: BottomNavBarActions) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .weight(1f)
-                    .clickable { actions.onHomeClick() },
-            ) {
-                Icon(Icons.Filled.Home, contentDescription = stringResource(R.string.home_nav_item_label))
-                Text(text = stringResource(R.string.home_nav_item_label), style = MaterialTheme.typography.bodySmall)
-            }
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .weight(1f)
                     .clickable {
                         actions.onSubjectsClick()
                     }
