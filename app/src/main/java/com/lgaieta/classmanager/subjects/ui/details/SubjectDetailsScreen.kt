@@ -59,9 +59,9 @@ fun SubjectDetailsScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(40.dp))
-                SubjectDetailsTasks(tasks = tasksState)
-                NewTaskButton(
-                    onClick = { subjectDetailsViewModel.onNewTask() },
+                SubjectDetailsTasks(
+                    tasks = tasksState,
+                    onNewTask = { subjectDetailsViewModel.onNewTask() }
                 )
             }
         }
@@ -106,18 +106,5 @@ fun SubjectDetailsCourse(course: String, modifier: Modifier = Modifier) {
             text = course,
             style = MaterialTheme.typography.bodyMedium
         )
-    }
-}
-
-@Composable
-fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Button(onClick = onClick, modifier = modifier) {
-        Row {
-            Icon(Icons.Filled.Add, stringResource(R.string.new_task))
-            Text(
-                text = stringResource(R.string.new_task),
-                style = MaterialTheme.typography.bodySmall
-            )
-        }
     }
 }
