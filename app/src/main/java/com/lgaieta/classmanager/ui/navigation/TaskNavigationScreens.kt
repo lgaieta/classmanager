@@ -130,6 +130,7 @@ class TaskNavigationScreens {
                     NewTaskViewModel(
                         offlineTaskRepository = ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
                         subjectId = subjectId,
+                        afterCreate = { navController.navigate("${ClassManagerScreen.SubjectDetails.name}/$subjectId") }
                     )
                 })
 
@@ -137,7 +138,6 @@ class TaskNavigationScreens {
             NewTaskScreen(
                 modifier = modifier,
                 newTaskViewModel = newTaskViewModel,
-                afterCreate = { navController.navigate(ClassManagerScreen.TaskList.name) }
             )
         }
 

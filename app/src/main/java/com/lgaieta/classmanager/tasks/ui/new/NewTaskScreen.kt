@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 fun NewTaskScreen(
     modifier: Modifier = Modifier,
     newTaskViewModel: NewTaskViewModel,
-    afterCreate: () -> Unit = {}
 ) {
     val uiState by newTaskViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
@@ -49,7 +48,6 @@ fun NewTaskScreen(
                 coroutineScope.launch {
                     newTaskViewModel.saveTask()
                 }
-                afterCreate()
             }
         )
     }
