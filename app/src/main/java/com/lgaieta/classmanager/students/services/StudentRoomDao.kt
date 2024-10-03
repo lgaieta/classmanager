@@ -20,20 +20,22 @@ interface StudentRoomDao {
     @Delete
     suspend fun delete(task: StudentRoomEntity)
 
-    @Query("INSERT OR IGNORE INTO subject_student (subjectId, studentId) VALUES (:subjectId, :studentId)")
+    @Query("INSERT OR IGNORE INTO subject_student " +
+            "(subjectId, studentId) VALUES (:subjectId, :studentId)")
     suspend fun assignSubject(studentId: Int, subjectId: Int)
 
     @Query("SELECT * from student WHERE id = :id")
     fun getStudent(id: Int): Flow<StudentRoomEntity?>
 
-    @Query("""
+    @Query(
+        """
         SELECT subject.* 
         FROM subject_student 
         JOIN subject ON subject_student.subjectId = subject.id 
         WHERE subject_student.studentId = :studentId
-    """)
+        """
+    )
     fun getSubjects(studentId: Int): Flow<List<Subject>>
-
 
     @Query("SELECT * from student ORDER BY name ASC")
     fun getAllStudents(): Flow<List<StudentRoomEntity>>
