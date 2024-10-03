@@ -19,8 +19,6 @@ import com.lgaieta.classmanager.tasks.ui.list.TasksListScreen
 import com.lgaieta.classmanager.tasks.ui.list.TasksListViewModel
 import com.lgaieta.classmanager.tasks.ui.new.NewTaskScreen
 import com.lgaieta.classmanager.tasks.ui.new.NewTaskViewModel
-import com.lgaieta.classmanager.ui.ClassManagerScreen
-import com.lgaieta.classmanager.ui.getDefaultBottomNavBarActions
 import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val TASK_ID_ARGUMENT = "id"

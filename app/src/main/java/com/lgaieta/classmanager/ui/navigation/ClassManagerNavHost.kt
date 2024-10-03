@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.ui
+package com.lgaieta.classmanager.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,12 +10,7 @@ import androidx.navigation.navArgument
 import com.lgaieta.classmanager.home.ui.HomeScreen
 import com.lgaieta.classmanager.register.ui.RegisterScreen
 import com.lgaieta.classmanager.students.ui.StudentsListScreen
-import com.lgaieta.classmanager.tasks.ui.list.TasksListScreen
-import com.lgaieta.classmanager.ui.navigation.SUBJECT_ID_ARGUMENT
-import com.lgaieta.classmanager.ui.navigation.SubjectNavigationScreens
-import com.lgaieta.classmanager.ui.navigation.TASK_ID_ARGUMENT
-import com.lgaieta.classmanager.ui.navigation.TaskNavigationScreens
-import com.lgaieta.classmanager.ui.navigation.subjectNavigationScreens
+import com.lgaieta.classmanager.ui.BottomNavBarActions
 
 enum class ClassManagerScreen {
     SubjectsList,

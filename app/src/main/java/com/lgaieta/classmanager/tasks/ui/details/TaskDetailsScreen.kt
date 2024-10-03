@@ -25,6 +25,7 @@ fun TaskDetailsScreen(
     modifier: Modifier = Modifier,
 ) {
     val taskDetailsState by taskDetailsViewModel.taskDetailsState.collectAsState()
+    val subjectState by taskDetailsViewModel.subjectState.collectAsState()
     val isNotFound = taskDetailsState.task == null
     val coroutineScope = rememberCoroutineScope()
 
@@ -52,6 +53,16 @@ fun TaskDetailsScreen(
                     )
                 }
             }
+            if (subjectState != null)
+                Column(
+                    modifier = Modifier.padding(top = 20.dp)
+                ) {
+                    Text(
+                        text = subjectState!!.name,
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.align(Alignment.Start)
+                    )
+                }
         }
     }
 }

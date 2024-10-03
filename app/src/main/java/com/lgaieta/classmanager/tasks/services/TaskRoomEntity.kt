@@ -9,11 +9,12 @@ import com.lgaieta.classmanager.tasks.models.Task
 data class TaskRoomEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String
+    val name: String,
+    val subjectId: Int,
 ) {
-    fun toTask() = Task(id, name)
+    fun toTask() = Task(id, name, subjectId)
 
     companion object {
-        fun fromTask(task: Task) = TaskRoomEntity(task.id, task.name)
+        fun fromTask(task: Task) = TaskRoomEntity(task.id, task.name, task.subjectId)
     }
 }

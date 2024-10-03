@@ -55,6 +55,8 @@ fun SubjectDetailsScreen(
                         onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
                     )
                 }
+                Spacer(modifier = Modifier.height(40.dp))
+                SubjectDetailsTasks()
             }
         }
     }
