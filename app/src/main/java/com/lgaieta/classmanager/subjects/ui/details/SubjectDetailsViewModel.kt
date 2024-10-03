@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.tasks.models.Task
-import com.lgaieta.classmanager.ui.navigation.ClassManagerScreen
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -18,7 +17,8 @@ class SubjectDetailsViewModel(
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
     private val afterDelete: (id: Int) -> Unit = {},
-    private val onNewTaskClick: () -> Unit = {}
+    private val afterNewTaskClick: () -> Unit = {},
+    private val afterTaskClick: (task: Task) -> Unit = {},
 ) : ViewModel() {
     val subjectDetailsState: StateFlow<SubjectDetailsState> =
         offlineSubjectRepository.getSubjectStream(subjectId)
@@ -50,8 +50,12 @@ class SubjectDetailsViewModel(
         }
     }
 
+    fun onTaskClick(task: Task) {
+        afterTaskClick(task)
+    }
+
     fun onNewTask() {
-        onNewTaskClick()
+        afterNewTaskClick()
     }
 }
 

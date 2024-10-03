@@ -1,8 +1,6 @@
 package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,7 +64,8 @@ fun SubjectDetailsScreen(
                 Spacer(modifier = Modifier.height(40.dp))
                 SubjectDetailsTasks(
                     tasks = tasksState,
-                    onNewTask = { subjectDetailsViewModel.onNewTask() }
+                    onNewTask = { subjectDetailsViewModel.onNewTask() },
+                    onTaskClick = { subjectDetailsViewModel.onTaskClick(it) }
                 )
             }
         }

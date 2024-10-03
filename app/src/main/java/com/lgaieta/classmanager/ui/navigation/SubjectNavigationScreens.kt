@@ -98,7 +98,12 @@ class SubjectNavigationScreens {
                         subjectId = subjectId,
                         afterDelete = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
                         afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditSubject.name}/${id}") },
-                        onNewTaskClick = { navController.navigate("${ClassManagerScreen.NewTask.name}/$subjectId") },
+                        afterNewTaskClick = { navController.navigate("${ClassManagerScreen.NewTask.name}/$subjectId") },
+                        afterTaskClick = {
+                            navController.navigate(
+                                "${ClassManagerScreen.TaskDetails.name}/${it.id}"
+                            )
+                        }
                     )
                 })
 

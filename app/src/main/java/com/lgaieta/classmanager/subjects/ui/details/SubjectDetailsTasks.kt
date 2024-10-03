@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,11 +30,13 @@ import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.tasks.models.Task
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubjectDetailsTasks(
-    tasks: List<Task> = emptyList(),
     onNewTask: () -> Unit,
-    modifier: Modifier = Modifier
+    onTaskClick: (task: Task) -> Unit,
+    modifier: Modifier = Modifier,
+    tasks: List<Task> = emptyList(),
 ) {
     Text(
         text = stringResource(R.string.tasks),
@@ -45,7 +48,7 @@ fun SubjectDetailsTasks(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(tasks) { task ->
-            Card {
+            Card(onClick = { onTaskClick(task) }) {
                 Text(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
