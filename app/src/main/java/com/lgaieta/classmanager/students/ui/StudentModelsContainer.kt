@@ -5,7 +5,6 @@ import com.lgaieta.classmanager.services.OfflineRoomDatabase
 import com.lgaieta.classmanager.students.models.Student
 import com.lgaieta.classmanager.students.models.StudentRepository
 import com.lgaieta.classmanager.students.services.OfflineRoomStudentRepository
-import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
