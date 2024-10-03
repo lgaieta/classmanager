@@ -39,6 +39,7 @@ fun StudentDetailsSubjects(subjects: List<Subject>) {
                     Card {
                         Text(
                             text = subject.name,
+                            style = MaterialTheme.typography.labelLarge,
                             modifier = Modifier
                                 .padding(24.dp)
                                 .fillMaxWidth()
