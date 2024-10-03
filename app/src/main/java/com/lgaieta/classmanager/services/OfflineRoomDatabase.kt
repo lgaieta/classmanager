@@ -6,13 +6,12 @@ import androidx.room.RoomDatabase
 import androidx.room.Database
 import com.lgaieta.classmanager.subjects.services.SubjectRoomDao
 import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
-import com.lgaieta.classmanager.tasks.services.TaskRoomDao
-import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
 
-@Database(entities = [SubjectRoomEntity::class, TaskRoomEntity::class], version = 4, exportSchema = false)
+@Database(entities = [SubjectRoomEntity::class], version = 2, exportSchema = false)
 abstract class OfflineRoomDatabase : RoomDatabase() {
     abstract fun subjectDao(): SubjectRoomDao
     abstract fun taskDao(): TaskRoomDao
+    abstract fun studentDao(): StudentRoomDao
 
     companion object {
         @Volatile
