@@ -17,3 +17,9 @@ data class StudentRoomEntity(
         fun fromStudent(task: Student) = StudentRoomEntity(task.id, task.name)
     }
 }
+
+@Entity(tableName = "subject_student", primaryKeys = ["subjectId", "studentId"])
+data class SubjectStudentCrossRef(
+    val subjectId: Int,
+    val studentId: Int
+)

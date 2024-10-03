@@ -25,4 +25,7 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
 
     override suspend fun update(student: Student) =
         studentDao.update(StudentRoomEntity.fromStudent(student))
+
+    override suspend fun assignSubject(studentId: Int, subjectId: Int) =
+        studentDao.assignSubject(studentId, subjectId)
 }

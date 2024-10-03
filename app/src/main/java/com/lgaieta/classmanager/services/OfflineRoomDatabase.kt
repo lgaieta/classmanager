@@ -5,11 +5,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Database
 import com.lgaieta.classmanager.students.services.StudentRoomEntity
+import com.lgaieta.classmanager.students.services.SubjectStudentCrossRef
 import com.lgaieta.classmanager.subjects.services.SubjectRoomDao
 import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
 import com.lgaieta.classmanager.tasks.services.StudentRoomDao
 
-@Database(entities = [SubjectRoomEntity::class, StudentRoomEntity::class], version = 3, exportSchema = false)
+@Database(
+    entities = [SubjectRoomEntity::class, StudentRoomEntity::class, SubjectStudentCrossRef::class],
+    version = 4,
+    exportSchema = false
+)
 abstract class OfflineRoomDatabase : RoomDatabase() {
     abstract fun subjectDao(): SubjectRoomDao
     abstract fun studentDao(): StudentRoomDao
@@ -20,7 +25,11 @@ abstract class OfflineRoomDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): OfflineRoomDatabase {
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, OfflineRoomDatabase::class.java, "offline_classmanager")
+                Room.databaseBuilder(
+                    context,
+                    OfflineRoomDatabase::class.java,
+                    "offline_classmanager"
+                )
                     .fallbackToDestructiveMigration().build().also { Instance = it }
             }
         }
