@@ -105,6 +105,7 @@ class SubjectNavigationScreens {
             SubjectDetailsScreen(
                 modifier = modifier,
                 subjectDetailsViewModel = subjectDetailsViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
 
