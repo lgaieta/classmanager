@@ -1,6 +1,8 @@
 package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,9 +23,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SubjectDetailsScreen(
-    subjectDetailsViewModel: SubjectDetailsViewModel,
     modifier: Modifier = Modifier,
-) {
+    subjectDetailsViewModel: SubjectDetailsViewModel,
+    onNewTaskClick: () -> Unit = {},
+    ) {
     val subjectDetailsState by subjectDetailsViewModel.subjectDetailsState.collectAsState()
     val tasksState by subjectDetailsViewModel.tasksState.collectAsState()
     val isNotFound = subjectDetailsState.subject == null
@@ -58,6 +61,9 @@ fun SubjectDetailsScreen(
                 }
                 Spacer(modifier = Modifier.height(40.dp))
                 SubjectDetailsTasks(tasks = tasksState)
+                NewTaskButton(
+                    onClick = onNewTaskClick,
+                )
             }
         }
     }
@@ -101,5 +107,15 @@ fun SubjectDetailsCourse(course: String, modifier: Modifier = Modifier) {
             text = course,
             style = MaterialTheme.typography.bodyMedium
         )
+    }
+}
+
+@Composable
+fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Button(onClick = onClick, modifier = modifier) {
+        Row {
+        Icon(Icons.Filled.Add, stringResource(R.string.new_task))
+        Text(text = stringResource(R.string.new_task), style = MaterialTheme.typography.bodySmall)
+        }
     }
 }

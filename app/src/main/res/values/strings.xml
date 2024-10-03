@@ -52,4 +52,5 @@
     <string name="task_not_found">La tarea que estás buscando no existe.</string>
     <string name="empty_tasks_list">No hay tareas creadas aún, presiona el botón + para crear una.</string>
     <string name="tasks">Tareas</string>
+    <string name="tasks_not_found">Aun no hay tareas creadas</string>
 </resources>

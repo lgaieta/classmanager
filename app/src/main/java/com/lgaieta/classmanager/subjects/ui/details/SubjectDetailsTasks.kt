@@ -33,8 +33,9 @@ fun SubjectDetailsTasks(tasks: List<Task> = emptyList(), modifier: Modifier = Mo
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+
         items(tasks) { task ->
-            Card {
+            Card() {
                 Text(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,

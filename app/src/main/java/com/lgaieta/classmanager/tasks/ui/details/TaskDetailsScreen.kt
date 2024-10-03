@@ -51,18 +51,24 @@ fun TaskDetailsScreen(
                         onEdit = { taskDetailsViewModel.onEdit() },
                         onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } }
                     )
-                }
-            }
-            if (subjectState != null)
+
+                 if (subjectState != null)
                 Column(
-                    modifier = Modifier.padding(top = 20.dp)
+                    modifier = modifier.padding(end = 16.dp)
                 ) {
+                    Text(
+                        text = stringResource(R.string.subject),
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.align(Alignment.Start)
+                    )
                     Text(
                         text = subjectState!!.name,
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                         modifier = Modifier.align(Alignment.Start)
                     )
                 }
+                }
+            }
         }
     }
 }
@@ -86,5 +92,20 @@ fun TaskDetailsHeader(title: String, modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
         )
+    }
+}
+
+@Composable
+fun TaskDetailsSubject( modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .padding(end = 16.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.course_subject_label),
+            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.align(Alignment.Start)
+        )
+
     }
 }

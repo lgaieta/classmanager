@@ -104,6 +104,7 @@ class SubjectNavigationScreens {
             SubjectDetailsScreen(
                 modifier = modifier,
                 subjectDetailsViewModel = subjectDetailsViewModel,
+                onNewTaskClick = { navController.navigate(ClassManagerScreen.NewTask.name) },
             )
         }
 

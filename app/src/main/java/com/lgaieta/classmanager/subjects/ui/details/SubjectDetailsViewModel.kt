@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.tasks.models.Task
+import com.lgaieta.classmanager.ui.navigation.ClassManagerScreen
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull

@@ -54,7 +54,10 @@ fun NavGraphBuilder.taskNavigationScreens(navController: NavHostController, modi
         )
     }
     composable(route = ClassManagerScreen.NewTask.name) {
-        TaskNavigationScreens.NewTaskScreenInitializer(navController = navController)
+       backStackEntry -> TaskNavigationScreens.NewTaskScreenInitializer(
+            navController = navController,
+            backStackEntry = backStackEntry,
+        )
     }
 }
 
@@ -110,14 +113,21 @@ class TaskNavigationScreens {
         @Composable
         fun NewTaskScreenInitializer(
             navController: NavHostController,
+            backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+
+            val subjectId =
+                backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
+
             val newTaskViewModel =
                 viewModel<NewTaskViewModel>(factory = viewModelFactory {
                     NewTaskViewModel(
-                        offlineTaskRepository = ClassManagerApplication.taskModelsContainer.offlineTaskRepository
+                        offlineTaskRepository = ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
+                        subjectId = subjectId,
                     )
                 })
+
 
             NewTaskScreen(
                 modifier = modifier,

@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class NewTaskViewModel(
-    private val offlineTaskRepository: TaskRepository
+    private val offlineTaskRepository: TaskRepository,
+    private val subjectId: Int
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewTaskState())
     val uiState: StateFlow<NewTaskState> = _uiState.asStateFlow()
@@ -27,7 +28,7 @@ class NewTaskViewModel(
 
     suspend fun saveTask() {
         if (isNameValid()) {
-            offlineTaskRepository.insert(uiState.value.toTask())
+            offlineTaskRepository.insert(uiState.value.toTask().copy(subjectId = subjectId))
             _uiState.update {
                 it.copy(name = "")
             }
@@ -38,5 +39,5 @@ class NewTaskViewModel(
 data class NewTaskState(
     val name: String = ""
 ) {
-    fun toTask() = Task(id = 0, name =  name, 1)
+    fun toTask() = Task(id = 0, name =  name, subjectId = 0)
 }

@@ -9,7 +9,7 @@ import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
 import com.lgaieta.classmanager.tasks.services.TaskRoomDao
 import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
 
-@Database(entities = [SubjectRoomEntity::class, TaskRoomEntity::class], version = 2, exportSchema = false)
+@Database(entities = [SubjectRoomEntity::class, TaskRoomEntity::class], version = 3, exportSchema = false)
 abstract class OfflineRoomDatabase : RoomDatabase() {
     abstract fun subjectDao(): SubjectRoomDao
     abstract fun taskDao(): TaskRoomDao
