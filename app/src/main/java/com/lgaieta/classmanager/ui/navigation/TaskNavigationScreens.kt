@@ -104,7 +104,7 @@ class TaskNavigationScreens {
                         offlineTaskRepository =
                         ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
                         taskId = taskId,
-                        afterDelete = { navController.navigate(ClassManagerScreen.TaskList.name) },
+                        afterDelete = { task -> navController.navigate("${ClassManagerScreen.SubjectDetails.name}/${task.subjectId}") },
                         afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditTask.name}/${id}") }
                     )
                 })

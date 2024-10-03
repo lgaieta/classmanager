@@ -16,7 +16,7 @@ class TaskDetailsViewModel(
     private val offlineTaskRepository: TaskRepository,
     taskId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
-    private val afterDelete: (id: Int) -> Unit = {}
+    private val afterDelete: (task: Task) -> Unit = {}
 ) : ViewModel() {
     val taskDetailsState: StateFlow<TaskDetailsState> =
         offlineTaskRepository.getTaskStream(taskId)
@@ -44,7 +44,7 @@ class TaskDetailsViewModel(
     fun onDelete() {
         if (taskDetailsState.value.task != null) viewModelScope.launch {
             offlineTaskRepository.delete(taskDetailsState.value.task!!)
-            afterDelete(taskDetailsState.value.task!!.id)
+            afterDelete(taskDetailsState.value.task!!)
         }
     }
 }
