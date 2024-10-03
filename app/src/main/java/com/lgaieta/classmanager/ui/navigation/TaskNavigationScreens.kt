@@ -112,6 +112,7 @@ class TaskNavigationScreens {
             TaskDetailsScreen(
                 modifier = modifier,
                 taskDetailsViewModel = taskDetailsViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
 

@@ -15,6 +15,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.ui.BottomNavBar
+import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TaskDetailsScreen(
     taskDetailsViewModel: TaskDetailsViewModel,
+    bottomNavBarActions: BottomNavBarActions,
     modifier: Modifier = Modifier,
 ) {
     val taskDetailsState by taskDetailsViewModel.taskDetailsState.collectAsState()
@@ -29,7 +32,7 @@ fun TaskDetailsScreen(
     val isNotFound = taskDetailsState.task == null
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold { innerPadding ->
+    Scaffold(bottomBar = { BottomNavBar(bottomNavBarActions) }) { innerPadding ->
         Column(
             modifier = modifier
                 .padding(
@@ -49,7 +52,9 @@ fun TaskDetailsScreen(
                 ) {
                     if (subjectState != null)
                         Column(
-                            modifier = modifier.padding(end = 16.dp).weight(1f)
+                            modifier = modifier
+                                .padding(end = 16.dp)
+                                .weight(1f)
                         ) {
                             Text(
                                 text = stringResource(R.string.subject),
