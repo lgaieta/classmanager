@@ -23,7 +23,7 @@ interface TaskRoomDao {
     suspend fun delete(task: TaskRoomEntity)
 
     @Query("SELECT * from task WHERE id = :id")
-    fun getTask(id: Int): Flow<TaskRoomEntity>
+    fun getTask(id: Int): Flow<TaskRoomEntity?>
 
     @Query("SELECT * from task ORDER BY name ASC")
     fun getAllTasks(): Flow<List<TaskRoomEntity>>
