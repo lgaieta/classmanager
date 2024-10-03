@@ -112,8 +112,8 @@ class StudentNavigationScreens {
             val newStudentViewModel =
                 viewModel<NewStudentViewModel>(factory = viewModelFactory {
                     NewStudentViewModel(
-                        offlineStudentRepository =
-                        ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                        offlineStudentRepository = ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository
                     )
                 })
 

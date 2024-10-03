@@ -32,6 +32,7 @@ fun NewStudentScreen(
     bottomNavBarActions: BottomNavBarActions
 ) {
     val uiState by newStudentViewModel.uiState.collectAsState()
+    val availableSubjects by newStudentViewModel.availableSubjects.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -56,6 +57,13 @@ fun NewStudentScreen(
                         newStudentViewModel.saveStudent()
                     }
                     afterCreate()
+                },
+                availableSubjects = availableSubjects,
+                selectedSubjects = uiState.selectedSubjects,
+                onSelectedSubjectsChange = { newList ->
+                    newStudentViewModel.onSelectedSubjectsChange(
+                        newList
+                    )
                 }
             )
         }
