@@ -1,5 +1,6 @@
 package com.lgaieta.classmanager.tasks.ui.details
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -17,7 +18,7 @@ import com.lgaieta.classmanager.R
 
 @Composable
 fun TaskDetailsButtons(onEdit: () -> Unit, onDelete: () -> Unit, modifier: Modifier = Modifier) {
-    Row(modifier = modifier) {
+    Row(modifier = modifier, horizontalArrangement = Arrangement.End) {
         FloatingActionButton(
             onClick = onEdit,
             elevation = FloatingActionButtonDefaults.elevation(0.dp)

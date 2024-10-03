@@ -47,26 +47,26 @@ fun TaskDetailsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    if (subjectState != null)
+                        Column(
+                            modifier = modifier.padding(end = 16.dp).weight(1f)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.subject),
+                                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                                modifier = Modifier.align(Alignment.Start)
+                            )
+                            Text(
+                                text = subjectState!!.name,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.align(Alignment.Start)
+                            )
+                        }
                     TaskDetailsButtons(
                         onEdit = { taskDetailsViewModel.onEdit() },
-                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } }
+                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
+                        modifier = Modifier.weight(1f)
                     )
-
-                 if (subjectState != null)
-                Column(
-                    modifier = modifier.padding(end = 16.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.subject),
-                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                        modifier = Modifier.align(Alignment.Start)
-                    )
-                    Text(
-                        text = subjectState!!.name,
-                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                        modifier = Modifier.align(Alignment.Start)
-                    )
-                }
                 }
             }
         }
@@ -96,7 +96,7 @@ fun TaskDetailsHeader(title: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TaskDetailsSubject( modifier: Modifier = Modifier) {
+fun TaskDetailsSubject(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .padding(end = 16.dp)
