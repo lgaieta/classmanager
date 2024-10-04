@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.students.ui.new
+ package com.lgaieta.classmanager.students.ui.new
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
