@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 
 class EditStudentViewModel(
     private val offlineStudentRepository: StudentRepository,
-    studentId: Int,
-    private val afterEdit: (id: Int) -> Unit = {},
+    studentId: Long,
+    private val afterEdit: (id: Long) -> Unit = {},
 ) : ViewModel() {
     private val _editStudentState = MutableStateFlow(EditStudentState())
 

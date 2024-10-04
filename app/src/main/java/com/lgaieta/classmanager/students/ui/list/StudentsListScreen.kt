@@ -35,7 +35,7 @@ import com.lgaieta.classmanager.ui.theme.TopPagePadding
 fun StudentsListScreen(
     bottomNavBarActions: BottomNavBarActions,
     studentsListViewModel: StudentsListViewModel,
-    onStudentClick: (id: Int) -> Unit = {},
+    onStudentClick: (id: Long) -> Unit = {},
     onNewStudentClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {

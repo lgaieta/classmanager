@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.update
 
 class NewStudentViewModel(
     private val offlineStudentRepository: StudentRepository,
-    private val offlineSubjectRepository: SubjectRepository
+    offlineSubjectRepository: SubjectRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewStudentState())
     val uiState: StateFlow<NewStudentState> = _uiState.asStateFlow()
@@ -46,9 +46,10 @@ class NewStudentViewModel(
 
     suspend fun saveStudent() {
         if (isNameValid()) {
-            offlineStudentRepository.insert(uiState.value.toStudent())
+            val studentId = offlineStudentRepository.insert(uiState.value.toStudent())
+            offlineStudentRepository.assignSubjects(uiState.value.selectedSubjects.map { Pair(studentId, it.id) })
             _uiState.update {
-                it.copy(name = "")
+                it.copy(name = "", selectedSubjects = emptyList())
             }
         }
     }
