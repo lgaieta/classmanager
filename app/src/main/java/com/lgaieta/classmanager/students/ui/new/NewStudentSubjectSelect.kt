@@ -3,6 +3,7 @@ package com.lgaieta.classmanager.students.ui.new
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -36,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.subjects.models.Subject
+import primaryLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -92,7 +95,11 @@ fun NewStudentSubjectSelect(
                 }
             }
         }
-        Button(onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth()) {
+        Button(
+            onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            contentPadding = PaddingValues(12.dp),
+        ) {
             Icon(
                 imageVector = Icons.Filled.Add,
                 contentDescription = stringResource(R.string.add_subjects)
