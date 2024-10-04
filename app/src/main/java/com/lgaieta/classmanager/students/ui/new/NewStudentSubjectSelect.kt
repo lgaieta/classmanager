@@ -60,11 +60,11 @@ fun NewStudentSubjectSelect(
                 style = MaterialTheme.typography.bodyMedium
             )
         }
-        LazyColumn(
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(selectedSubjects) { selectedSubject ->
+            selectedSubjects.map { selectedSubject ->
                 Card {
                     Text(
                         text = selectedSubject.name,
@@ -75,82 +75,82 @@ fun NewStudentSubjectSelect(
                 }
             }
         }
-        Button(onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth()) {
-            Icon(
-                imageVector = Icons.Filled.Add,
-                contentDescription = stringResource(R.string.add_subjects)
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Text(text = stringResource(R.string.add_subjects))
-        }
-        if (isOpen) Dialog(onDismissRequest = { isOpen = false }) {
-            Card {
-                Column {
-                    Text(
-                        text = stringResource(R.string.subject_select_title),
-                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        modifier = Modifier
-                            .padding(24.dp)
-                            .fillMaxWidth()
-                    )
-                    Divider(modifier = Modifier.fillMaxWidth())
-                    LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier
-                            .padding(horizontal = 24.dp)
-                            .weight(1f)
-                    ) {
-                        items(availableSubjects) { availableSubject ->
-                            Card(
-                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
-                                onClick = {
-                                    if (!selectedDialogSubjects.contains(availableSubject))
-                                        selectedDialogSubjects += availableSubject
-                                    else
-                                        selectedDialogSubjects =
-                                            selectedDialogSubjects.filterNot { it == availableSubject }
-                                }) {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Text(
-                                        text = availableSubject.name,
+    }
+    Button(onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth()) {
+        Icon(
+            imageVector = Icons.Filled.Add,
+            contentDescription = stringResource(R.string.add_subjects)
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(text = stringResource(R.string.add_subjects))
+    }
+    if (isOpen) Dialog(onDismissRequest = { isOpen = false }) {
+        Card {
+            Column {
+                Text(
+                    text = stringResource(R.string.subject_select_title),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier
+                        .padding(24.dp)
+                        .fillMaxWidth()
+                )
+                Divider(modifier = Modifier.fillMaxWidth())
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp)
+                        .weight(1f)
+                ) {
+                    items(availableSubjects) { availableSubject ->
+                        Card(
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
+                            onClick = {
+                                if (!selectedDialogSubjects.contains(availableSubject))
+                                    selectedDialogSubjects += availableSubject
+                                else
+                                    selectedDialogSubjects =
+                                        selectedDialogSubjects.filterNot { it == availableSubject }
+                            }) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = availableSubject.name,
+                                    modifier = Modifier
+                                        .padding(16.dp),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                                if (selectedDialogSubjects.contains(availableSubject)) {
+                                    Icon(
+                                        Icons.Filled.Done,
+                                        contentDescription = stringResource(
+                                            R.string.selected
+                                        ),
                                         modifier = Modifier
-                                            .padding(16.dp),
-                                        style = MaterialTheme.typography.bodyMedium
+                                            .padding(16.dp)
+                                            .size(16.dp),
                                     )
-                                    if (selectedDialogSubjects.contains(availableSubject)) {
-                                        Icon(
-                                            Icons.Filled.Done,
-                                            contentDescription = stringResource(
-                                                R.string.selected
-                                            ),
-                                            modifier = Modifier
-                                                .padding(16.dp)
-                                                .size(16.dp),
-                                        )
-                                    }
                                 }
                             }
                         }
                     }
-                    Divider(modifier = Modifier.fillMaxWidth())
-                    Row(modifier = Modifier.padding(24.dp)) {
-                        Button(
-                            onClick = {
-                                onSelectedSubjectsChange(selectedDialogSubjects)
-                                isOpen = false
-                            },
-                            shape = MaterialTheme.shapes.medium,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = stringResource(R.string.add_subjects),
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        }
+                }
+                Divider(modifier = Modifier.fillMaxWidth())
+                Row(modifier = Modifier.padding(24.dp)) {
+                    Button(
+                        onClick = {
+                            onSelectedSubjectsChange(selectedDialogSubjects)
+                            isOpen = false
+                        },
+                        shape = MaterialTheme.shapes.medium,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = stringResource(R.string.add_subjects),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 }
             }

@@ -4,3 +4,4 @@ import androidx.compose.ui.unit.dp
 
 val HorizontalPagePadding = 24.dp;
 val TopPagePadding = 64.dp;
+val BottomPagePadding = 24.dp;
