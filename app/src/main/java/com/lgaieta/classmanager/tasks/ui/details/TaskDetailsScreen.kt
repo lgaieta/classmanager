@@ -74,6 +74,7 @@ fun TaskDetailsScreen(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(24.dp))
             Column(
                 modifier = modifier
                     .padding(end = 16.dp)
@@ -85,7 +86,7 @@ fun TaskDetailsScreen(
                     modifier = Modifier.align(Alignment.Start)
                 )
                 Text(
-                    text = "La sección de tareas se encuentra en desarrollo.",
+                    text = "La sección de notas de tareas se encuentra en desarrollo.",
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.align(Alignment.Start)
                 )
