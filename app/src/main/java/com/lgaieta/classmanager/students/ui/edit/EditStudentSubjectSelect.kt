@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -144,7 +145,10 @@ fun EditStudentSubjectSelect(
                     }
                     items(availableSubjects) { availableSubject ->
                         Card(
-                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                contentColor = MaterialTheme.colorScheme.onSurface,
+                            ),
                             onClick = {
                                 if (!selectedDialogSubjects.contains(availableSubject))
                                     selectedDialogSubjects += availableSubject
