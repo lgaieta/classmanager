@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager.subjects.ui.list
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
@@ -52,30 +52,32 @@ fun SubjectsListScreen(
         }
     )
     { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = modifier.padding(
-                horizontal = HorizontalPagePadding,
-                vertical = TopPagePadding + innerPadding.calculateTopPadding()
+                start = HorizontalPagePadding,
+                end = HorizontalPagePadding,
+                top = TopPagePadding + innerPadding.calculateTopPadding()
             )
         ) {
-            SubjectHeader()
-            Spacer(modifier = Modifier.height(48.dp))
-            if (listState.subjects.isEmpty()) {
-                Text(
-                    text = stringResource(R.string.empty_subjects_list),
-                    textAlign = TextAlign.Center,
-                )
+            item {
+                SubjectHeader()
+                Spacer(modifier = Modifier.height(48.dp))
             }
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(listState.subjects) { subject ->
-                    SubjectItem(subject, onClick = onSubjectClick)
+            if (listState.subjects.isEmpty()) {
+                item {
+                    Text(
+                        text = stringResource(R.string.empty_subjects_list),
+                        textAlign = TextAlign.Center,
+                    )
                 }
             }
-            Spacer(modifier = Modifier.height(48.dp))
+            items(listState.subjects) { subject ->
+                SubjectItem(subject, onClick = onSubjectClick)
+                Spacer(modifier = Modifier.height(12.dp))
+            }
+            item {
+                Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
@@ -52,31 +53,30 @@ fun StudentsListScreen(
         },
         floatingActionButtonPosition = FabPosition.Center,
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = modifier.padding(
                 start = HorizontalPagePadding,
                 end = HorizontalPagePadding,
                 top = TopPagePadding + innerPadding.calculateTopPadding()
             )
         ) {
-            StudentHeader()
-            Spacer(modifier = Modifier.height(48.dp))
-            if (listState.students.isEmpty()) {
-                Text(
-                    text = stringResource(R.string.empty_students_list),
-                    textAlign = TextAlign.Center,
-                )
-            }
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(listState.students) { student ->
-                    StudentItem(student, onClick = onStudentClick)
+            item {
+                StudentHeader()
+                Spacer(modifier = Modifier.height(48.dp))
+                if (listState.students.isEmpty()) {
+                    Text(
+                        text = stringResource(R.string.empty_students_list),
+                        textAlign = TextAlign.Center,
+                    )
                 }
             }
-            Spacer(modifier = Modifier.height(48.dp))
+            items(listState.students) { student ->
+                StudentItem(student, onClick = onStudentClick)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+            item {
+                Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
+            }
         }
     }
 }
