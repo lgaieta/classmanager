@@ -71,4 +71,5 @@
     <string name="add_subjects">Agregar materias</string>
     <string name="subject_select_title">Seleccione las materias en las que será incluido el alumno</string>
     <string name="selected_label">Seleccionado</string>
+    <string name="notes">Notas</string>
 </resources>

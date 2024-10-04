@@ -74,6 +74,22 @@ fun TaskDetailsScreen(
                     )
                 }
             }
+            Column(
+                modifier = modifier
+                    .padding(end = 16.dp)
+                    .weight(1f)
+            ) {
+                Text(
+                    text = stringResource(R.string.notes),
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.align(Alignment.Start)
+                )
+                Text(
+                    text = "La sección de tareas se encuentra en desarrollo.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+            }
         }
     }
 }
