@@ -13,21 +13,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.subjects.models.Subject
 
 @Composable
 fun NewStudentForm(
     nameValue: String,
     onNameChange: (name: String) -> Unit,
     onSubmit: () -> Unit,
+    availableSubjects: List<Subject>,
+    selectedSubjects: List<Subject>,
+    onSelectedSubjectsChange: (subjectList: List<Subject>) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameField(value = nameValue, onValueChange = onNameChange)
+        NewStudentSubjectSelect(
+            availableSubjects = availableSubjects,
+            selectedSubjects = selectedSubjects,
+            onSelectedSubjectsChange = onSelectedSubjectsChange
+        )
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }
 
 @Composable
-fun NameField(value: String, onValueChange: (value: String) -> Unit) {
+private fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(text = stringResource(R.string.student_name_label))
         OutlinedTextField(
@@ -39,8 +48,9 @@ fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     }
 }
 
+
 @Composable
-fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
         modifier = modifier,

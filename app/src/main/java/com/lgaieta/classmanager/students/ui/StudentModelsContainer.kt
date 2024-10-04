@@ -29,6 +29,7 @@ class DefaultStudentModelsContainer(private val context: Context) : StudentModel
             offlineStudentRepository.insert(subject2)
             offlineStudentRepository.assignSubject(subject1.id, 2)
             offlineStudentRepository.assignSubject(subject2.id, 4)
+            offlineStudentRepository.assignSubject(subject2.id, 5)
         }
     }
 }

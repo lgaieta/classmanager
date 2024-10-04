@@ -14,7 +14,7 @@ import com.lgaieta.classmanager.students.models.Student
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StudentItem(student: Student, modifier: Modifier = Modifier, onClick: (id: Int) -> Unit = {}) {
+fun StudentItem(student: Student, modifier: Modifier = Modifier, onClick: (id: Long) -> Unit = {}) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,

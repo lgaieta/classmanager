@@ -18,7 +18,7 @@
     <string name="cancel">Cancelar</string>
     <string name="save_subject">Guardar materia</string>
     <string name="delete">Eliminar</string>
-    <string name="delete_subject">¿Deseas eliminar esta materia?</string>
+    <string name="delete_subject_question">¿Deseas eliminar esta materia?</string>
     <string name="_label">Tareas y exámenes</string>
     <string name="tasks_label">Tareas y exámenes</string>
     <string name="subject_name_label">Nombre de la materia</string>
@@ -67,5 +67,8 @@
     <string name="edit_student">Editar alumno</string>
     <string name="save_changes">Guardar cambios</string>
     <string name="student_name_placeholder">Aieta Luciano</string>
-
+    <string name="subjects">Materias</string>
+    <string name="add_subjects">Agregar materias</string>
+    <string name="subject_select_title">Seleccione las materias en las que será incluido el alumno</string>
+    <string name="selected_label">Seleccionado</string>
 </resources>

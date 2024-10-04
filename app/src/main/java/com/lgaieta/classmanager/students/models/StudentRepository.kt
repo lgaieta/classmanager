@@ -5,10 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface StudentRepository {
     fun getAllStudentsStream(): Flow<List<Student>>
-    fun getStudentStream(id: Int): Flow<Student?>
-    fun getSubjectsStream(studentId: Int): Flow<List<Subject>>
-    suspend fun insert(student: Student)
+    fun getStudentStream(id: Long): Flow<Student?>
+    fun getSubjectsStream(studentId: Long): Flow<List<Subject>>
+    suspend fun insert(student: Student): Long
     suspend fun delete(student: Student)
     suspend fun update(student: Student)
-    suspend fun assignSubject(studentId: Int, subjectId: Int)
+    suspend fun assignSubject(studentId: Long, subjectId: Int)
+    suspend fun assignSubjects(studentSubjectPairs: List<Pair<Long, Int>>)
 }

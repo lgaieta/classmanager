@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StudentRoomDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(task: StudentRoomEntity)
+    suspend fun insert(task: StudentRoomEntity): Long
 
     @Update
     suspend fun update(task: StudentRoomEntity)
@@ -20,20 +21,28 @@ interface StudentRoomDao {
     @Delete
     suspend fun delete(task: StudentRoomEntity)
 
-    @Query("INSERT OR IGNORE INTO subject_student (subjectId, studentId) VALUES (:subjectId, :studentId)")
-    suspend fun assignSubject(studentId: Int, subjectId: Int)
+    @Transaction
+    suspend fun assignSubjects(crossRefs: List<SubjectStudentCrossRef>) {
+        crossRefs.forEach { pair ->
+            assignSubject(pair.studentId, pair.subjectId)
+        }
+    }
+
+    @Query("INSERT OR IGNORE INTO subject_student (studentId, subjectId) VALUES (:studentId, :subjectId)")
+    suspend fun assignSubject(studentId: Long, subjectId: Int)
 
     @Query("SELECT * from student WHERE id = :id")
-    fun getStudent(id: Int): Flow<StudentRoomEntity?>
+    fun getStudent(id: Long): Flow<StudentRoomEntity?>
 
-    @Query("""
+    @Query(
+        """
         SELECT subject.* 
         FROM subject_student 
         JOIN subject ON subject_student.subjectId = subject.id 
         WHERE subject_student.studentId = :studentId
-    """)
-    fun getSubjects(studentId: Int): Flow<List<Subject>>
-
+        """
+    )
+    fun getSubjects(studentId: Long): Flow<List<Subject>>
 
     @Query("SELECT * from student ORDER BY name ASC")
     fun getAllStudents(): Flow<List<StudentRoomEntity>>

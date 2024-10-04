@@ -1,6 +1,6 @@
 package com.lgaieta.classmanager.students.models
 
 data class Student(
-    val id: Int,
+    val id: Long,
     val name: String
 )

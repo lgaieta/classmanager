@@ -54,7 +54,7 @@ fun StudentDetailsScreen(
                         onDelete = { studentDetailsViewModel.onDelete() }
                     )
                 }
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(24.dp))
                 StudentDetailsSubjects(subjects = subjectsState)
             }
         }

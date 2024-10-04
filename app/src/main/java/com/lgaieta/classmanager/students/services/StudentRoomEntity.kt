@@ -8,7 +8,7 @@ import com.lgaieta.classmanager.students.models.Student
 @Entity(tableName = "student")
 data class StudentRoomEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Long = 0,
     val name: String
 ) {
     fun toStudent() = Student(id, name)
@@ -21,5 +21,5 @@ data class StudentRoomEntity(
 @Entity(tableName = "subject_student", primaryKeys = ["subjectId", "studentId"])
 data class SubjectStudentCrossRef(
     val subjectId: Int,
-    val studentId: Int
+    val studentId: Long
 )
