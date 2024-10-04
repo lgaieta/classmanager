@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -13,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -65,26 +67,44 @@ fun NewStudentSubjectSelect(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             selectedSubjects.map { selectedSubject ->
-                Card {
-                    Text(
-                        text = selectedSubject.name,
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .fillMaxWidth()
-                    )
+                Card(onClick = {
+                    onSelectedSubjectsChange(selectedSubjects.filterNot { it == selectedSubject })
+                    selectedDialogSubjects = selectedSubjects.filterNot { it == selectedSubject }
+                }) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = selectedSubject.name,
+                            modifier = Modifier
+                                .padding(16.dp)
+                        )
+                        Icon(
+                            Icons.Filled.Close,
+                            contentDescription = stringResource(id = R.string.delete),
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .size(16.dp),
+                        )
+                    }
                 }
             }
         }
+        Button(onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth()) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = stringResource(R.string.add_subjects)
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(text = stringResource(R.string.add_subjects))
+        }
     }
-    Button(onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth()) {
-        Icon(
-            imageVector = Icons.Filled.Add,
-            contentDescription = stringResource(R.string.add_subjects)
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = stringResource(R.string.add_subjects))
-    }
-    if (isOpen) Dialog(onDismissRequest = { isOpen = false }) {
+    if (isOpen) Dialog(onDismissRequest = {
+        isOpen = false
+        selectedDialogSubjects = selectedSubjects
+    }) {
         Card {
             Column {
                 Text(
@@ -101,6 +121,9 @@ fun NewStudentSubjectSelect(
                         .padding(horizontal = 24.dp)
                         .weight(1f)
                 ) {
+                    item {
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
                     items(availableSubjects) { availableSubject ->
                         Card(
                             border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
@@ -135,6 +158,9 @@ fun NewStudentSubjectSelect(
                                 }
                             }
                         }
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(12.dp))
                     }
                 }
                 Divider(modifier = Modifier.fillMaxWidth())

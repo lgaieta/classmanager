@@ -18,7 +18,7 @@
     <string name="cancel">Cancelar</string>
     <string name="save_subject">Guardar materia</string>
     <string name="delete">Eliminar</string>
-    <string name="delete_subject">¿Deseas eliminar esta materia?</string>
+    <string name="delete_subject_question">¿Deseas eliminar esta materia?</string>
     <string name="_label">Tareas y exámenes</string>
     <string name="tasks_label">Tareas y exámenes</string>
     <string name="subject_name_label">Nombre de la materia</string>
