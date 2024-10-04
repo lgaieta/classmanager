@@ -82,7 +82,6 @@ class StudentNavigationScreens {
         fun StudentDetailsScreenInitializer(
             navController: NavHostController,
             backStackEntry: NavBackStackEntry,
-            modifier: Modifier = Modifier
         ) {
             val studentId =
                 backStackEntry.arguments?.getLong(SUBJECT_ID_ARGUMENT) ?: return

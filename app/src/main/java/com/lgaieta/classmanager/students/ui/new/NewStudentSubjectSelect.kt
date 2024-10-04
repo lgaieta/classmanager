@@ -149,7 +149,7 @@ fun NewStudentSubjectSelect(
                                     Icon(
                                         Icons.Filled.Done,
                                         contentDescription = stringResource(
-                                            R.string.selected
+                                            R.string.selected_label
                                         ),
                                         modifier = Modifier
                                             .padding(16.dp)
