@@ -14,9 +14,9 @@ import kotlinx.coroutines.launch
 
 class StudentDetailsViewModel(
     private val offlineStudentRepository: StudentRepository,
-    studentId: Int,
-    private val afterEdit: (id: Int) -> Unit = {},
-    private val afterDelete: (id: Int) -> Unit = {}
+    studentId: Long,
+    private val afterEdit: (id: Long) -> Unit = {},
+    private val afterDelete: (id: Long) -> Unit = {}
 ) : ViewModel() {
     val studentDetailsState: StateFlow<StudentDetailsState> =
         offlineStudentRepository.getStudentStream(studentId)

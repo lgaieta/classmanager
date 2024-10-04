@@ -25,7 +25,7 @@ fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
     composable(
         route = "${ClassManagerScreen.StudentDetails.name}/{$STUDENT_ID_ARGUMENT}",
         arguments = listOf(navArgument(STUDENT_ID_ARGUMENT) {
-            type = androidx.navigation.NavType.IntType
+            type = androidx.navigation.NavType.LongType
         })
     ) { backStackEntry ->
         StudentNavigationScreens.StudentDetailsScreenInitializer(
@@ -44,7 +44,7 @@ fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
     composable(
         route = "${ClassManagerScreen.EditStudent.name}/{$STUDENT_ID_ARGUMENT}",
         arguments = listOf(navArgument(STUDENT_ID_ARGUMENT) {
-            type = androidx.navigation.NavType.IntType
+            type = androidx.navigation.NavType.LongType
         })
     ) { backstackEntry ->
         StudentNavigationScreens.EditStudentScreenInitializer(
@@ -82,10 +82,9 @@ class StudentNavigationScreens {
         fun StudentDetailsScreenInitializer(
             navController: NavHostController,
             backStackEntry: NavBackStackEntry,
-            modifier: Modifier = Modifier
         ) {
             val studentId =
-                backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
+                backStackEntry.arguments?.getLong(SUBJECT_ID_ARGUMENT) ?: return
 
             val studentDetailsViewModel =
                 viewModel<StudentDetailsViewModel>(factory = viewModelFactory {
@@ -130,7 +129,7 @@ class StudentNavigationScreens {
             backStackEntry: NavBackStackEntry,
             navController: NavHostController
         ) {
-            val studentId = backStackEntry.arguments?.getInt(STUDENT_ID_ARGUMENT) ?: return
+            val studentId = backStackEntry.arguments?.getLong(STUDENT_ID_ARGUMENT) ?: return
 
             val editStudentViewModel = viewModel<EditStudentViewModel>(factory = viewModelFactory {
                 EditStudentViewModel(

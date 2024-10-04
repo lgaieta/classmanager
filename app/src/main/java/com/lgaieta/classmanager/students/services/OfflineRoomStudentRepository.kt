@@ -14,10 +14,10 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
             }
         }
 
-    override fun getStudentStream(id: Int): Flow<Student?> =
+    override fun getStudentStream(id: Long): Flow<Student?> =
         studentDao.getStudent(id).map { it?.toStudent() }
 
-    override fun getSubjectsStream(studentId: Int): Flow<List<Subject>> =
+    override fun getSubjectsStream(studentId: Long): Flow<List<Subject>> =
         studentDao.getSubjects(studentId)
 
     override suspend fun insert(student: Student) =
@@ -29,6 +29,14 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
     override suspend fun update(student: Student) =
         studentDao.update(StudentRoomEntity.fromStudent(student))
 
-    override suspend fun assignSubject(studentId: Int, subjectId: Int) =
+    override suspend fun assignSubject(studentId: Long, subjectId: Int) =
         studentDao.assignSubject(studentId, subjectId)
+
+    override suspend fun assignSubjects(studentSubjectPairs: List<Pair<Long, Int>>) =
+        studentDao.assignSubjects(studentSubjectPairs.map {
+            SubjectStudentCrossRef(
+                studentId = it.first,
+                subjectId = it.second
+            )
+        })
 }
