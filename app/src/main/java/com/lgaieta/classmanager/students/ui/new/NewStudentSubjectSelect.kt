@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -61,7 +60,10 @@ fun NewStudentSubjectSelect(
                 style = MaterialTheme.typography.bodyMedium
             )
         }
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             items(selectedSubjects) { selectedSubject ->
                 Card {
                     Text(
@@ -144,7 +146,10 @@ fun NewStudentSubjectSelect(
                             shape = MaterialTheme.shapes.medium,
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text(text = stringResource(R.string.add_subjects), style = MaterialTheme.typography.bodyMedium)
+                            Text(
+                                text = stringResource(R.string.add_subjects),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
                         }
                     }
                 }
