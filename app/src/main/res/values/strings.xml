@@ -26,6 +26,7 @@
     <string name="subjects_list_title">Materias</string>
     <string name="new_subject_fab_description">Nueva materia</string>
     <string name="empty_subjects_list">No hay materias creadas aún, presiona el botón + para crear una.</string>
+    <string name="empty_students_list">No hay alumnos registrados aún, presiona el botón + para registrar uno.</string>
     <string name="subject_not_found">La materia que estás buscando no existe.</string>
     <string name="delete_subject_fab_description">Eliminar materia</string>
     <string name="edit_subject_fab_description">Editar materia</string>
@@ -53,4 +54,20 @@
     <string name="empty_tasks_list">No hay tareas creadas aún, presiona el botón + para crear una.</string>
     <string name="tasks">Tareas</string>
     <string name="tasks_not_found">Aun no hay tareas creadas</string>
+    <string name="students_list_title">Alumnos</string>
+    <string name="new_student_fab_description">Nuevo alumno</string>
+    <string name="new_student">Nuevo alumno</string>
+    <string name="student_name_label">Nombre del alumno</string>
+    <string name="create_student">Guardar Alumno</string>
+    <string name="student_not_found">El alumno que estás buscando no existe.</string>
+    <string name="edit">Editar</string>
+    <string name="confirm_delete_student_title">¿Estás seguro de borrar el alumno?\n</string>
+    <string name="confirm_delete_student_description">Los datos se eliminarán permanentemente.</string>
+    <string name="delete_student_fab_description">Eliminar alumno</string>
+    <string name="edit_student">Editar alumno</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="student_name_placeholder">Aieta Luciano</string>
+    <string name="subjects">Materias</string>
+    <string name="add_subject">Agregar materia</string>
+
 </resources>
