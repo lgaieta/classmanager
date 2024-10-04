@@ -99,18 +99,3 @@ fun TaskDetailsHeader(title: String, modifier: Modifier = Modifier) {
         )
     }
 }
-
-@Composable
-fun TaskDetailsSubject(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .padding(end = 16.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.course_subject_label),
-            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.align(Alignment.Start)
-        )
-
-    }
-}
