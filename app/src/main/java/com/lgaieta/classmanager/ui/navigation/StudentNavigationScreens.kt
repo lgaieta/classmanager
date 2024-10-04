@@ -135,13 +135,15 @@ class StudentNavigationScreens {
                 EditStudentViewModel(
                     offlineStudentRepository =
                     ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                    offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
                     studentId = studentId,
                     afterEdit = { navController.popBackStack() }
                 )
             })
 
             EditStudentScreen(
-                editStudentViewModel = editStudentViewModel
+                editStudentViewModel = editStudentViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
     }
