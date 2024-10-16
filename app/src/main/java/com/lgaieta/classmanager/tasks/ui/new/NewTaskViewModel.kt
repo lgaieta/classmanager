@@ -33,7 +33,6 @@ class NewTaskViewModel(
         return _uiState.value.name.isNotBlank()
     }
 
-    // - Agregar validación para descripción en blanco
 
     suspend fun saveTask() {
         if (isNameValid()) {
