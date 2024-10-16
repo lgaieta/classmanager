@@ -10,11 +10,12 @@ data class TaskRoomEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
+    val description: String,
     val subjectId: Int,
 ) {
-    fun toTask() = Task(id, name, subjectId)
+    fun toTask() = Task(id, name, description, subjectId)
 
     companion object {
-        fun fromTask(task: Task) = TaskRoomEntity(task.id, task.name, task.subjectId)
+        fun fromTask(task: Task) = TaskRoomEntity(task.id, task.name, task.description, task.subjectId)
     }
 }

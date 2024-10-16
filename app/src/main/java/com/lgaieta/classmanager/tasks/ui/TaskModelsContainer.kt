@@ -22,16 +22,16 @@ class DefaultTaskModelsContainer(private val context: Context) : TaskModelsConta
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            val task1 = Task(id = 1, name = "Trabajo práctico de lenguaje", subjectId = 2)
-            val task2 = Task(id = 2, name = "Ensayo sobre teorías del desarrollo cognitivo", subjectId = 6)
-            val task3 = Task(id = 3, name = "Investigación de causas de la revolución industrial", subjectId = 8)
-            val task4 = Task(id = 4, name = "Proyecto sobre el ciclo del agua", subjectId = 9)
-            val task5 = Task(id = 5, name = "Examen de álgebra lineal", subjectId = 1)
-            val task6 = Task(id = 6, name = "Análisis de comportamiento en grupos sociales", subjectId = 8)
-            val task7 = Task(id = 7, name = "Tarea sobre fotosíntesis en plantas", subjectId = 9)
-            val task8 = Task(id = 8, name = "Informe sobre la teoría del apego", subjectId = 6)
-            val task9 = Task(id = 9, name = "Estudio de movimientos tectónicos", subjectId = 1)
-            val task10 = Task(id = 10, name = "Resolución de problemas de geometría euclidiana", subjectId = 1)
+            val task1 = Task(id = 1, name = "Trabajo práctico de lenguaje",description = "", subjectId = 2)
+            val task2 = Task(id = 2, name = "Ensayo sobre teorías del desarrollo cognitivo",description = "", subjectId = 6)
+            val task3 = Task(id = 3, name = "Investigación de causas de la revolución industrial", description = "", subjectId = 8)
+            val task4 = Task(id = 4, name = "Proyecto sobre el ciclo del agua", description = "", subjectId = 9)
+            val task5 = Task(id = 5, name = "Examen de álgebra lineal", description = "", subjectId = 1)
+            val task6 = Task(id = 6, name = "Análisis de comportamiento en grupos sociales", description = "", subjectId = 8)
+            val task7 = Task(id = 7, name = "Tarea sobre fotosíntesis en plantas", description = "", subjectId = 9)
+            val task8 = Task(id = 8, name = "Informe sobre la teoría del apego", description = "", subjectId = 6)
+            val task9 = Task(id = 9, name = "Estudio de movimientos tectónicos", description = "", subjectId = 1)
+            val task10 = Task(id = 10, name = "Resolución de problemas de geometría euclidiana", description = "", subjectId = 1)
 
             offlineTaskRepository.insert(task1)
             offlineTaskRepository.insert(task2)

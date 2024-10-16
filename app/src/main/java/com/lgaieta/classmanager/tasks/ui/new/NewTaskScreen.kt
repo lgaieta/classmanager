@@ -44,6 +44,8 @@ fun NewTaskScreen(
         NewTaskForm(
             nameValue = uiState.name,
             onNameChange = { newTaskViewModel.changeName(it) },
+            descValue = uiState.description,
+            onDescChange = {newTaskViewModel.changeDescription(it)},
             onSubmit = {
                 coroutineScope.launch {
                     newTaskViewModel.saveTask()

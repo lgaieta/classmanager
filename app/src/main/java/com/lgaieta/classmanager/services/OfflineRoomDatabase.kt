@@ -14,7 +14,7 @@ import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
 
 @Database(
     entities = [SubjectRoomEntity::class, TaskRoomEntity::class, StudentRoomEntity::class, SubjectStudentCrossRef::class],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 abstract class OfflineRoomDatabase : RoomDatabase() {

@@ -18,10 +18,13 @@ import com.lgaieta.classmanager.R
 fun NewTaskForm(
     nameValue: String,
     onNameChange: (name: String) -> Unit,
+    descValue: String,
+    onDescChange: (description: String) -> Unit,
     onSubmit: () -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameField(value = nameValue, onValueChange = onNameChange)
+        DescField(value = descValue, onValueChange = onDescChange)
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }
@@ -30,6 +33,19 @@ fun NewTaskForm(
 fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(text = stringResource(R.string.task_name_label))
+        OutlinedTextField(
+            value = value,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp),
+            onValueChange = onValueChange
+        )
+    }
+}
+
+@Composable
+fun DescField(value: String, onValueChange: (value: String) -> Unit){
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(text = stringResource(R.string.task_description_label))
         OutlinedTextField(
             value = value,
             modifier = Modifier.fillMaxWidth(),

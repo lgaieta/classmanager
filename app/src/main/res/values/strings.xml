@@ -71,4 +71,7 @@
     <string name="add_subjects">Agregar materias</string>
     <string name="subject_select_title">Seleccione las materias en las que será incluido el alumno</string>
     <string name="selected_label">Seleccionado</string>
+    <string name="task_description_label">Descripción de la tarea</string>
+    <string name="description">Descripción</string>
+    <string name="description_not_found">La tarea no tiene una descripción</string>
 </resources>

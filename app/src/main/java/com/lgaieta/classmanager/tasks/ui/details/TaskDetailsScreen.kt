@@ -72,6 +72,42 @@ fun TaskDetailsScreen(
                         onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
                         modifier = Modifier.weight(1f)
                     )
+
+                }
+                Spacer(modifier = Modifier.height(40.dp))
+                Column(
+                    modifier = modifier
+                        .padding(end = 16.dp)
+                        .weight(1f)
+                ) {
+                    Text(
+                        text = stringResource(R.string.description),
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.align(Alignment.Start)
+                    )
+                    Spacer(modifier = Modifier.padding(8.dp))
+                    if (!taskDetailsState.task!!.description.isNullOrEmpty()) {
+                        Card {
+                            Text(
+                                text = taskDetailsState.task!!.description,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier
+                                    .align(Alignment.Start)
+                                    .padding(24.dp)
+                                    .widthIn(max = 150.dp)
+                            )
+                        }
+                    } else {
+                        Text(
+                            text = stringResource(R.string.description_not_found),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier
+                                .align(Alignment.Start)
+                                .padding(24.dp)
+                        )
+                    }
+
+
                 }
             }
         }

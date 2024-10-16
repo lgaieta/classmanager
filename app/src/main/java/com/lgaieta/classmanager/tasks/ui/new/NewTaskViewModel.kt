@@ -23,15 +23,24 @@ class NewTaskViewModel(
         }
     }
 
+    fun changeDescription(newDesc: String){
+        _uiState.update{
+            it.copy(description = newDesc)
+        }
+    }
+
     private fun isNameValid(): Boolean {
         return _uiState.value.name.isNotBlank()
     }
+
+    // - Agregar validación para descripción en blanco
 
     suspend fun saveTask() {
         if (isNameValid()) {
             offlineTaskRepository.insert(uiState.value.toTask().copy(subjectId = subjectId))
             _uiState.update {
                 it.copy(name = "")
+                it.copy(description = "")
             }
             afterCreate()
         }
@@ -39,7 +48,8 @@ class NewTaskViewModel(
 }
 
 data class NewTaskState(
-    val name: String = ""
+    val name: String = "",
+    val description: String = ""
 ) {
-    fun toTask() = Task(id = 0, name =  name, subjectId = 0)
+    fun toTask() = Task(id = 0, name =  name,description = description, subjectId = 0)
 }
