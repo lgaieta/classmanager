@@ -21,16 +21,6 @@ interface StudentRoomDao {
     @Delete
     suspend fun delete(task: StudentRoomEntity)
 
-    @Transaction
-    suspend fun assignSubjects(crossRefs: List<SubjectStudentCrossRef>) {
-        crossRefs.forEach { pair ->
-            assignSubject(pair.studentId, pair.subjectId)
-        }
-    }
-
-    @Query("INSERT OR IGNORE INTO subject_student (studentId, subjectId) VALUES (:studentId, :subjectId)")
-    suspend fun assignSubject(studentId: Long, subjectId: Int)
-
     @Query("SELECT * from student WHERE id = :id")
     fun getStudent(id: Long): Flow<StudentRoomEntity?>
 
@@ -46,4 +36,24 @@ interface StudentRoomDao {
 
     @Query("SELECT * from student ORDER BY name ASC")
     fun getAllStudents(): Flow<List<StudentRoomEntity>>
+
+    @Query("INSERT OR IGNORE INTO subject_student (studentId, subjectId) VALUES (:studentId, :subjectId)")
+    suspend fun assignSubject(studentId: Long, subjectId: Int)
+
+    @Transaction
+    suspend fun assignSubjects(crossRefs: List<SubjectStudentCrossRef>) {
+        crossRefs.forEach { pair ->
+            assignSubject(pair.studentId, pair.subjectId)
+        }
+    }
+
+    @Query("DELETE FROM subject_student WHERE studentId = :studentId AND subjectId = :subjectId")
+    suspend fun removeSubject(studentId: Long, subjectId: Int)
+
+    @Transaction
+    suspend fun removeSubjects(crossRefs: List<SubjectStudentCrossRef>) {
+        crossRefs.forEach { pair ->
+            removeSubject(pair.studentId, pair.subjectId)
+        }
+    }
 }

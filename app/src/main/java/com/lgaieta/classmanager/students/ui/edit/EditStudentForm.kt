@@ -13,15 +13,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.subjects.models.Subject
 
 @Composable
 fun EditStudentForm(
     nameValue: String,
     onNameChange: (name: String) -> Unit,
     onSubmit: () -> Unit,
+    availableSubjects: List<Subject>,
+    onSelectedSubjectsChange: (subjectList: List<Subject>) -> Unit,
+    selectedSubjects: List<Subject>,
+    onSubjectsToBeDeletedChange: (subjectList: List<Subject>) -> Unit,
+    subjectsToBeDeleted: List<Subject>
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameFieldEdit(value = nameValue, onValueChange = onNameChange)
+        EditStudentSubjectSelect(
+            availableSubjects = availableSubjects,
+            onSelectedSubjectsChange = onSelectedSubjectsChange,
+            selectedSubjects = selectedSubjects,
+            subjectsToBeDeleted = subjectsToBeDeleted,
+            onSubjectsToBeDeletedChange = onSubjectsToBeDeletedChange,
+        )
         SubmitEditButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }

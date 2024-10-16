@@ -39,4 +39,15 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
                 subjectId = it.second
             )
         })
+
+    override suspend fun removeSubject(studentId: Long, subjectId: Int) =
+        studentDao.removeSubject(studentId = studentId, subjectId = subjectId)
+
+    override suspend fun removeSubjects(studentSubjectPairs: List<Pair<Long, Int>>) =
+        studentDao.removeSubjects(studentSubjectPairs.map {
+            SubjectStudentCrossRef(
+                studentId = it.first,
+                subjectId = it.second
+            )
+        })
 }

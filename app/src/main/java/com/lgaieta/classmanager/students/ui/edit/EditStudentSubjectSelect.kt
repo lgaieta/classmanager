@@ -1,5 +1,6 @@
-package com.lgaieta.classmanager.students.ui.new
+package com.lgaieta.classmanager.students.ui.edit
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,10 +43,12 @@ import com.lgaieta.classmanager.subjects.models.Subject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewStudentSubjectSelect(
+fun EditStudentSubjectSelect(
     availableSubjects: List<Subject>,
     onSelectedSubjectsChange: (subjectList: List<Subject>) -> Unit,
-    selectedSubjects: List<Subject>
+    selectedSubjects: List<Subject>,
+    subjectsToBeDeleted: List<Subject>,
+    onSubjectsToBeDeletedChange: (subjectList: List<Subject>) -> Unit,
 ) {
     var isOpen by rememberSaveable {
         mutableStateOf(false)
@@ -73,6 +76,7 @@ fun NewStudentSubjectSelect(
                 Card(onClick = {
                     onSelectedSubjectsChange(selectedSubjects.filterNot { it == selectedSubject })
                     selectedDialogSubjects = selectedSubjects.filterNot { it == selectedSubject }
+                    onSubjectsToBeDeletedChange(subjectsToBeDeleted + selectedSubject)
                 }) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -96,7 +100,11 @@ fun NewStudentSubjectSelect(
             }
         }
         Button(
-            onClick = { isOpen = true }, modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                selectedDialogSubjects = selectedSubjects
+                isOpen = true
+            },
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
             contentPadding = PaddingValues(12.dp),
             colors = ButtonDefaults.buttonColors(
@@ -181,7 +189,12 @@ fun NewStudentSubjectSelect(
                 Row(modifier = Modifier.padding(24.dp)) {
                     Button(
                         onClick = {
-                            onSelectedSubjectsChange(selectedDialogSubjects)
+                            if (selectedDialogSubjects.isNotEmpty()) onSelectedSubjectsChange(selectedDialogSubjects)
+                            onSubjectsToBeDeletedChange(subjectsToBeDeleted.filterNot {
+                                selectedDialogSubjects.contains(
+                                    it
+                                )
+                            })
                             isOpen = false
                         },
                         shape = MaterialTheme.shapes.medium,
