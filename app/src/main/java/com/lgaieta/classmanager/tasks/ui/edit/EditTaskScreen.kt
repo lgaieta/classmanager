@@ -42,6 +42,8 @@ fun EditTaskScreen(
             EditTaskForm(
                 nameValue = uiState.name,
                 onNameChange = { editTaskViewModel.changeName(it) },
+                descValue = uiState.description,
+                onDescChange = {editTaskViewModel.changeDescription(it)},
                 onSubmit = {
                     coroutineScope.launch {
                         editTaskViewModel.editTask()

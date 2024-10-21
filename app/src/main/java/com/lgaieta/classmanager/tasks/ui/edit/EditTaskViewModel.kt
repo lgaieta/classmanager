@@ -25,6 +25,7 @@ class EditTaskViewModel(
                 .collect { task ->
                     _editTaskState.value = EditTaskState(
                         name = task?.name ?: "",
+                        description = task?.description ?: "",
                         storedTask = task
                     )
                 }
@@ -37,11 +38,17 @@ class EditTaskViewModel(
         }
     }
 
+    fun changeDescription(newDesc: String){
+        _editTaskState.update{
+            it.copy(description = newDesc)
+        }
+    }
 
     suspend fun editTask() {
         val currentState = _editTaskState.value
         val updatedTask = currentState.storedTask?.copy(
             name = currentState.name,
+            description = currentState.description,
         )
         if (updatedTask != null) {
             offlineTaskRepository.update(updatedTask)
@@ -52,5 +59,6 @@ class EditTaskViewModel(
 
 data class EditTaskState(
     val name: String = "",
+    val description : String = "",
     val storedTask: Task? = null,
 )
