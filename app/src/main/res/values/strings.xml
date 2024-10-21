@@ -72,4 +72,7 @@
     <string name="subject_select_title">Seleccione las materias en las que será incluido el alumno</string>
     <string name="selected_label">Seleccionado</string>
     <string name="notes">Notas</string>
+    <string name="description">Descripción</string>
+    <string name="description_not_found">No hay descripción</string>
+    <string name="task_description_label">Descripción</string>
 </resources>
