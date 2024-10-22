@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -50,7 +51,7 @@ fun DescFieldEdit(value: String, onValueChange: (value: String) -> Unit){
         Text(text = stringResource(R.string.task_description_label))
         OutlinedTextField(
             value = value,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(128.dp),
             shape = RoundedCornerShape(12.dp),
             placeholder = {Text(stringResource(R.string.description))},
             onValueChange = onValueChange
