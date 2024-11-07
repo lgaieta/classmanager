@@ -6,6 +6,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.lgaieta.classmanager.students.models.Student
+import com.lgaieta.classmanager.students.services.StudentRoomEntity
+import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -28,4 +31,17 @@ interface SubjectRoomDao {
 
     @Query("SELECT * FROM task WHERE subjectId = :subjectId")
     fun getTasks(subjectId: Int): Flow<List<TaskRoomEntity>>
+
+    @Query(
+        """
+        SELECT student.* 
+        FROM subject_student 
+        JOIN student ON subject_student.studentId = student.id 
+        WHERE subject_student.subjectId = :subjectId
+        """
+    )
+    fun getStudents(subjectId: Int): Flow<List<Student>>
+
+
+
 }

@@ -2,6 +2,7 @@ package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lgaieta.classmanager.students.models.Student
 import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.tasks.models.Task
@@ -33,6 +34,14 @@ class SubjectDetailsViewModel(
     val tasksState: StateFlow<List<Task>> =
         offlineSubjectRepository.getTasksStream(subjectId)
             .filterNotNull()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
+            )
+
+    val studentsState: StateFlow<List<Student>> =
+        offlineSubjectRepository.getStudentsStream(subjectId)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
