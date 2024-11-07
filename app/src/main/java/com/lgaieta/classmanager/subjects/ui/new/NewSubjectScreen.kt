@@ -18,6 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.ui.BottomNavBar
+import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
@@ -27,12 +29,17 @@ fun NewSubjectScreen(
     modifier: Modifier = Modifier,
     newSubjectViewModel: NewSubjectViewModel,
     onNewTime: () -> Unit,
+    bottomNavBarActions: BottomNavBarActions,
     afterCreate: () -> Unit = {}
 ) {
     val uiState by newSubjectViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold { innerPadding ->
+    Scaffold (
+        bottomBar = {
+            BottomNavBar(actions = bottomNavBarActions)
+        }
+    ) { innerPadding ->
         Column(
             modifier = modifier
                 .padding(

@@ -130,7 +130,8 @@ class SubjectNavigationScreens {
                 modifier = modifier,
                 newSubjectViewModel = newSubjectViewModel,
                 onNewTime = { navController.navigate(ClassManagerScreen.NewSubjectTime.name) },
-                afterCreate = { navController.navigate(ClassManagerScreen.SubjectsList.name) }
+                afterCreate = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
 
