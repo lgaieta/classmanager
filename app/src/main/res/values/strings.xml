@@ -77,5 +77,5 @@
     <string name="task_description_label">Descripción</string>
     <string name="new_subject_helper_text">Las tareas y los alumnos podrán ser creadas posteriormente.</string>
     <string name="info_label">Información</string>
-    <string name="info_helper_text">Opcional</string>
+    <string name="optional">Opcional</string>
 </resources>

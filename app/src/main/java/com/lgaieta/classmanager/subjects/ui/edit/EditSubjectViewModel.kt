@@ -12,6 +12,7 @@ class EditSubjectViewModel(
     private val offlineSubjectRepository: SubjectRepository,
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
+    private val afterCancel: () -> Unit
 ) : ViewModel() {
     private val _editSubjectState = MutableStateFlow(EditSubjectState())
 
@@ -52,6 +53,10 @@ class EditSubjectViewModel(
             offlineSubjectRepository.update(updatedSubject)
             afterEdit(updatedSubject.id)
         }
+    }
+
+    fun cancel() {
+        afterCancel()
     }
 }
 

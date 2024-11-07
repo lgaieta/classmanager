@@ -146,7 +146,8 @@ class SubjectNavigationScreens {
                         offlineSubjectRepository =
                         ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
                         subjectId = subjectId,
-                        afterEdit = { navController.popBackStack() }
+                        afterEdit = { navController.popBackStack() },
+                        afterCancel = { navController.popBackStack() }
                     )
                 })
 

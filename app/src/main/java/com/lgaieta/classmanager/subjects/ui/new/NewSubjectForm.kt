@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager.subjects.ui.new
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -30,55 +29,52 @@ fun NewSubjectForm(
 ) {
     Column {
         NameField(value = nameValue, onValueChange = onNameChange)
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         InfoField(value = infoValue, onValueChange = onInfoChange)
         Spacer(modifier = Modifier.height(32.dp))
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(4.dp))
         CancelButton(onClick = onCancel, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
-        HelperText(text = stringResource(R.string.new_subject_helper_text))}
-}
-
-@Composable
-fun NameField(value: String, onValueChange: (value: String) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        OutlinedTextField(
-            value = value,
-            modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.small,
-            onValueChange = onValueChange,
-            label = {
-                Text(
-                    text = stringResource(R.string.subject_name_label),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-        )
+        HelperText(text = stringResource(R.string.new_subject_helper_text))
     }
 }
 
 @Composable
-fun InfoField(value: String, onValueChange: (value: String) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        OutlinedTextField(
-            value = value,
-            modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.small,
-            onValueChange = onValueChange,
-            label = {
-                Text(
-                    text = stringResource(R.string.info_label),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            },
-            supportingText = { Text(text = stringResource(R.string.info_helper_text)) }
-        )
-    }
+private fun NameField(value: String, onValueChange: (value: String) -> Unit) {
+    OutlinedTextField(
+        value = value,
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.small,
+        onValueChange = onValueChange,
+        label = {
+            Text(
+                text = stringResource(R.string.subject_name_label),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+    )
 }
 
 @Composable
-fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun InfoField(value: String, onValueChange: (value: String) -> Unit) {
+    OutlinedTextField(
+        value = value,
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.small,
+        onValueChange = onValueChange,
+        label = {
+            Text(
+                text = stringResource(R.string.info_label),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        },
+        supportingText = { Text(text = stringResource(R.string.optional)) }
+    )
+}
+
+@Composable
+private fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
         modifier = modifier,
@@ -90,7 +86,7 @@ fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CancelButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun CancelButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     TextButton(
         onClick = onClick,
         modifier = modifier,
@@ -102,7 +98,7 @@ fun CancelButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun HelperText(text: String) {
+private fun HelperText(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodySmall,

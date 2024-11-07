@@ -57,6 +57,9 @@ fun EditSubjectScreen(
                         editSubjectViewModel.editSubject()
                     }
                 },
+                onCancel = {
+                    editSubjectViewModel.cancel()
+                }
             )
         }
     }
