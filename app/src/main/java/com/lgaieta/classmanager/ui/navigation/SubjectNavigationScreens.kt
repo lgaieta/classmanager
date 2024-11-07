@@ -133,7 +133,7 @@ class SubjectNavigationScreens {
 
         @Composable
         fun EditSubjectScreenInitializer(
-            navController: NavController,
+            navController: NavHostController,
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
@@ -152,7 +152,8 @@ class SubjectNavigationScreens {
 
             EditSubjectScreen(
                 modifier = modifier,
-                editSubjectViewModel = editSubjectViewModel
+                editSubjectViewModel = editSubjectViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
     }

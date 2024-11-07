@@ -16,6 +16,8 @@ import androidx.compose.runtime.*
 
 import androidx.compose.ui.res.stringResource
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.ui.BottomNavBar
+import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
 
@@ -24,11 +26,16 @@ import kotlinx.coroutines.launch
 fun EditSubjectScreen(
     modifier: Modifier = Modifier,
     editSubjectViewModel: EditSubjectViewModel,
+    bottomNavBarActions: BottomNavBarActions
 ) {
     val uiState by editSubjectViewModel.editSubjectState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold { innerPadding ->
+    Scaffold(
+        bottomBar = {
+            BottomNavBar(actions = bottomNavBarActions)
+        }
+    ) { innerPadding ->
         Column(
             modifier = modifier
                 .padding(
