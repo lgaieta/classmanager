@@ -9,11 +9,11 @@ data class SubjectRoomEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val course: String,
+    val info: String?,
 ) {
-    fun toSubject() = Subject(id, name, course)
+    fun toSubject() = Subject(id, name, info)
 
     companion object {
-        fun fromSubject(subject: Subject) = SubjectRoomEntity(subject.id, subject.name, subject.course)
+        fun fromSubject(subject: Subject) = SubjectRoomEntity(subject.id, subject.name, subject.info)
     }
 }

@@ -23,46 +23,56 @@ import com.lgaieta.classmanager.R
 fun NewSubjectForm(
     nameValue: String,
     onNameChange: (name: String) -> Unit,
-    courseValue: String,
-    onCourseChange: (course: String) -> Unit,
+    infoValue: String,
+    onInfoChange: (info: String) -> Unit,
     onSubmit: () -> Unit,
     onCancel: () -> Unit
 ) {
     Column {
         NameField(value = nameValue, onValueChange = onNameChange)
         Spacer(modifier = Modifier.height(16.dp))
-        CourseField(value = courseValue, onValueChange = onCourseChange)
-        Spacer(modifier = Modifier.height(24.dp))
+        InfoField(value = infoValue, onValueChange = onInfoChange)
+        Spacer(modifier = Modifier.height(32.dp))
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(4.dp))
         CancelButton(onClick = onCancel, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
-        HelperText(text = stringResource(R.string.new_subject_helper_text))
-    }
+        HelperText(text = stringResource(R.string.new_subject_helper_text))}
 }
 
 @Composable
 fun NameField(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(text = stringResource(R.string.subject_name_label))
         OutlinedTextField(
             value = value,
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            onValueChange = onValueChange
+            shape = MaterialTheme.shapes.small,
+            onValueChange = onValueChange,
+            label = {
+                Text(
+                    text = stringResource(R.string.subject_name_label),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         )
     }
 }
 
 @Composable
-fun CourseField(value: String, onValueChange: (value: String) -> Unit) {
+fun InfoField(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(text = stringResource(R.string.course_label))
         OutlinedTextField(
             value = value,
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            onValueChange = onValueChange
+            shape = MaterialTheme.shapes.small,
+            onValueChange = onValueChange,
+            label = {
+                Text(
+                    text = stringResource(R.string.info_label),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            },
+            supportingText = { Text(text = stringResource(R.string.info_helper_text)) }
         )
     }
 }

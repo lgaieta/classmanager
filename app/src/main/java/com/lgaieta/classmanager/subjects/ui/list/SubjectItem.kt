@@ -32,12 +32,14 @@ fun SubjectItem(subject: Subject, modifier: Modifier = Modifier, onClick: (id: I
                 .padding(top = 24.dp, start = 24.dp, end = 24.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = subject.course,
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
-        )
+        if (subject.info != null) {
+            Text(
+                text = subject.info,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
+            )
+        }
     }
 }

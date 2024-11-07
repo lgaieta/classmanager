@@ -22,16 +22,16 @@ class DefaultSubjectModelsContainer(private val context: Context) : SubjectModel
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            val subject1 = Subject(id = 1, name = "Matemáticas", course = "7mo 2da")
-            val subject2 = Subject(id = 2, name = "Ciencias", course = "5to 3ra")
-            val subject3 = Subject(id = 3, name = "Historia", course = "6to 1ra")
-            val subject4 = Subject(id = 4, name = "Lengua Española", course = "4to 2da")
-            val subject5 = Subject(id = 5, name = "Biología", course = "5to 2da")
-            val subject6 = Subject(id = 6, name = "Geografía", course = "7mo 3ra")
-            val subject7 = Subject(id = 7, name = "Educación Física", course = "3ro 1ra")
-            val subject8 = Subject(id = 8, name = "Filosofía", course = "6to 2da")
-            val subject9 = Subject(id = 9, name = "Arte", course = "4to 3ra")
-            val subject10 = Subject(id = 10, name = "Informática", course = "7mo 1ra")
+            val subject1 = Subject(id = 1, name = "Matemáticas", info = "7mo 2da")
+            val subject2 = Subject(id = 2, name = "Ciencias", info = "5to 3ra")
+            val subject3 = Subject(id = 3, name = "Historia", info = "6to 1ra")
+            val subject4 = Subject(id = 4, name = "Lengua Española", info = "4to 2da")
+            val subject5 = Subject(id = 5, name = "Biología", info = "5to 2da")
+            val subject6 = Subject(id = 6, name = "Geografía", info = "7mo 3ra")
+            val subject7 = Subject(id = 7, name = "Educación Física", info = "3ro 1ra")
+            val subject8 = Subject(id = 8, name = "Filosofía", info = "6to 2da")
+            val subject9 = Subject(id = 9, name = "Arte", info = "4to 3ra")
+            val subject10 = Subject(id = 10, name = "Informática", info = "7mo 1ra")
 
             offlineSubjectRepository.insert(subject1)
             offlineSubjectRepository.insert(subject2)

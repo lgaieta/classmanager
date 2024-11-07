@@ -52,10 +52,12 @@ fun SubjectDetailsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    SubjectDetailsCourse(
-                        course = subjectDetailsState.subject!!.course,
-                        modifier = Modifier.weight(1f)
-                    )
+                    subjectDetailsState.subject!!.info?.let {
+                        SubjectDetailsInfo(
+                            info = it,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                     SubjectDetailsButtons(
                         onEdit = { subjectDetailsViewModel.onEdit() },
                         onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
@@ -96,18 +98,18 @@ fun SubjectDetailsHeader(title: String, modifier: Modifier = Modifier) {
 
 
 @Composable
-fun SubjectDetailsCourse(course: String, modifier: Modifier = Modifier) {
+fun SubjectDetailsInfo(info: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .padding(end = 16.dp)
     ) {
         Text(
-            text = stringResource(R.string.course_subject_label),
+            text = stringResource(R.string.info_label),
             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.Start)
         )
         Text(
-            text = course,
+            text = info,
             style = MaterialTheme.typography.bodyMedium
         )
     }

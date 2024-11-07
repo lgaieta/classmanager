@@ -43,8 +43,8 @@ fun EditSubjectScreen(
             EditSubjectForm(
                 nameValue = uiState.name,
                 onNameChange = { editSubjectViewModel.changeName(it) },
-                courseValue = uiState.course,
-                onCourseChange = { editSubjectViewModel.changeCourse(it) },
+                infoValue = uiState.info,
+                onInfoChange = { editSubjectViewModel.changeInfo(it) },
                 onSubmit = {
                     coroutineScope.launch {
                         editSubjectViewModel.editSubject()

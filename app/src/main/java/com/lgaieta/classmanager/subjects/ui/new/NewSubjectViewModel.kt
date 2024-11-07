@@ -22,15 +22,15 @@ class NewSubjectViewModel(
         }
     }
 
-    fun changeCourse(newCourse: String) {
+    fun changeInfo(newInfo: String) {
         _uiState.update {
-            it.copy(course = newCourse)
+            it.copy(info = newInfo)
         }
     }
 
     fun cancel() {
         _uiState.update {
-            it.copy(name = "", course = "")
+            it.copy(name = "", info = "")
         }
         afterCancel()
     }
@@ -39,15 +39,15 @@ class NewSubjectViewModel(
         return _uiState.value.name.isNotBlank()
     }
 
-    private fun isCourseValid(): Boolean {
-        return _uiState.value.course.isNotBlank()
+    private fun isInfoValid(): Boolean {
+        return _uiState.value.info.isNotBlank()
     }
 
     suspend fun saveSubject() {
-        if (isNameValid() && isCourseValid()) {
+        if (isNameValid() && isInfoValid()) {
             offlineSubjectRepository.insert(uiState.value.toSubject())
             _uiState.update {
-                it.copy(name = "", course = "")
+                it.copy(name = "", info = "")
             }
             afterSave()
         }
@@ -56,7 +56,7 @@ class NewSubjectViewModel(
 
 data class NewSubjectState(
     val name: String = "",
-    val course: String = ""
+    val info: String = ""
 ) {
-    fun toSubject() = Subject(id = 0, name = name, course = course)
+    fun toSubject() = Subject(id = 0, name = name, info = info)
 }

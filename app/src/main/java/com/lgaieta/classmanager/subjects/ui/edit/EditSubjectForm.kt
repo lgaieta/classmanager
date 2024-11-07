@@ -19,13 +19,13 @@ import com.lgaieta.classmanager.R
 fun EditSubjectForm(
     nameValue: String,
     onNameChange: (name: String) -> Unit,
-    courseValue: String,
-    onCourseChange: (course: String) -> Unit,
+    infoValue: String,
+    onInfoChange: (info: String) -> Unit,
     onSubmit: () -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         NameFieldEdit(value = nameValue, onValueChange = onNameChange)
-        CourseFieldEdit(value = courseValue, onValueChange = onCourseChange)
+        InfoFieldEdit(value = infoValue, onValueChange = onInfoChange)
         SubmitEditButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
     }
 }
@@ -38,21 +38,19 @@ fun NameFieldEdit(value: String, onValueChange: (value: String) -> Unit) {
             value = value,
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            placeholder = { Text(stringResource(R.string.subject_name_placeholder)) },
             onValueChange = onValueChange
         )
     }
 }
 
 @Composable
-fun CourseFieldEdit(value: String, onValueChange: (value: String) -> Unit) {
+fun InfoFieldEdit(value: String, onValueChange: (value: String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(text = stringResource(R.string.course_subject_label))
+        Text(text = stringResource(R.string.info_label))
         OutlinedTextField(
             value = value,
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            placeholder = { Text("Curso de materia") },
             onValueChange = onValueChange
         )
     }

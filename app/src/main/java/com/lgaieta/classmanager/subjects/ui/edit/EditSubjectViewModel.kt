@@ -23,7 +23,7 @@ class EditSubjectViewModel(
                 .collect { subject ->
                     _editSubjectState.value = EditSubjectState(
                         name = subject?.name ?: "",
-                        course = subject?.course ?: "",
+                        info = subject?.info ?: "",
                         storedSubject = subject
                     )
                 }
@@ -36,9 +36,9 @@ class EditSubjectViewModel(
         }
     }
 
-    fun changeCourse(newCourse: String) {
+    fun changeInfo(newInfo: String) {
         _editSubjectState.update {
-            it.copy(course = newCourse)
+            it.copy(info = newInfo)
         }
     }
 
@@ -46,7 +46,7 @@ class EditSubjectViewModel(
         val currentState = _editSubjectState.value
         val updatedSubject = currentState.storedSubject?.copy(
             name = currentState.name,
-            course = currentState.course
+            info = currentState.info
         )
         if (updatedSubject != null) {
             offlineSubjectRepository.update(updatedSubject)
@@ -57,6 +57,6 @@ class EditSubjectViewModel(
 
 data class EditSubjectState(
     val name: String = "",
-    val course: String = "",
+    val info: String = "",
     val storedSubject: Subject? = null,
 )
