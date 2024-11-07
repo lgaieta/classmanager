@@ -17,7 +17,6 @@ import com.lgaieta.classmanager.subjects.ui.edit.EditSubjectScreen
 import com.lgaieta.classmanager.subjects.ui.list.SubjectsListScreen
 import com.lgaieta.classmanager.subjects.ui.list.SubjectsListViewModel
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectScreen
-import com.lgaieta.classmanager.subjects.ui.new.NewSubjectTimeScreen
 import com.lgaieta.classmanager.subjects.ui.new.NewSubjectViewModel
 import com.lgaieta.classmanager.ui.viewModelFactory
 
@@ -53,9 +52,6 @@ fun NavGraphBuilder.subjectNavigationScreens(navController: NavHostController) {
     }
     composable(route = ClassManagerScreen.NewSubject.name) {
         SubjectNavigationScreens.NewSubjectScreenInitializer(navController = navController)
-    }
-    composable(route = ClassManagerScreen.NewSubjectTime.name) {
-        SubjectNavigationScreens.NewSubjectTimeScreenInitializer(navController = navController)
     }
 }
 
@@ -122,15 +118,15 @@ class SubjectNavigationScreens {
             val newSubjectViewModel =
                 viewModel<NewSubjectViewModel>(factory = viewModelFactory {
                     NewSubjectViewModel(
-                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository
+                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
+                        afterSave = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
+                        afterCancel = { navController.popBackStack() }
                     )
                 })
 
             NewSubjectScreen(
                 modifier = modifier,
                 newSubjectViewModel = newSubjectViewModel,
-                onNewTime = { navController.navigate(ClassManagerScreen.NewSubjectTime.name) },
-                afterCreate = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
                 bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
@@ -157,14 +153,6 @@ class SubjectNavigationScreens {
             EditSubjectScreen(
                 modifier = modifier,
                 editSubjectViewModel = editSubjectViewModel
-            )
-        }
-
-        @Composable
-        fun NewSubjectTimeScreenInitializer(
-            navController: NavHostController,
-        ) {
-            NewSubjectTimeScreen(
             )
         }
     }

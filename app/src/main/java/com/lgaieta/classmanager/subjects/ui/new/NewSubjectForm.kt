@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,13 +22,13 @@ fun NewSubjectForm(
     courseValue: String,
     onCourseChange: (course: String) -> Unit,
     onSubmit: () -> Unit,
-    onNewTime: () -> Unit
+    onCancel: () -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         NameField(value = nameValue, onValueChange = onNameChange)
         CourseField(value = courseValue, onValueChange = onCourseChange)
-        // TimeField(onClick = onNewTime)
         SubmitButton(onClick = onSubmit, modifier = Modifier.fillMaxWidth())
+        CancelButton(onClick = onCancel, modifier = Modifier.fillMaxWidth())
     }
 }
 
@@ -58,20 +59,6 @@ fun CourseField(value: String, onValueChange: (value: String) -> Unit) {
 }
 
 @Composable
-fun TimeField(onClick: () -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(text = stringResource(R.string.times_label))
-        Button(
-            onClick = onClick,
-            shape = RoundedCornerShape(12.dp),
-            contentPadding = PaddingValues(16.dp),
-        ) {
-            Text(text = stringResource(R.string.new_time))
-        }
-    }
-}
-
-@Composable
 fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
@@ -80,5 +67,17 @@ fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         contentPadding = PaddingValues(16.dp),
     ) {
         Text(text = stringResource(R.string.create_subject))
+    }
+}
+
+@Composable
+fun CancelButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    TextButton(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        Text(text = stringResource(R.string.cancel))
     }
 }

@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class NewSubjectViewModel(
-    private val offlineSubjectRepository: SubjectRepository
+    private val offlineSubjectRepository: SubjectRepository,
+    private val afterCancel: () -> Unit,
+    private val afterSave: () -> Unit,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewSubjectState())
     val uiState: StateFlow<NewSubjectState> = _uiState.asStateFlow()
@@ -26,6 +28,13 @@ class NewSubjectViewModel(
         }
     }
 
+    fun cancel() {
+        _uiState.update {
+            it.copy(name = "", course = "")
+        }
+        afterCancel()
+    }
+
     private fun isNameValid(): Boolean {
         return _uiState.value.name.isNotBlank()
     }
@@ -40,6 +49,7 @@ class NewSubjectViewModel(
             _uiState.update {
                 it.copy(name = "", course = "")
             }
+            afterSave()
         }
     }
 }
