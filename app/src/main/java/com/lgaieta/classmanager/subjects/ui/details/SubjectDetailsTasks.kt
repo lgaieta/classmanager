@@ -19,7 +19,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -33,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.tasks.models.Task
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubjectDetailsTasks(
     onTaskClick: (task: Task) -> Unit,
@@ -76,8 +74,8 @@ fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         shape = RoundedCornerShape(12.dp),
         contentPadding = PaddingValues(16.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-            contentColor = MaterialTheme.colorScheme.onTertiary
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
         )
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
