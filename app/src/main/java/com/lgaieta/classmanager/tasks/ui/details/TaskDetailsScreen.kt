@@ -1,6 +1,8 @@
 package com.lgaieta.classmanager.tasks.ui.details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,96 +40,57 @@ fun TaskDetailsScreen(
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
-                    top = TopPagePadding + innerPadding.calculateTopPadding()
                 )
                 .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
+            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
             if (isNotFound) TaskDetailsNotFound()
             if (!isNotFound) {
-                TaskDetailsHeader(title = taskDetailsState.task!!.name)
-                Spacer(modifier = Modifier.height(40.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    if (subjectState != null)
-                        Column(
-                            modifier = modifier
-                                .padding(end = 16.dp)
-                                .weight(1f)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.subject),
-                                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                                modifier = Modifier.align(Alignment.Start)
-                            )
-                            Text(
-                                text = subjectState!!.name,
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.align(Alignment.Start)
-                            )
-                        }
-                    TaskDetailsButtons(
-                        onEdit = { taskDetailsViewModel.onEdit() },
-                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
-                        modifier = Modifier.weight(1f)
-                    )
-
+                if (subjectState != null) {
+                    SubjectBadge(name = subjectState!!.name)
                 }
-                Spacer(modifier = Modifier.height(40.dp))
-                Column(
-                    modifier = modifier
-                        .padding(end = 16.dp)
-                        .weight(1f)
-                ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                TaskDetailsHeader(title = taskDetailsState.task!!.name)
+                Spacer(modifier = Modifier.height(36.dp))
+                TaskDetailsButtons(
+                    onEdit = { taskDetailsViewModel.onEdit() },
+                    onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                if (taskDetailsState.task!!.description.isNotEmpty()) {
+                    TaskDescription(description = taskDetailsState.task!!.description)
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+                Column {
                     Text(
-                        text = stringResource(R.string.description),
-                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        text = stringResource(R.string.notes),
+                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                         modifier = Modifier.align(Alignment.Start)
                     )
-                    Spacer(modifier = Modifier.padding(8.dp))
-                    if (!taskDetailsState.task!!.description.isNullOrEmpty()) {
-                        Card {
-                            Text(
-                                text = taskDetailsState.task!!.description,
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier
-                                    .align(Alignment.Start)
-                                    .padding(24.dp)
-                                    .widthIn(max = 150.dp)
-                            )
-                        }
-                    } else {
-                        Text(
-                            text = stringResource(R.string.description_not_found),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier
-                                .align(Alignment.Start)
-                                .padding(24.dp)
-                        )
-                    }
-
-
+                    Text(
+                        text = "La sección de notas de tareas se encuentra en desarrollo.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.align(Alignment.Start)
+                    )
                 }
             }
-            Spacer(modifier = Modifier.height(24.dp))
-            Column(
-                modifier = modifier
-                    .padding(end = 16.dp)
-                    .weight(1f)
-            ) {
-                Text(
-                    text = stringResource(R.string.notes),
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                    modifier = Modifier.align(Alignment.Start)
-                )
-                Text(
-                    text = "La sección de notas de tareas se encuentra en desarrollo.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.align(Alignment.Start)
-                )
-            }
         }
+    }
+}
+
+@Composable
+private fun TaskDescription(description: String) {
+    Column {
+        Text(
+            text = stringResource(R.string.description),
+            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.align(Alignment.Start)
+        )
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyLarge,
+        )
     }
 }
 
@@ -135,6 +98,25 @@ fun TaskDetailsScreen(
 fun TaskDetailsNotFound() {
     Column {
         Text(text = stringResource(R.string.task_not_found))
+    }
+}
+
+@Composable
+private fun SubjectBadge(name: String) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+        ),
+    ) {
+        Text(
+            text = name,
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(horizontal = 8.dp, vertical = 2.dp)
+        )
     }
 }
 
@@ -147,7 +129,6 @@ fun TaskDetailsHeader(title: String, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = title,
-            textAlign = TextAlign.Center,
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
         )
     }
