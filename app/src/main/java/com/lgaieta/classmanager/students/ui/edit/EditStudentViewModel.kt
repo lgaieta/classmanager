@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class EditStudentViewModel(
     private val offlineStudentRepository: StudentRepository,
-    private val offlineSubjectRepository: SubjectRepository,
+    offlineSubjectRepository: SubjectRepository,
     private val studentId: Long,
     private val afterEdit: (id: Long) -> Unit = {},
     private val afterCancel: () -> Unit = {}
