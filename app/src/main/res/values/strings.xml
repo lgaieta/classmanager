@@ -78,4 +78,5 @@
     <string name="new_subject_helper_text">Las tareas y los alumnos podrán ser creadas posteriormente.</string>
     <string name="info_label">Información</string>
     <string name="optional">Opcional</string>
+    <string name="new_task_helper">Las notas podrán ser asignadas luego de haber creado la tarea.</string>
 </resources>

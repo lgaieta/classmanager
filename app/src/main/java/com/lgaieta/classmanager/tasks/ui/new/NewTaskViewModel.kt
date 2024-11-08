@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.update
 class NewTaskViewModel(
     private val offlineTaskRepository: TaskRepository,
     private val subjectId: Int,
-    private val afterCreate: () -> Unit
+    private val afterCreate: () -> Unit,
+    private val afterCancel: () -> Unit
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewTaskState())
     val uiState: StateFlow<NewTaskState> = _uiState.asStateFlow()
@@ -43,6 +44,10 @@ class NewTaskViewModel(
             }
             afterCreate()
         }
+    }
+
+    fun cancel() {
+        afterCancel()
     }
 }
 

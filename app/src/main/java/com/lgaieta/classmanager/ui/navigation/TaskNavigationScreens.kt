@@ -131,7 +131,8 @@ class TaskNavigationScreens {
                     NewTaskViewModel(
                         offlineTaskRepository = ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
                         subjectId = subjectId,
-                        afterCreate = { navController.navigate("${ClassManagerScreen.SubjectDetails.name}/$subjectId") }
+                        afterCreate = { navController.navigate("${ClassManagerScreen.SubjectDetails.name}/$subjectId") },
+                        afterCancel = { navController.popBackStack() }
                     )
                 })
 
@@ -139,6 +140,7 @@ class TaskNavigationScreens {
             NewTaskScreen(
                 modifier = modifier,
                 newTaskViewModel = newTaskViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
 
