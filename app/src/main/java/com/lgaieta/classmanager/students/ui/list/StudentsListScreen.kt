@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager.students.ui.list
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -57,10 +56,11 @@ fun StudentsListScreen(
             modifier = modifier.padding(
                 start = HorizontalPagePadding,
                 end = HorizontalPagePadding,
-                top = TopPagePadding + innerPadding.calculateTopPadding()
-            )
+            ).fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
+                Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
                 StudentHeader()
                 Spacer(modifier = Modifier.height(48.dp))
                 if (listState.students.isEmpty()) {
@@ -72,7 +72,7 @@ fun StudentsListScreen(
             }
             items(listState.students) { student ->
                 StudentItem(student, onClick = onStudentClick)
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(24.dp))
             }
             item {
                 Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
@@ -97,8 +97,8 @@ private fun StudentHeader() {
 }
 
 @Composable
-fun NewStudentButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    FloatingActionButton(onClick = onClick, modifier = modifier) {
+private fun NewStudentButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    FloatingActionButton(onClick = onClick, modifier = modifier, containerColor = MaterialTheme.colorScheme.primary, shape = MaterialTheme.shapes.extraLarge) {
         Icon(Icons.Filled.Add, stringResource(R.string.new_student_fab_description))
     }
 }
