@@ -22,10 +22,10 @@ private val ItemPadding = 32.dp
 fun SubjectItem(subject: Subject, modifier: Modifier = Modifier, onClick: (id: Int) -> Unit = {}) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         ),
         shape = MaterialTheme.shapes.large,
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primaryContainer.copy(alpha = 1f)),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.surfaceContainerHigh),
         onClick = { onClick(subject.id) }
     ) {
         Text(

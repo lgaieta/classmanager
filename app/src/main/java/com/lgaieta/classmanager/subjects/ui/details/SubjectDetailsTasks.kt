@@ -52,7 +52,7 @@ fun SubjectDetailsTasks(
         items(tasks) { task ->
             Card(
                 onClick = { onTaskClick(task) },
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.5f)),
                 border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.surfaceContainerHigh)
             ) {
                 Text(
@@ -61,7 +61,8 @@ fun SubjectDetailsTasks(
                     text = task.name,
                     modifier = Modifier
                         .padding(24.dp)
-                        .widthIn(max = 150.dp)
+                        .widthIn(max = 150.dp),
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
@@ -75,8 +76,8 @@ fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         shape = RoundedCornerShape(12.dp),
         contentPadding = PaddingValues(16.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.onSecondary
+            containerColor = MaterialTheme.colorScheme.tertiary,
+            contentColor = MaterialTheme.colorScheme.onTertiary
         )
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
