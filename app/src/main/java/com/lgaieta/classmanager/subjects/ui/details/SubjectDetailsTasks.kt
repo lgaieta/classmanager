@@ -1,5 +1,6 @@
 package com.lgaieta.classmanager.subjects.ui.details
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,7 +16,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,22 +36,25 @@ import com.lgaieta.classmanager.tasks.models.Task
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubjectDetailsTasks(
-    onNewTask: () -> Unit,
     onTaskClick: (task: Task) -> Unit,
     modifier: Modifier = Modifier,
     tasks: List<Task> = emptyList(),
 ) {
     Text(
         text = stringResource(R.string.tasks),
-        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
         modifier = modifier
     )
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(4.dp))
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(tasks) { task ->
-            Card(onClick = { onTaskClick(task) }) {
+            Card(
+                onClick = { onTaskClick(task) },
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.surfaceContainerHigh)
+            ) {
                 Text(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
@@ -60,10 +66,6 @@ fun SubjectDetailsTasks(
             }
         }
     }
-    Spacer(modifier = Modifier.height(8.dp))
-    NewTaskButton(
-        onClick = onNewTask,
-    )
 }
 
 @Composable
@@ -72,6 +74,10 @@ fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         onClick = onClick, modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         contentPadding = PaddingValues(16.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary
+        )
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Filled.Add, stringResource(R.string.new_task))

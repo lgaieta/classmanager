@@ -1,6 +1,8 @@
 package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
@@ -40,36 +43,36 @@ fun SubjectDetailsScreen(
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
-                    top = TopPagePadding + innerPadding.calculateTopPadding()
                 )
                 .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
+            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
             if (isNotFound) SubjectDetailsNotFound()
             if (!isNotFound) {
                 SubjectDetailsHeader(title = subjectDetailsState.subject!!.name)
                 Spacer(modifier = Modifier.height(40.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    subjectDetailsState.subject!!.info?.let {
-                        SubjectDetailsInfo(
-                            info = it,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    SubjectDetailsButtons(
-                        onEdit = { subjectDetailsViewModel.onEdit() },
-                        onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
+                SubjectDetailsButtons(
+                    onEdit = { subjectDetailsViewModel.onEdit() },
+                    onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
+                )
+                subjectDetailsState.subject!!.info?.let {
+                    Spacer(modifier = Modifier.height(32.dp))
+                    SubjectDetailsInfo(
+                        info = it,
                     )
                 }
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 SubjectDetailsTasks(
                     tasks = tasksState,
-                    onNewTask = { subjectDetailsViewModel.onNewTask() },
                     onTaskClick = { subjectDetailsViewModel.onTaskClick(it) }
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+                NewTaskButton(
+                    onClick = { subjectDetailsViewModel.onNewTask() },
+                )
             }
+            Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
         }
     }
 }
@@ -105,12 +108,13 @@ fun SubjectDetailsInfo(info: String, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(R.string.info_label),
-            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.Start)
         )
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = info,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }

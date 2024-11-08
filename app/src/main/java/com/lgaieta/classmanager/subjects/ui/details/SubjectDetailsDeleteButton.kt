@@ -1,5 +1,8 @@
 package com.lgaieta.classmanager.subjects.ui.details
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
@@ -15,12 +18,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 
 @Composable
-fun SubjectDetailsDeleteButton(onDelete: () -> Unit) {
+fun SubjectDetailsDeleteButton(onDelete: () -> Unit, modifier: Modifier) {
     var openDialog by rememberSaveable { mutableStateOf(false) }
     if (openDialog) ConfirmDeleteDialog(
         onConfirmation = {
@@ -35,13 +40,18 @@ fun SubjectDetailsDeleteButton(onDelete: () -> Unit) {
     )
     FloatingActionButton(
         onClick = { openDialog = true },
-        elevation = FloatingActionButtonDefaults.elevation(0.dp)
+        elevation = FloatingActionButtonDefaults.elevation(0.dp),
+        modifier = modifier
     ) {
-        Icon(
-            imageVector = Icons.Default.Delete,
-            contentDescription = stringResource(R.string.delete_subject_fab_description),
-            tint = MaterialTheme.colorScheme.primary
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = stringResource(R.string.delete_subject_fab_description),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(text = stringResource(R.string.delete))
+        }
     }
 }
 

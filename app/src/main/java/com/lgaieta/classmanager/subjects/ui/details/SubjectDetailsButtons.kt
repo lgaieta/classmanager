@@ -9,7 +9,9 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -20,17 +22,23 @@ fun SubjectDetailsButtons(onEdit: () -> Unit, onDelete: () -> Unit, modifier: Mo
     Row(modifier = modifier) {
         FloatingActionButton(
             onClick = onEdit,
-            elevation = FloatingActionButtonDefaults.elevation(0.dp)
+            elevation = FloatingActionButtonDefaults.elevation(0.dp),
+            modifier = Modifier.weight(1f)
         ) {
-            Icon(
-                imageVector = Icons.Default.Edit,
-                contentDescription = stringResource(R.string.edit_subject_fab_description),
-                tint = MaterialTheme.colorScheme.primary
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = stringResource(R.string.edit_subject_fab_description),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(text = stringResource(R.string.edit))
+            }
         }
         Spacer(modifier = Modifier.width(8.dp))
         SubjectDetailsDeleteButton(
-            onDelete = onDelete
+            onDelete = onDelete,
+            modifier = Modifier.weight(1f)
         )
     }
 }
