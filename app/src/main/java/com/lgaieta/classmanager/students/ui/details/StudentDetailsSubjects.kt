@@ -27,7 +27,7 @@ fun StudentDetailsSubjects(subjects: List<Subject>) {
         Text(
             text = stringResource(R.string.subjects),
             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier.align(Alignment.Start)
         )
         Spacer(modifier = Modifier.height(8.dp))
         if (subjects.isNotEmpty()) {

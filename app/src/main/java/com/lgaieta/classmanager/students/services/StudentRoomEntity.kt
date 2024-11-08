@@ -9,12 +9,13 @@ import com.lgaieta.classmanager.students.models.Student
 data class StudentRoomEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val name: String
+    val name: String,
+    val note: Int
 ) {
-    fun toStudent() = Student(id, name)
+    fun toStudent() = Student(id, name, note)
 
     companion object {
-        fun fromStudent(task: Student) = StudentRoomEntity(task.id, task.name)
+        fun fromStudent(task: Student) = StudentRoomEntity(task.id, task.name, task.note)
     }
 }
 

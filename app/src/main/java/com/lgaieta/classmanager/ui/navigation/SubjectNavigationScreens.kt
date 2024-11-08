@@ -91,6 +91,7 @@ class SubjectNavigationScreens {
                     SubjectDetailsViewModel(
                         offlineSubjectRepository =
                         ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
+                        offlineStudentRepository = ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
                         subjectId = subjectId,
                         afterDelete = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
                         afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditSubject.name}/${id}") },

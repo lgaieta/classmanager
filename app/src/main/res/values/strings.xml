@@ -75,6 +75,7 @@
     <string name="description">Descripción</string>
     <string name="description_not_found">No hay descripción</string>
     <string name="task_description_label">Descripción</string>
+    <string name="students_not_found">No hay alumnos</string>
     <string name="new_subject_helper_text">Las tareas y los alumnos podrán ser creadas posteriormente.</string>
     <string name="info_label">Información</string>
     <string name="optional">Opcional</string>
