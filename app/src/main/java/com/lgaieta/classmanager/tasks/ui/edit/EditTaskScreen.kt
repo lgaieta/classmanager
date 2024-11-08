@@ -2,6 +2,8 @@ package com.lgaieta.classmanager.tasks.ui.edit
 
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +17,9 @@ import androidx.compose.runtime.*
 
 import androidx.compose.ui.res.stringResource
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.ui.BottomNavBar
+import com.lgaieta.classmanager.ui.BottomNavBarActions
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
 
@@ -23,33 +28,40 @@ import kotlinx.coroutines.launch
 fun EditTaskScreen(
     modifier: Modifier = Modifier,
     editTaskViewModel: EditTaskViewModel,
+    bottomNavBarActions: BottomNavBarActions
 ) {
     val uiState by editTaskViewModel.editTaskState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold { innerPadding ->
+    Scaffold(bottomBar = { BottomNavBar(actions = bottomNavBarActions) })
+    { innerPadding ->
         Column(
             modifier = modifier
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
-                    top = TopPagePadding + innerPadding.calculateTopPadding(),
                 )
                 .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
+            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
             EditTaskHeader()
             Spacer(modifier = Modifier.height(48.dp))
             EditTaskForm(
                 nameValue = uiState.name,
                 onNameChange = { editTaskViewModel.changeName(it) },
                 descValue = uiState.description,
-                onDescChange = {editTaskViewModel.changeDescription(it)},
+                onDescChange = { editTaskViewModel.changeDescription(it) },
                 onSubmit = {
                     coroutineScope.launch {
                         editTaskViewModel.editTask()
                     }
                 },
+                onCancel = {
+                    editTaskViewModel.cancel()
+                }
             )
+            Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
         }
     }
 }

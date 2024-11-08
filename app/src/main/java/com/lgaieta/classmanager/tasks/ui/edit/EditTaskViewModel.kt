@@ -14,6 +14,7 @@ class EditTaskViewModel(
     private val offlineTaskRepository: TaskRepository,
     taskId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
+    private val afterCancel: () -> Unit
 ) : ViewModel() {
     private val _editTaskState = MutableStateFlow(EditTaskState())
 
@@ -54,6 +55,10 @@ class EditTaskViewModel(
             offlineTaskRepository.update(updatedTask)
             afterEdit(updatedTask.id)
         }
+    }
+
+    fun cancel() {
+        afterCancel()
     }
 }
 

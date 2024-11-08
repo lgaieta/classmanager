@@ -146,7 +146,7 @@ class TaskNavigationScreens {
 
         @Composable
         fun EditTaskScreenInitializer(
-            navController: NavController,
+            navController: NavHostController,
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
@@ -159,13 +159,15 @@ class TaskNavigationScreens {
                         offlineTaskRepository =
                         ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
                         taskId = taskId,
-                        afterEdit = { navController.popBackStack() }
+                        afterEdit = { navController.popBackStack() },
+                        afterCancel = { navController.popBackStack() }
                     )
                 })
 
             EditTaskScreen(
                 modifier = modifier,
-                editTaskViewModel = editTaskViewModel
+                editTaskViewModel = editTaskViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }
     }
