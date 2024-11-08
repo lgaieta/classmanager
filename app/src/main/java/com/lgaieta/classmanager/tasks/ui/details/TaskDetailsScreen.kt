@@ -15,6 +15,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.subjects.ui.details.SubjectDetailsStudents
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
@@ -29,6 +30,7 @@ fun TaskDetailsScreen(
 ) {
     val taskDetailsState by taskDetailsViewModel.taskDetailsState.collectAsState()
     val subjectState by taskDetailsViewModel.subjectState.collectAsState()
+    val studentsState by taskDetailsViewModel.studentsState.collectAsState()
     val isNotFound = taskDetailsState.task == null
     val coroutineScope = rememberCoroutineScope()
 
@@ -106,7 +108,7 @@ fun TaskDetailsScreen(
                                 .padding(24.dp)
                         )
                     }
-
+                    TaskDetailsStudents(students = studentsState)
 
                 }
             }
@@ -116,16 +118,7 @@ fun TaskDetailsScreen(
                     .padding(end = 16.dp)
                     .weight(1f)
             ) {
-                Text(
-                    text = stringResource(R.string.notes),
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                    modifier = Modifier.align(Alignment.Start)
-                )
-                Text(
-                    text = "La sección de notas de tareas se encuentra en desarrollo.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.align(Alignment.Start)
-                )
+
             }
         }
     }
