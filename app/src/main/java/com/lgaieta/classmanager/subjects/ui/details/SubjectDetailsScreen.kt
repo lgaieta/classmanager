@@ -63,11 +63,13 @@ fun SubjectDetailsScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(32.dp))
-                SubjectDetailsTasks(
-                    tasks = tasksState,
-                    onTaskClick = { subjectDetailsViewModel.onTaskClick(it) }
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+                if (tasksState.isNotEmpty()) {
+                    SubjectDetailsTasks(
+                        tasks = tasksState,
+                        onTaskClick = { subjectDetailsViewModel.onTaskClick(it) }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
                 NewTaskButton(
                     onClick = { subjectDetailsViewModel.onNewTask() },
                 )
