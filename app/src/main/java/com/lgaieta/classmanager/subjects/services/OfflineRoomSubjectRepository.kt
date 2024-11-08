@@ -24,8 +24,6 @@ class OfflineRoomSubjectRepository(private val subjectDao: SubjectRoomDao) : Sub
                 it.toTask()
             }
         }
-    override fun getStudentsStream(studentId: Int) : Flow<List<Student>> =
-        subjectDao.getStudents(studentId)
 
     override suspend fun insert(subject: Subject) =
         subjectDao.insert(SubjectRoomEntity.fromSubject(subject))

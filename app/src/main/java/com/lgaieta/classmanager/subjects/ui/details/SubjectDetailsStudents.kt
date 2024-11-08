@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -26,8 +25,8 @@ import com.lgaieta.classmanager.R
 fun SubjectDetailsStudents(students: List<Student>){
     Column{
         Text(
-            text= stringResource(R.string.students_list_title),
-            style=MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+            text = stringResource(R.string.students_list_title),
+            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.align(Alignment.Start)
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -46,5 +45,16 @@ fun SubjectDetailsStudents(students: List<Student>){
                 }
             }
         }
+        else{
+            Text(
+                text = stringResource(R.string.students_not_found),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(24.dp)
+            )
+        }
+
+
     }
 }

@@ -3,6 +3,8 @@ package com.lgaieta.classmanager.subjects.ui.details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.students.models.Student
+import com.lgaieta.classmanager.students.models.StudentRepository
+import com.lgaieta.classmanager.students.ui.list.StudentsListState
 import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.tasks.models.Task
@@ -15,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class SubjectDetailsViewModel(
     private val offlineSubjectRepository: SubjectRepository,
+    private val offlineStudentRepository: StudentRepository,
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
     private val afterDelete: (id: Int) -> Unit = {},
@@ -41,7 +44,7 @@ class SubjectDetailsViewModel(
             )
 
     val studentsState: StateFlow<List<Student>> =
-        offlineSubjectRepository.getStudentsStream(subjectId)
+        offlineStudentRepository.getStudentsStream(subjectId)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),

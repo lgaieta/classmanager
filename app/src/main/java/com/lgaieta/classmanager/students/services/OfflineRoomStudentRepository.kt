@@ -17,6 +17,12 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
     override fun getStudentStream(id: Long): Flow<Student?> =
         studentDao.getStudent(id).map { it?.toStudent() }
 
+    override fun getStudentsStream(subjectId: Int) : Flow<List<Student>> =
+        studentDao.getStudents(subjectId)
+
+    override fun getStudentsTaskStream(subjectId: Int) : Flow<List<Student>> =
+        studentDao.getStudentsByTask(subjectId)
+
     override fun getSubjectsStream(studentId: Long): Flow<List<Subject>> =
         studentDao.getSubjects(studentId)
 

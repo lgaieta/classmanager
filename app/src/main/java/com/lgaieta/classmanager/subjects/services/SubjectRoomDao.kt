@@ -32,15 +32,6 @@ interface SubjectRoomDao {
     @Query("SELECT * FROM task WHERE subjectId = :subjectId")
     fun getTasks(subjectId: Int): Flow<List<TaskRoomEntity>>
 
-    @Query(
-        """
-        SELECT student.* 
-        FROM subject_student 
-        JOIN student ON subject_student.studentId = student.id 
-        WHERE subject_student.subjectId = :subjectId
-        """
-    )
-    fun getStudents(subjectId: Int): Flow<List<Student>>
 
 
 
