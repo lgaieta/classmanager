@@ -75,4 +75,5 @@
     <string name="description">Descripción</string>
     <string name="description_not_found">No hay descripción</string>
     <string name="task_description_label">Descripción</string>
+    <string name="students_not_found">No hay alumnos</string>
 </resources>
