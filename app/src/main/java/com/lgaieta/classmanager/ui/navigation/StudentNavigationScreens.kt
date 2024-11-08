@@ -112,15 +112,15 @@ class StudentNavigationScreens {
                 viewModel<NewStudentViewModel>(factory = viewModelFactory {
                     NewStudentViewModel(
                         offlineStudentRepository = ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
-                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository
-                    )
+                        offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
+                        afterCreate = { navController.popBackStack() },
+                        afterCancel = { navController.popBackStack() })
                 })
 
             NewStudentScreen(
                 modifier = modifier,
                 bottomNavBarActions = getDefaultBottomNavBarActions(navController),
                 newStudentViewModel = newStudentViewModel,
-                afterCreate = { navController.popBackStack() }
             )
         }
 

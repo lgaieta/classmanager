@@ -16,7 +16,9 @@ import kotlinx.coroutines.flow.update
 
 class NewStudentViewModel(
     private val offlineStudentRepository: StudentRepository,
-    offlineSubjectRepository: SubjectRepository
+    offlineSubjectRepository: SubjectRepository,
+    private val afterCreate: () -> Unit = {},
+    private val afterCancel: () -> Unit = {}
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewStudentState())
     val uiState: StateFlow<NewStudentState> = _uiState.asStateFlow()
@@ -51,7 +53,12 @@ class NewStudentViewModel(
             _uiState.update {
                 it.copy(name = "", selectedSubjects = emptyList())
             }
+            afterCreate()
         }
+    }
+
+    fun cancel() {
+        afterCancel()
     }
 }
 

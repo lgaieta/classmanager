@@ -22,7 +22,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,7 +40,6 @@ import androidx.compose.ui.window.Dialog
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.subjects.models.Subject
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewStudentSubjectSelect(
     availableSubjects: List<Subject>,
@@ -70,10 +69,14 @@ fun NewStudentSubjectSelect(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             selectedSubjects.map { selectedSubject ->
-                Card(onClick = {
-                    onSelectedSubjectsChange(selectedSubjects.filterNot { it == selectedSubject })
-                    selectedDialogSubjects = selectedSubjects.filterNot { it == selectedSubject }
-                }) {
+                Card(
+                    onClick = {
+                        onSelectedSubjectsChange(selectedSubjects.filterNot { it == selectedSubject })
+                        selectedDialogSubjects =
+                            selectedSubjects.filterNot { it == selectedSubject }
+                    },
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -116,7 +119,10 @@ fun NewStudentSubjectSelect(
         isOpen = false
         selectedDialogSubjects = selectedSubjects
     }) {
-        Card {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            shape = MaterialTheme.shapes.extraLarge
+        ) {
             Column {
                 Text(
                     text = stringResource(R.string.subject_select_title),
@@ -125,7 +131,7 @@ fun NewStudentSubjectSelect(
                         .padding(24.dp)
                         .fillMaxWidth()
                 )
-                Divider(modifier = Modifier.fillMaxWidth())
+                HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier = Modifier
@@ -138,7 +144,7 @@ fun NewStudentSubjectSelect(
                     items(availableSubjects) { availableSubject ->
                         Card(
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surface,
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
                                 contentColor = MaterialTheme.colorScheme.onSurface,
                             ),
                             onClick = {
@@ -177,8 +183,8 @@ fun NewStudentSubjectSelect(
                         Spacer(modifier = Modifier.height(12.dp))
                     }
                 }
-                Divider(modifier = Modifier.fillMaxWidth())
-                Row(modifier = Modifier.padding(24.dp)) {
+                HorizontalDivider(modifier = Modifier.fillMaxWidth())
+                Row(modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)) {
                     Button(
                         onClick = {
                             onSelectedSubjectsChange(selectedDialogSubjects)

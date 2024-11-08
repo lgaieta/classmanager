@@ -34,7 +34,6 @@ class NewTaskViewModel(
         return _uiState.value.name.isNotBlank()
     }
 
-
     suspend fun saveTask() {
         if (isNameValid()) {
             offlineTaskRepository.insert(uiState.value.toTask().copy(subjectId = subjectId))
