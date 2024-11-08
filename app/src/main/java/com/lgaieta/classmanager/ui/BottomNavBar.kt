@@ -1,8 +1,10 @@
 package com.lgaieta.classmanager.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -18,7 +20,7 @@ import com.lgaieta.classmanager.R
 @Composable
 fun BottomNavBar(actions: BottomNavBarActions) {
     BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
         contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
         Row(
@@ -27,11 +29,13 @@ fun BottomNavBar(actions: BottomNavBarActions) {
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .weight(1f)
                     .clickable {
                         actions.onSubjectsClick()
                     }
+                    .fillMaxHeight()
             ) {
                 Icon(
                     painter = painterResource(R.drawable.school_filled_24),
@@ -41,9 +45,13 @@ fun BottomNavBar(actions: BottomNavBarActions) {
             }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .weight(1f)
-                    .clickable { actions.onStudentsClick() }
+                    .clickable {
+                        actions.onStudentsClick()
+                    }
+                    .fillMaxHeight()
             ) {
                 Icon(
                     painter = painterResource(R.drawable.group_filled_24),
