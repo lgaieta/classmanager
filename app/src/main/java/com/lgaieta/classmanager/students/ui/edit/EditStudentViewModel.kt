@@ -21,6 +21,7 @@ class EditStudentViewModel(
     private val offlineSubjectRepository: SubjectRepository,
     private val studentId: Long,
     private val afterEdit: (id: Long) -> Unit = {},
+    private val afterCancel: () -> Unit = {}
 ) : ViewModel() {
     private val _editStudentState = MutableStateFlow(EditStudentState())
 
@@ -86,6 +87,10 @@ class EditStudentViewModel(
             }
             afterEdit(updatedStudent.id)
         }
+    }
+
+    fun cancel() {
+        afterCancel()
     }
 
     fun onSelectedSubjectsChange(newList: List<Subject>) {

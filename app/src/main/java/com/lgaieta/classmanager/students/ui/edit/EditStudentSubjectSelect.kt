@@ -24,6 +24,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -73,11 +74,18 @@ fun EditStudentSubjectSelect(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             selectedSubjects.map { selectedSubject ->
-                Card(onClick = {
-                    onSelectedSubjectsChange(selectedSubjects.filterNot { it == selectedSubject })
-                    selectedDialogSubjects = selectedSubjects.filterNot { it == selectedSubject }
-                    onSubjectsToBeDeletedChange(subjectsToBeDeleted + selectedSubject)
-                }) {
+                Card(
+                    onClick = {
+                        onSelectedSubjectsChange(selectedSubjects.filterNot { it == selectedSubject })
+                        selectedDialogSubjects =
+                            selectedSubjects.filterNot { it == selectedSubject }
+                        onSubjectsToBeDeletedChange(subjectsToBeDeleted + selectedSubject)
+                    },
+                    colors = CardDefaults.cardColors(
+                        containerColor =
+                        MaterialTheme.colorScheme.surfaceContainerLow
+                    )
+                ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -124,7 +132,10 @@ fun EditStudentSubjectSelect(
         isOpen = false
         selectedDialogSubjects = selectedSubjects
     }) {
-        Card {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            shape = MaterialTheme.shapes.extraLarge
+        ) {
             Column {
                 Text(
                     text = stringResource(R.string.subject_select_title),
@@ -133,7 +144,7 @@ fun EditStudentSubjectSelect(
                         .padding(24.dp)
                         .fillMaxWidth()
                 )
-                Divider(modifier = Modifier.fillMaxWidth())
+                HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier = Modifier
@@ -146,7 +157,7 @@ fun EditStudentSubjectSelect(
                     items(availableSubjects) { availableSubject ->
                         Card(
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surface,
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
                                 contentColor = MaterialTheme.colorScheme.onSurface,
                             ),
                             onClick = {
@@ -185,11 +196,13 @@ fun EditStudentSubjectSelect(
                         Spacer(modifier = Modifier.height(12.dp))
                     }
                 }
-                Divider(modifier = Modifier.fillMaxWidth())
+                HorizontalDivider(modifier = Modifier.fillMaxWidth())
                 Row(modifier = Modifier.padding(24.dp)) {
                     Button(
                         onClick = {
-                            if (selectedDialogSubjects.isNotEmpty()) onSelectedSubjectsChange(selectedDialogSubjects)
+                            if (selectedDialogSubjects.isNotEmpty()) onSelectedSubjectsChange(
+                                selectedDialogSubjects
+                            )
                             onSubjectsToBeDeletedChange(subjectsToBeDeleted.filterNot {
                                 selectedDialogSubjects.contains(
                                     it

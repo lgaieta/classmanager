@@ -63,7 +63,8 @@ fun EditStudentScreen(
                             it
                         )
                     },
-                    subjectsToBeDeleted = uiState.subjectsToBeDeleted
+                    subjectsToBeDeleted = uiState.subjectsToBeDeleted,
+                    onCancel = { editStudentViewModel.cancel() }
                 )
             }
             item {

@@ -137,7 +137,8 @@ class StudentNavigationScreens {
                     ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
                     offlineSubjectRepository = ClassManagerApplication.subjectModelsContainer.offlineSubjectRepository,
                     studentId = studentId,
-                    afterEdit = { navController.popBackStack() }
+                    afterEdit = { navController.popBackStack() },
+                    afterCancel = { navController.popBackStack() }
                 )
             })
 
