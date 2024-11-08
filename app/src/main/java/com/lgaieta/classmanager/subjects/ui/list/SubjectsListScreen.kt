@@ -56,9 +56,11 @@ fun SubjectsListScreen(
             modifier = modifier.padding(
                 start = HorizontalPagePadding,
                 end = HorizontalPagePadding,
-                top = TopPagePadding + innerPadding.calculateTopPadding()
             )
         ) {
+            item {
+                Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
+            }
             item {
                 SubjectHeader()
                 Spacer(modifier = Modifier.height(48.dp))
@@ -91,14 +93,20 @@ fun SubjectHeader() {
     ) {
         Text(
             text = stringResource(R.string.subjects_list_title),
-            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
         )
     }
 }
 
 @Composable
 fun NewSubjectButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    FloatingActionButton(onClick = onClick, modifier = modifier) {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        shape = MaterialTheme.shapes.extraLarge
+    ) {
         Icon(Icons.Filled.Add, stringResource(R.string.new_subject_fab_description))
     }
 }
