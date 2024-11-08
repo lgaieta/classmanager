@@ -39,8 +39,7 @@ class NewTaskViewModel(
         if (isNameValid()) {
             offlineTaskRepository.insert(uiState.value.toTask().copy(subjectId = subjectId))
             _uiState.update {
-                it.copy(name = "")
-                it.copy(description = "")
+                it.copy(name = "", description = "")
             }
             afterCreate()
         }
