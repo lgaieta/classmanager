@@ -4,11 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.students.models.Student
 import com.lgaieta.classmanager.students.models.StudentRepository
+import com.lgaieta.classmanager.students.ui.new.NewStudentState
 import com.lgaieta.classmanager.subjects.models.Subject
+import com.lgaieta.classmanager.subjects.ui.new.NewSubjectState
 import com.lgaieta.classmanager.tasks.models.Task
 import com.lgaieta.classmanager.tasks.models.TaskRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -23,6 +27,9 @@ class TaskDetailsViewModel(
     private val afterEdit: (id: Int) -> Unit = {},
     private val afterDelete: (task: Task) -> Unit = {}
 ) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(TaskDetailsState())
+
     val taskDetailsState: StateFlow<TaskDetailsState> =
         offlineTaskRepository.getTaskStream(taskId)
             .filterNotNull()
@@ -49,7 +56,11 @@ class TaskDetailsViewModel(
                 initialValue = emptyList()
             )
 
-
+    fun changeNote(newNote: Int) {
+        _uiState.update {
+            it.copy(note = newNote)
+        }
+    }
 
     fun onEdit() {
         afterEdit(taskDetailsState.value.task!!.id)
@@ -65,4 +76,8 @@ class TaskDetailsViewModel(
 
 data class TaskDetailsState(
     val task: Task? = null,
-)
+    val note : Int = 0
+){
+    fun toStudent() = Student(id = 0, name = "", note = note)
+}
+
