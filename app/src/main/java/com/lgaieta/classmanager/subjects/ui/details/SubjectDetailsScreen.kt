@@ -17,6 +17,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.students.ui.details.SubjectDetailsStudentSelector
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.BottomPagePadding
@@ -64,6 +65,12 @@ fun SubjectDetailsScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(32.dp))
+                if (studentsState.isNotEmpty()) {
+                    SubjectDetailsStudents(onStudentClick = { subjectDetailsViewModel.onStudentClick(it) }, students = studentsState)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+                NewStudentButton(onClick = { subjectDetailsViewModel.onNewStudentClick() })
+                Spacer(modifier = Modifier.height(32.dp))
                 if (tasksState.isNotEmpty()) {
                     SubjectDetailsTasks(
                         tasks = tasksState,
@@ -74,12 +81,6 @@ fun SubjectDetailsScreen(
                 NewTaskButton(
                     onClick = { subjectDetailsViewModel.onNewTask() },
                 )
-                Spacer(modifier = Modifier.height(32.dp))
-                if (studentsState.isNotEmpty()) {
-                    SubjectDetailsStudents(onStudentClick = { /*TODO*/ }, students = studentsState)
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
-                NewStudentButton(onClick = { /*TODO*/ })
             }
             Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
         }

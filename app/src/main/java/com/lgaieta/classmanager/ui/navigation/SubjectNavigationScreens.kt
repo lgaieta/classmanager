@@ -100,6 +100,12 @@ class SubjectNavigationScreens {
                             navController.navigate(
                                 "${ClassManagerScreen.TaskDetails.name}/${it.id}"
                             )
+                        },
+                        afterStudentClick = {
+                            navController.navigate("${ClassManagerScreen.StudentDetails.name}/${it.id}")
+                        },
+                        afterNewStudentClick = {
+                            navController.navigate("${ClassManagerScreen.AddStudents.name}/$subjectId")
                         }
                     )
                 })

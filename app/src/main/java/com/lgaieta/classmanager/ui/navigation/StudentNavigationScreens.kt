@@ -17,6 +17,8 @@ import com.lgaieta.classmanager.students.ui.list.StudentsListScreen
 import com.lgaieta.classmanager.students.ui.list.StudentsListViewModel
 import com.lgaieta.classmanager.students.ui.new.NewStudentScreen
 import com.lgaieta.classmanager.students.ui.new.NewStudentViewModel
+import com.lgaieta.classmanager.subjects.ui.add_students.AddStudentsScreen
+import com.lgaieta.classmanager.subjects.ui.add_students.AddStudentsViewModel
 import com.lgaieta.classmanager.ui.viewModelFactory
 
 const val STUDENT_ID_ARGUMENT = "id"
@@ -48,6 +50,17 @@ fun NavGraphBuilder.studentNavigationScreens(navController: NavHostController) {
         })
     ) { backstackEntry ->
         StudentNavigationScreens.EditStudentScreenInitializer(
+            navController = navController,
+            backStackEntry = backstackEntry
+        )
+    }
+    composable(
+        route = "${ClassManagerScreen.AddStudents.name}/{$SUBJECT_ID_ARGUMENT}",
+        arguments = listOf(navArgument(SUBJECT_ID_ARGUMENT) {
+            type = androidx.navigation.NavType.IntType
+        })
+    ) { backstackEntry ->
+        StudentNavigationScreens.AddStudentsScreenInitializer(
             navController = navController,
             backStackEntry = backstackEntry
         )
@@ -144,6 +157,28 @@ class StudentNavigationScreens {
 
             EditStudentScreen(
                 editStudentViewModel = editStudentViewModel,
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController)
+            )
+        }
+
+        @Composable
+        fun AddStudentsScreenInitializer(
+            backStackEntry: NavBackStackEntry,
+            navController: NavHostController
+        ) {
+            val subjectId = backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
+
+            val addStudentsViewModel = viewModel<AddStudentsViewModel>(factory = viewModelFactory {
+                AddStudentsViewModel(
+                    offlineStudentRepository = ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                    afterStudentClick = {},
+                    subjectId = subjectId,
+                    afterSubmit = {navController.popBackStack()}
+                )
+            })
+
+            AddStudentsScreen(
+                addStudentsViewModel = addStudentsViewModel,
                 bottomNavBarActions = getDefaultBottomNavBarActions(navController)
             )
         }

@@ -9,6 +9,7 @@ import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.tasks.models.Task
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -16,12 +17,14 @@ import kotlinx.coroutines.launch
 
 class SubjectDetailsViewModel(
     private val offlineSubjectRepository: SubjectRepository,
-    private val offlineStudentRepository: StudentRepository,
+    offlineStudentRepository: StudentRepository,
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
     private val afterDelete: (id: Int) -> Unit = {},
     private val afterNewTaskClick: () -> Unit = {},
     private val afterTaskClick: (task: Task) -> Unit = {},
+    private val afterStudentClick: (student: Student) -> Unit = {},
+    private val afterNewStudentClick: () -> Unit = {}
 ) : ViewModel() {
     val subjectDetailsState: StateFlow<SubjectDetailsState> =
         offlineSubjectRepository.getSubjectStream(subjectId)
@@ -66,6 +69,14 @@ class SubjectDetailsViewModel(
 
     fun onNewTask() {
         afterNewTaskClick()
+    }
+
+    fun onStudentClick(student: Student) {
+        afterStudentClick(student)
+    }
+
+    fun onNewStudentClick() {
+        afterNewStudentClick()
     }
 }
 

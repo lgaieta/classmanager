@@ -9,7 +9,6 @@ import com.lgaieta.classmanager.ui.BottomNavBarActions
 enum class ClassManagerScreen {
     SubjectsList,
     NewSubject,
-    NewSubjectTime,
     EditSubject,
     SubjectDetails,
     Home,
@@ -20,7 +19,8 @@ enum class ClassManagerScreen {
     TaskDetails,
     StudentDetails,
     EditStudent,
-    NewStudent
+    NewStudent,
+    AddStudents
 }
 
 fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(

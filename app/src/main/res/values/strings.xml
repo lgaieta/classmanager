@@ -80,4 +80,9 @@
     <string name="optional">Opcional</string>
     <string name="new_task_helper">Las notas podrán ser asignadas luego de haber creado la tarea.</string>
     <string name="students">Alumnos</string>
+    <string name="add_students">Agregar alumnos</string>
+    <string name="student_select_title">Seleccione los alumnos</string>
+    <string name="empty_students_selector_list">Aún no hay alumnos creados, para crear uno ve a la vista de Alumnos y presiona el botón +</string>
+    <string name="select_student_list_title">Seleccione los alumnos a integrar en el curso</string>
+    <string name="selected">Seleccionado</string>
 </resources>
