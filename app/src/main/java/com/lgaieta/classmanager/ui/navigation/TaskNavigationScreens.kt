@@ -96,12 +96,18 @@ class TaskNavigationScreens {
         ) {
             val taskId =
                 backStackEntry.arguments?.getInt(TASK_ID_ARGUMENT) ?: return
+            val subjectId =
+                backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
+
 
             val taskDetailsViewModel =
                 viewModel<TaskDetailsViewModel>(factory = viewModelFactory {
                     TaskDetailsViewModel(
                         offlineTaskRepository =
                         ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
+                        offlineStudentRepository =
+                        ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
+                        subjectId = subjectId,
                         taskId = taskId,
                         afterDelete = { task -> navController.navigate("${ClassManagerScreen.SubjectDetails.name}/${task.subjectId}") },
                         afterEdit = { id -> navController.navigate("${ClassManagerScreen.EditTask.name}/${id}") }

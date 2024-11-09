@@ -1,6 +1,7 @@
 package com.lgaieta.classmanager.tasks.ui.details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -31,48 +32,65 @@ fun TaskDetailsScreen(
 ) {
     val taskDetailsState by taskDetailsViewModel.taskDetailsState.collectAsState()
     val subjectState by taskDetailsViewModel.subjectState.collectAsState()
+    val studentsState by taskDetailsViewModel.studentsState.collectAsState()
     val isNotFound = taskDetailsState.task == null
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(bottomBar = { BottomNavBar(bottomNavBarActions) }) { innerPadding ->
-        Column(
+    Scaffold(
+        bottomBar = { BottomNavBar(bottomNavBarActions) }
+    ) { innerPadding ->
+        LazyColumn(
             modifier = modifier
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
                 )
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
-            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
-            if (isNotFound) TaskDetailsNotFound()
+            item{
+            Spacer(modifier = Modifier.height(TopPagePadding ))
+            }
+
             if (!isNotFound) {
-                if (subjectState != null) {
-                    SubjectBadge(name = subjectState!!.name)
+                item{
+                    if (subjectState != null) {
+                        SubjectBadge(name = subjectState!!.name)
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                TaskDetailsHeader(title = taskDetailsState.task!!.name)
-                Spacer(modifier = Modifier.height(36.dp))
-                TaskDetailsButtons(
-                    onEdit = { taskDetailsViewModel.onEdit() },
-                    onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
-                )
-                Spacer(modifier = Modifier.height(24.dp))
+                item{
+                    TaskDetailsHeader(title = taskDetailsState.task!!.name)
+                    Spacer(modifier = Modifier.height(36.dp))
+                }
+                item{
+                    TaskDetailsButtons(
+                        onEdit = { taskDetailsViewModel.onEdit() },
+                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
+                    )
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
+
                 if (taskDetailsState.task!!.description.isNotEmpty()) {
-                    TaskDescription(description = taskDetailsState.task!!.description)
+                 item{
+                     TaskDescription(description = taskDetailsState.task!!.description)
+                    }
                 }
+                item{
                 Spacer(modifier = Modifier.height(24.dp))
-                Column {
-                    Text(
-                        text = stringResource(R.string.notes),
-                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                        modifier = Modifier.align(Alignment.Start)
-                    )
-                    Text(
-                        text = "La sección de notas de tareas se encuentra en desarrollo.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.align(Alignment.Start)
-                    )
+                }
+                item{
+                        Text(
+                            text = stringResource(R.string.notes),
+                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                           // modifier = Modifier.align(Alignment.Start)
+                        )
+                        TaskDetailsStudents(students = studentsState)
+                }
+            }
+            else {
+                item{
+                    TaskDetailsNotFound()
                 }
             }
         }
@@ -96,9 +114,11 @@ private fun TaskDescription(description: String) {
 
 @Composable
 fun TaskDetailsNotFound() {
-    Column {
-        Text(text = stringResource(R.string.task_not_found))
-    }
+        Text(text = stringResource(R.string.task_not_found),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .padding(24.dp)
+        )
 }
 
 @Composable

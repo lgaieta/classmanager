@@ -3,6 +3,8 @@ package com.lgaieta.classmanager.subjects.ui.details
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,61 +41,116 @@ fun SubjectDetailsScreen(
     Scaffold(
         bottomBar = { BottomNavBar(actions = bottomNavBarActions) }
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = modifier
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
                 )
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
         ) {
-            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
-            if (isNotFound) SubjectDetailsNotFound()
+            item {
+                Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
+            }
+            item {
+                if (isNotFound) {
+                    SubjectDetailsNotFound()
+                }
+            }
             if (!isNotFound) {
-                SubjectDetailsHeader(title = subjectDetailsState.subject!!.name)
-                Spacer(modifier = Modifier.height(40.dp))
-                SubjectDetailsButtons(
-                    onEdit = { subjectDetailsViewModel.onEdit() },
-                    onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
-                )
-                subjectDetailsState.subject!!.info?.let {
-                    Spacer(modifier = Modifier.height(32.dp))
-                    SubjectDetailsInfo(
-                        info = it,
+                item {
+                    SubjectDetailsHeader(title = subjectDetailsState.subject!!.name)
+                    Spacer(modifier = Modifier.height(40.dp))
+                }
+                item {
+                    SubjectDetailsButtons(
+                        onEdit = { subjectDetailsViewModel.onEdit() },
+                        onDelete = { coroutineScope.launch { subjectDetailsViewModel.onDelete() } }
                     )
                 }
-                Spacer(modifier = Modifier.height(32.dp))
-                if (studentsState.isNotEmpty()) {
-                    SubjectDetailsStudents(onStudentClick = {
-                        subjectDetailsViewModel.onStudentClick(
-                            it
+                subjectDetailsState.subject!!.info?.let {
+                    item {
+                        Spacer(modifier = Modifier.height(32.dp))
+                        SubjectDetailsInfo(
+                            info = it,
                         )
-                    },
-                        students = studentsState,
-                        onDeleteStudent = {
-                            coroutineScope.launch {
-                                subjectDetailsViewModel.onDeleteStudent(it)
-                            }
-                        })
-                    Spacer(modifier = Modifier.height(8.dp))
+                    }
                 }
-                NewStudentButton(onClick = { subjectDetailsViewModel.onNewStudentClick() })
-                Spacer(modifier = Modifier.height(32.dp))
-                if (tasksState.isNotEmpty()) {
+                item {
+                    Spacer(modifier = Modifier.height(32.dp))
+                    if (studentsState.isNotEmpty()) {
+                        SubjectDetailsStudents(onStudentClick = {
+                            subjectDetailsViewModel.onStudentClick(
+                                it
+                            )
+                        },
+                            students = studentsState,
+                            onDeleteStudent = {
+                                coroutineScope.launch {
+                                    subjectDetailsViewModel.onDeleteStudent(it)
+                                }
+                            })
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    NewStudentButton(onClick = { subjectDetailsViewModel.onNewStudentClick() })
+                    Spacer(modifier = Modifier.height(32.dp))
+                    SubjectDetailsInfo(info = it)
+                }
+            }
+            item { Spacer(modifier = Modifier.height(32.dp)) }
+
+            if (tasksState.isNotEmpty()) {
+                item {
                     SubjectDetailsTasks(
                         tasks = tasksState,
                         onTaskClick = { subjectDetailsViewModel.onTaskClick(it) }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
+            }
+
+            item {
                 NewTaskButton(
                     onClick = { subjectDetailsViewModel.onNewTask() },
                 )
+                Spacer(modifier = Modifier.height(40.dp))
             }
-            Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
+            item {
+                Text(
+                    text = stringResource(R.string.students_list_title),
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                )
+            }
+            if (studentsState.isNotEmpty()) {
+                items(studentsState) { student ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    ) {
+                        Text(
+                            text = student.name,
+                            style = MaterialTheme.typography.labelLarge,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                }
+            } else {
+                item {
+                    Text(
+                        text = stringResource(R.string.students_not_found),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier
+                            .padding(24.dp)
+                    )
+                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(BottomPagePadding))
+            }
         }
     }
+}
 }
 
 @Composable

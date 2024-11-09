@@ -1,5 +1,6 @@
 package com.lgaieta.classmanager.subjects.models
 
+import com.lgaieta.classmanager.students.models.Student
 import com.lgaieta.classmanager.tasks.models.Task
 import kotlinx.coroutines.flow.Flow
 
