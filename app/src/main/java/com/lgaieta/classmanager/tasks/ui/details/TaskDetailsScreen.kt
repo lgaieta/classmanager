@@ -45,18 +45,13 @@ fun TaskDetailsScreen(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
                 )
-                .fillMaxWidth()
-                .wrapContentHeight()
+                .fillMaxSize()
                 .padding(innerPadding)
         ) {
             item{
             Spacer(modifier = Modifier.height(TopPagePadding ))
             }
-            item{
-                if (isNotFound) {
-                    TaskDetailsNotFound()
-                }
-            }
+
             if (!isNotFound) {
                 item{
                     if (subjectState != null) {
@@ -75,20 +70,27 @@ fun TaskDetailsScreen(
                     )
                     Spacer(modifier = Modifier.height(24.dp))
                 }
-                item{
 
                 if (taskDetailsState.task!!.description.isNotEmpty()) {
-                    TaskDescription(description = taskDetailsState.task!!.description)
+                 item{
+                     TaskDescription(description = taskDetailsState.task!!.description)
+                    }
                 }
+                item{
                 Spacer(modifier = Modifier.height(24.dp))
-                Column {
-                    Text(
-                        text = stringResource(R.string.notes),
-                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                        modifier = Modifier.align(Alignment.Start)
-                    )
-                    TaskDetailsStudents(students = studentsState)
                 }
+                item{
+                        Text(
+                            text = stringResource(R.string.notes),
+                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                           // modifier = Modifier.align(Alignment.Start)
+                        )
+                        TaskDetailsStudents(students = studentsState)
+                }
+            }
+            else {
+                item{
+                    TaskDetailsNotFound()
                 }
             }
         }
@@ -112,9 +114,11 @@ private fun TaskDescription(description: String) {
 
 @Composable
 fun TaskDetailsNotFound() {
-    Column {
-        Text(text = stringResource(R.string.task_not_found))
-    }
+        Text(text = stringResource(R.string.task_not_found),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .padding(24.dp)
+        )
 }
 
 @Composable
