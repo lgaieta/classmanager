@@ -37,6 +37,16 @@ interface StudentRoomDao {
     @Query("SELECT * from student ORDER BY name ASC")
     fun getAllStudents(): Flow<List<StudentRoomEntity>>
 
+    @Query(
+        """
+        SELECT student.* 
+        FROM student 
+        JOIN subject_student ON student.id = subject_student.studentId 
+        WHERE subject_student.subjectId = :subjectId
+        """
+    )
+    fun getAllStudentsInSubject(subjectId: Int): Flow<List<StudentRoomEntity>>
+
     @Query("INSERT OR IGNORE INTO subject_student (studentId, subjectId) VALUES (:studentId, :subjectId)")
     suspend fun assignSubject(studentId: Long, subjectId: Int)
 

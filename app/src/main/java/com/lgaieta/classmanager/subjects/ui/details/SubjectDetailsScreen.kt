@@ -32,6 +32,7 @@ fun SubjectDetailsScreen(
 ) {
     val subjectDetailsState by subjectDetailsViewModel.subjectDetailsState.collectAsState()
     val tasksState by subjectDetailsViewModel.tasksState.collectAsState()
+    val studentsState by subjectDetailsViewModel.studentsState.collectAsState()
     val isNotFound = subjectDetailsState.subject == null
     val coroutineScope = rememberCoroutineScope()
 
@@ -73,6 +74,12 @@ fun SubjectDetailsScreen(
                 NewTaskButton(
                     onClick = { subjectDetailsViewModel.onNewTask() },
                 )
+                Spacer(modifier = Modifier.height(32.dp))
+                if (studentsState.isNotEmpty()) {
+                    SubjectDetailsStudents(onStudentClick = { /*TODO*/ }, students = studentsState)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+                NewStudentButton(onClick = { /*TODO*/ })
             }
             Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
         }
