@@ -17,7 +17,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
-import com.lgaieta.classmanager.students.ui.details.SubjectDetailsStudentSelector
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.BottomPagePadding
@@ -66,7 +65,17 @@ fun SubjectDetailsScreen(
                 }
                 Spacer(modifier = Modifier.height(32.dp))
                 if (studentsState.isNotEmpty()) {
-                    SubjectDetailsStudents(onStudentClick = { subjectDetailsViewModel.onStudentClick(it) }, students = studentsState)
+                    SubjectDetailsStudents(onStudentClick = {
+                        subjectDetailsViewModel.onStudentClick(
+                            it
+                        )
+                    },
+                        students = studentsState,
+                        onDeleteStudent = {
+                            coroutineScope.launch {
+                                subjectDetailsViewModel.onDeleteStudent(it)
+                            }
+                        })
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 NewStudentButton(onClick = { subjectDetailsViewModel.onNewStudentClick() })

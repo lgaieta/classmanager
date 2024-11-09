@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class SubjectDetailsViewModel(
     private val offlineSubjectRepository: SubjectRepository,
-    offlineStudentRepository: StudentRepository,
+    private val offlineStudentRepository: StudentRepository,
     subjectId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
     private val afterDelete: (id: Int) -> Unit = {},
@@ -77,6 +77,10 @@ class SubjectDetailsViewModel(
 
     fun onNewStudentClick() {
         afterNewStudentClick()
+    }
+
+    suspend fun onDeleteStudent(student: Student) {
+        offlineStudentRepository.removeSubject(student.id, subjectDetailsState.value.subject!!.id)
     }
 }
 

@@ -2,6 +2,7 @@ package com.lgaieta.classmanager.subjects.ui.details
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,6 +37,7 @@ import com.lgaieta.classmanager.students.models.Student
 @Composable
 fun SubjectDetailsStudents(
     onStudentClick: (student: Student) -> Unit,
+    onDeleteStudent: (student: Student) -> Unit,
     modifier: Modifier = Modifier,
     students: List<Student> = emptyList(),
 ) {
@@ -51,20 +53,34 @@ fun SubjectDetailsStudents(
         items(students) { student ->
             Card(
                 onClick = { onStudentClick(student) },
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.5f)),
-                border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.surfaceContainerHigh),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(
+                        alpha = 0.5f
+                    )
+                ),
+                border = BorderStroke(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.surfaceContainerHigh
+                ),
                 shape = MaterialTheme.shapes.large
             ) {
-                Text(
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    text = student.name,
+                Box(
                     modifier = Modifier
-                        .padding(32.dp)
                         .widthIn(max = 150.dp),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    textAlign = TextAlign.Center
-                )
+                ) {
+                    Text(
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        text = student.name,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(32.dp)
+                    )
+                    SubjectDetailsRemoveStudentButton(
+                        onDelete = { onDeleteStudent(student) },
+                        modifier = Modifier.align(Alignment.TopEnd).padding(8.dp),
+                    )
+                }
             }
         }
     }
