@@ -1,6 +1,7 @@
 package com.lgaieta.classmanager.tasks.ui.details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -17,7 +18,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.lgaieta.classmanager.R
-import com.lgaieta.classmanager.subjects.ui.details.SubjectDetailsStudents
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
@@ -36,74 +36,77 @@ fun TaskDetailsScreen(
     val isNotFound = taskDetailsState.task == null
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(bottomBar = { BottomNavBar(bottomNavBarActions) }) { innerPadding ->
-        Column(
+    Scaffold(
+        bottomBar = { BottomNavBar(bottomNavBarActions) }
+    ) { innerPadding ->
+        LazyColumn(
             modifier = modifier
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
                 )
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
+                .wrapContentHeight()
+                .padding(innerPadding)
         ) {
-            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
-            if (isNotFound) TaskDetailsNotFound()
-            if (!isNotFound) {
-                if (subjectState != null) {
-                    SubjectBadge(name = subjectState!!.name)
+            item{
+            Spacer(modifier = Modifier.height(TopPagePadding ))
+            }
+            item{
+                if (isNotFound) {
+                    TaskDetailsNotFound()
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                TaskDetailsHeader(title = taskDetailsState.task!!.name)
-                Spacer(modifier = Modifier.height(36.dp))
-                TaskDetailsButtons(
-                    onEdit = { taskDetailsViewModel.onEdit() },
-                    onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
-                )
-                Spacer(modifier = Modifier.height(24.dp))
+            }
+            if (!isNotFound) {
+                item{
+                    if (subjectState != null) {
+                        SubjectBadge(name = subjectState!!.name)
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+                item{
+                    TaskDetailsHeader(title = taskDetailsState.task!!.name)
+                    Spacer(modifier = Modifier.height(36.dp))
+                }
+                item{
+                    TaskDetailsButtons(
+                        onEdit = { taskDetailsViewModel.onEdit() },
+                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
+                    )
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
+                item{
+
                 if (taskDetailsState.task!!.description.isNotEmpty()) {
                     TaskDescription(description = taskDetailsState.task!!.description)
                 }
                 Spacer(modifier = Modifier.height(24.dp))
                 Column {
                     Text(
-                        text = stringResource(R.string.description),
-                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        text = stringResource(R.string.notes),
+                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                         modifier = Modifier.align(Alignment.Start)
                     )
-                    Spacer(modifier = Modifier.padding(8.dp))
-                    if (!taskDetailsState.task!!.description.isNullOrEmpty()) {
-                        Card {
-                            Text(
-                                text = taskDetailsState.task!!.description,
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier
-                                    .align(Alignment.Start)
-                                    .padding(24.dp)
-                                    .widthIn(max = 150.dp)
-                            )
-                        }
-                    } else {
-                        Text(
-                            text = stringResource(R.string.description_not_found),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier
-                                .align(Alignment.Start)
-                                .padding(24.dp)
-                        )
-                    }
                     TaskDetailsStudents(students = studentsState)
-
+                }
                 }
             }
-            Spacer(modifier = Modifier.height(24.dp))
-            Column(
-                modifier = modifier
-                    .padding(end = 16.dp)
-                    .weight(1f)
-            ) {
-
-            }
         }
+    }
+}
+
+@Composable
+private fun TaskDescription(description: String) {
+    Column {
+        Text(
+            text = stringResource(R.string.description),
+            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.align(Alignment.Start)
+        )
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyLarge,
+        )
     }
 }
 

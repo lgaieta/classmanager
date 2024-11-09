@@ -30,7 +30,10 @@ import com.lgaieta.classmanager.R
 
 @Composable
 fun TaskDetailsStudents(students: List<Student>) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
         Text(
             text = stringResource(R.string.notes),
             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
@@ -39,7 +42,8 @@ fun TaskDetailsStudents(students: List<Student>) {
         Spacer(modifier = Modifier.height(8.dp))
         if (students.isNotEmpty()) {
             LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(students) { student ->
@@ -58,6 +62,7 @@ fun TaskDetailsStudents(students: List<Student>) {
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StudentCard(student: Student) {
@@ -67,10 +72,7 @@ fun StudentCard(student: Student) {
         else -> Color.Gray
     }
 
-    var isDialogOpen by remember { mutableStateOf(false) }
-    var selectedNote by remember { mutableStateOf(student.note) }
-
-    Card(modifier = Modifier.fillMaxWidth(), onClick = { isDialogOpen = true }) {
+    Card(modifier = Modifier.fillMaxWidth(), onClick = {  }) {
         Row(
             modifier = Modifier
                 .padding(16.dp)
