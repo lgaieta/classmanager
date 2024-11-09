@@ -9,7 +9,6 @@ import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.tasks.models.Task
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn

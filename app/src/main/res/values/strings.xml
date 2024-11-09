@@ -84,7 +84,7 @@
     <string name="student_select_title">Seleccione los alumnos</string>
     <string name="empty_students_selector_list">Aún no hay alumnos creados, para crear uno ve a la vista de Alumnos y presiona el botón +</string>
     <string name="select_student_list_title">Seleccione los alumnos a integrar en el curso</string>
-    <string name="selected">Seleccionado</string>
+    <string name="selected_text">Seleccionado</string>
     <string name="confirm_remove_student_title">¿Estás seguro de querer quitar este alumno del curso?</string>
     <string name="confirm_remove_student_description">Se borrarán sus notas asignadas a aquellas tareas que pertenezcan a esta materia.</string>
 </resources>
