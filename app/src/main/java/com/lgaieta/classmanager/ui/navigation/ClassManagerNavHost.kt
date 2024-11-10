@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 
 enum class ClassManagerScreen {
+    Register,
     SubjectsList,
     NewSubject,
     EditSubject,
@@ -34,8 +35,9 @@ fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavB
 fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = ClassManagerScreen.SubjectsList.name,
+        startDestination = ClassManagerScreen.Register.name,
     ) {
+        authNavigationScreens(navController)
         studentNavigationScreens(navController)
         taskNavigationScreens(navController)
         subjectNavigationScreens(navController)

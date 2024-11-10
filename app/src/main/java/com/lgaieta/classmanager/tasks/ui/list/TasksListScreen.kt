@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager.tasks.ui.list
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,8 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -61,31 +58,27 @@ fun TasksListScreen(
                 end = HorizontalPagePadding
             )
         ) {
-            item{
+            item {
                 Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
-            }
-            item{
                 TaskHeader()
                 Spacer(modifier = Modifier.height(48.dp))
             }
-            if (listState.tasks.isNotEmpty() )  {
-                items(listState.tasks) { task ->
-                    TaskItem(task, onClick = onTaskClick )
-                    Spacer(modifier = Modifier.height(48.dp))
+            if (listState.isNotEmpty()) {
+                items(listState) { task ->
+                    TaskItem(task, onClick = onTaskClick)
+                    Spacer(modifier = Modifier.height(24.dp))
                 }
-
-            }else{
-                item{
-                        Text(
-                            text = stringResource(R.string.empty_tasks_list),
-                            textAlign = TextAlign.Center,
-                        )
+            } else {
+                item {
+                    Text(
+                        text = stringResource(R.string.empty_tasks_list),
+                        textAlign = TextAlign.Center,
+                    )
                 }
             }
             item {
                 Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
             }
-
         }
     }
 }
@@ -111,7 +104,8 @@ fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
-        shape = MaterialTheme.shapes.extraLarge)
+        shape = MaterialTheme.shapes.extraLarge
+    )
     {
         Icon(Icons.Filled.Add, stringResource(R.string.new_task))
     }

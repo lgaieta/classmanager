@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943047953127",
+    "project_id": "classmanager-20ab1",
+    "storage_bucket": "classmanager-20ab1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943047953127:android:136635b22f73be7b0c7042",
+        "android_client_info": {
+          "package_name": "com.lgaieta.classmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD6ASslsj_RICit59mPfehH1G-XN7qxi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
