@@ -24,7 +24,9 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import com.lgaieta.classmanager.students.models.Student
@@ -32,6 +34,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.saveable.rememberSaveable
+import com.lgaieta.classmanager.students.models.StudentWithNote
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 
 @Composable
 fun TaskDetailsScreen(
@@ -39,69 +43,56 @@ fun TaskDetailsScreen(
     bottomNavBarActions: BottomNavBarActions,
     modifier: Modifier = Modifier,
 ) {
-    val taskDetailsState by taskDetailsViewModel.taskDetailsState.collectAsState()
+    val taskState by taskDetailsViewModel.taskDetailsState.collectAsState()
     val subjectState by taskDetailsViewModel.subjectState.collectAsState()
     val studentsState by taskDetailsViewModel.studentsState.collectAsState()
-    val isNotFound = taskDetailsState.task == null
+    val isNotFound = taskState == null
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         bottomBar = { BottomNavBar(bottomNavBarActions) }
     ) { innerPadding ->
-        LazyColumn(
+        Column(
             modifier = modifier
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
                 )
                 .fillMaxSize()
-                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
         ) {
-            item{
-            Spacer(modifier = Modifier.height(TopPagePadding ))
-            }
-
+            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
             if (!isNotFound) {
-                item{
-                    if (subjectState != null) {
-                        SubjectBadge(name = subjectState!!.name)
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
+                if (subjectState != null) {
+                    SubjectBadge(name = subjectState!!.name)
                 }
-                item{
-                    TaskDetailsHeader(title = taskDetailsState.task!!.name)
-                    Spacer(modifier = Modifier.height(36.dp))
-                }
-                item{
-                    TaskDetailsButtons(
-                        onEdit = { taskDetailsViewModel.onEdit() },
-                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
-                    )
+                Spacer(modifier = Modifier.height(16.dp))
+                TaskDetailsHeader(title = taskState!!.name)
+                Spacer(modifier = Modifier.height(36.dp))
+                TaskDetailsButtons(
+                    onEdit = { taskDetailsViewModel.onEdit() },
+                    onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                if (taskState!!.description.isNotEmpty()) {
+                    TaskDescription(description = taskState!!.description)
                     Spacer(modifier = Modifier.height(24.dp))
                 }
-
-                if (taskDetailsState.task!!.description.isNotEmpty()) {
-                 item{
-                     TaskDescription(description = taskDetailsState.task!!.description)
-                     Spacer(modifier = Modifier.height(24.dp))
-                    }
-                }
-
-                item{
-                        Text(
-                            text = stringResource(R.string.notes),
-                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                        )
-                        TaskDetailsStudents(students = studentsState, onUpdateStudentNote = { newNote ->
-                            taskDetailsViewModel.changeNote(newNote)
-                        },  )
-                }
+                Text(
+                    text = stringResource(R.string.notes),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                TaskDetailsStudents(
+                    students = studentsState,
+                    onUpdateStudentNote = { studentWithNote ->
+                        taskDetailsViewModel.changeNote(studentWithNote)
+                    },
+                )
+            } else {
+                TaskDetailsNotFound()
             }
-            else {
-                item{
-                    TaskDetailsNotFound()
-                }
-            }
+            Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
         }
     }
 }
@@ -122,12 +113,13 @@ private fun TaskDescription(description: String) {
 }
 
 @Composable
-fun TaskDetailsNotFound() {
-        Text(text = stringResource(R.string.task_not_found),
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier
-                .padding(24.dp)
-        )
+private fun TaskDetailsNotFound() {
+    Text(
+        text = stringResource(R.string.task_not_found),
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = Modifier
+            .padding(24.dp)
+    )
 }
 
 @Composable
@@ -164,33 +156,36 @@ fun TaskDetailsHeader(title: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TaskDetailsStudents(students: List<Student>, onUpdateStudentNote: (Int) -> Unit) {
-    var selectedStudent by remember { mutableStateOf<Student?>(null) }
-    var showNoteSelector by remember { mutableStateOf(false) }
+fun TaskDetailsStudents(
+    students: List<StudentWithNote>,
+    onUpdateStudentNote: (StudentWithNote) -> Unit
+) {
+    var selectedStudentWithNote by rememberSaveable { mutableStateOf<StudentWithNote?>(null) }
+    var showNoteSelector by rememberSaveable { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(max = 400.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(students) { student ->
+        items(students) { studentWithNote ->
             StudentCard(
-                student = student,
+                studentWithNote = studentWithNote,
                 onClick = {
-                    selectedStudent = student
+                    selectedStudentWithNote = studentWithNote
                     showNoteSelector = true
                 }
             )
         }
     }
 
-    selectedStudent?.let {
-        if (showNoteSelector) {
+    if (showNoteSelector) {
+        selectedStudentWithNote?.let {
             ShowNoteSelectorDialog(
-                student = it,
+                studentWithNote = it,
                 onSaveNote = { note ->
-                    onUpdateStudentNote(note)
+                    onUpdateStudentNote(StudentWithNote(student = it.student, note = note))
                     showNoteSelector = false
                 },
                 onDismiss = { showNoteSelector = false }
@@ -202,29 +197,29 @@ fun TaskDetailsStudents(students: List<Student>, onUpdateStudentNote: (Int) -> U
 
 @Composable
 fun ShowNoteSelectorDialog(
-    student: Student,
-    onSaveNote: (Int) -> Unit,
+    studentWithNote: StudentWithNote,
+    onSaveNote: (Float) -> Unit,
     onDismiss: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = "Seleccionar nota para ${student.name}") },
+        title = { Text(text = stringResource(R.string.select_note_for) + "  ${studentWithNote.student.name}") },
         text = {
             NoteSelector(
-                initialNote = student.note,
+                initialNote = studentWithNote.note,
                 onSaveNote = onSaveNote
             )
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = "Cerrar")
+                Text(text = stringResource(id = R.string.cancel))
             }
         }
     )
 }
 
 @Composable
-fun NoteSelector(initialNote: Int, onSaveNote: (Int) -> Unit) {
+fun NoteSelector(initialNote: Float?, onSaveNote: (Float) -> Unit) {
     var note by rememberSaveable { mutableStateOf(initialNote) }
 
     Column(
@@ -232,73 +227,59 @@ fun NoteSelector(initialNote: Int, onSaveNote: (Int) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(
-                onClick = { if (note > 0) note-- },
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Reducir nota")
-            }
-
             Text(
                 text = note.toString(),
                 style = MaterialTheme.typography.displayMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth()
             )
-
-            IconButton(
-                onClick = { if (note < 10) note++ },
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(Icons.Default.KeyboardArrowUp, contentDescription = "Aumentar nota")
-            }
         }
-
         Spacer(modifier = Modifier.height(16.dp))
-
         Button(
-            onClick = { onSaveNote(note) },
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            onClick = { if (note != null) onSaveNote(note!!) },
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
         ) {
-            Text(text = "Guardar nota")
+            Text(text = stringResource(R.string.save_note))
         }
     }
 }
 
 @Composable
-fun StudentCard(student: Student, onClick: () -> Unit) {
-    val noteBackgroundColor = when {
-        student.note >= 7 -> Color.Green
-        student.note in 0..6 -> Color.Red
-        else -> Color.Gray
-    }
+private fun StudentCard(studentWithNote: StudentWithNote, onClick: () -> Unit) {
+    val note = studentWithNote.note
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(12.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = student.name,
-                style = MaterialTheme.typography.labelLarge,
+                text = studentWithNote.student.name,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(8.dp)
             )
-
             Box(
                 modifier = Modifier
-                    .background(noteBackgroundColor, shape = RoundedCornerShape(8.dp))
-                    .padding(12.dp)
+                    .size(32.dp)
             ) {
                 Text(
-                    text = student.note.toString(),
-                    style = MaterialTheme.typography.labelLarge.copy(color = Color.White)
+                    text = if (note == null || note <= 0f) "0" else note.toString(),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
         }

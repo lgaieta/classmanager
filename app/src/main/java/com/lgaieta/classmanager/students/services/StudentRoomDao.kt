@@ -8,8 +8,10 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.lgaieta.classmanager.students.models.Student
+import com.lgaieta.classmanager.students.models.StudentWithNote
 import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
 @Dao
 interface StudentRoomDao {
@@ -33,16 +35,7 @@ interface StudentRoomDao {
         WHERE subject_student.subjectId = :subjectId
         """
     )
-    fun getStudents(subjectId: Int): Flow<List<Student>>
-
-    @Query("""
-    SELECT student.* 
-    FROM student
-    JOIN subject_student ON student.id = subject_student.studentId
-    JOIN task ON subject_student.subjectId = task.subjectId
-    WHERE task.id = :taskId
-""")
-    fun getStudentsByTask(taskId: Int): Flow<List<Student>>
+    fun getStudents(subjectId: Int): Flow<List<StudentRoomEntity>>
 
     @Query(
         """
@@ -53,6 +46,18 @@ interface StudentRoomDao {
         """
     )
     fun getSubjects(studentId: Long): Flow<List<Subject>>
+
+    @Query(
+        """
+        SELECT student.*, task_student.note
+        FROM student
+        JOIN subject_student ON student.id = subject_student.studentId
+        LEFT JOIN task_student ON student.id = task_student.studentId AND task_student.taskId = :taskId
+        LEFT JOIN task ON task.id = :taskId AND task.subjectId = subject_student.subjectId
+        WHERE task.id IS NOT NULL
+        """
+    )
+    fun getByTask(taskId: Int): Flow<List<StudentRoomEntityWithNote>>
 
     @Query("SELECT * from student ORDER BY name ASC")
     fun getAllStudents(): Flow<List<StudentRoomEntity>>

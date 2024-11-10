@@ -17,9 +17,6 @@ class OfflineRoomTaskRepository(private val taskDao: TaskRoomDao) : TaskReposito
     override fun getTaskStream(id: Int): Flow<Task?> =
         taskDao.getTask(id).map { it?.toTask() }
 
-    override fun getSubjectStream(taskId: Int): Flow<Subject?> =
-        taskDao.getSubject(taskId).map { it?.toSubject() }
-
     override suspend fun insert(task: Task) =
         taskDao.insert(TaskRoomEntity.fromTask(task))
 

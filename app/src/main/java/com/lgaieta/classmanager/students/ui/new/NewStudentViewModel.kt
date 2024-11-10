@@ -66,5 +66,5 @@ data class NewStudentState(
     val name: String = "",
     val selectedSubjects: List<Subject> = emptyList()
 ) {
-    fun toStudent() = Student(id = 0, name = name, note = 0)
+    fun toStudent() = Student(id = 0, name = name)
 }
