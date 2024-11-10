@@ -55,7 +55,7 @@ fun BottomNavBar(actions: BottomNavBarActions) {
                     .fillMaxHeight()
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.list_check_24),
+                    painter = painterResource(R.drawable.baseline_checklist_24),
                     contentDescription = stringResource(R.string.task_list_nav_item_label)
                 )
                 Text(text = stringResource(R.string.task_list_nav_item_label), style = MaterialTheme.typography.bodySmall)

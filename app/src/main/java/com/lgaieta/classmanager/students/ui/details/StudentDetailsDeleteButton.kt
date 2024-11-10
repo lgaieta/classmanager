@@ -82,7 +82,7 @@ private fun ConfirmDeleteDialog(
                     contentColor = MaterialTheme.colorScheme.error
                 )
             ) {
-                Text(text = stringResource(R.string.delete))
+                Text(text = stringResource(R.string.confirm_delete_student_button))
             }
         },
         dismissButton = {

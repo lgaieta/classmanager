@@ -42,9 +42,7 @@ fun TasksListScreen(
     val listState by tasksListViewModel.taskListState.collectAsState()
     Scaffold(
         floatingActionButton = {
-            NewTaskButton(
-                onClick = onNewTaskClick,
-            )
+
         },
         floatingActionButtonPosition = FabPosition.Center,
         bottomBar = {
