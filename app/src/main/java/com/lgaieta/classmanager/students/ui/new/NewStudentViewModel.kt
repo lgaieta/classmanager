@@ -1,5 +1,6 @@
 package com.lgaieta.classmanager.students.ui.new
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.students.models.Student
@@ -18,7 +19,7 @@ class NewStudentViewModel(
     private val offlineStudentRepository: StudentRepository,
     offlineSubjectRepository: SubjectRepository,
     private val afterCreate: () -> Unit = {},
-    private val afterCancel: () -> Unit = {}
+    private val afterCancel: () -> Unit = {},
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewStudentState())
     val uiState: StateFlow<NewStudentState> = _uiState.asStateFlow()
@@ -51,9 +52,11 @@ class NewStudentViewModel(
             val studentId = offlineStudentRepository.insert(uiState.value.toStudent())
             offlineStudentRepository.assignSubjects(uiState.value.selectedSubjects.map { Pair(studentId, it.id) })
             _uiState.update {
-                it.copy(name = "", selectedSubjects = emptyList())
+                it.copy(name = "", selectedSubjects = emptyList(), )
             }
             afterCreate()
+        } else {
+            _uiState.update{it.copy(nameError = true)}
         }
     }
 
@@ -64,7 +67,9 @@ class NewStudentViewModel(
 
 data class NewStudentState(
     val name: String = "",
-    val selectedSubjects: List<Subject> = emptyList()
+    val selectedSubjects: List<Subject> = emptyList(),
+    val nameError: Boolean = false
+
 ) {
     fun toStudent() = Student(id = 0, name = name, note = 0)
 }

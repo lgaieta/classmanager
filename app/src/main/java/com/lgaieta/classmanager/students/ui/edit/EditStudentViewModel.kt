@@ -58,12 +58,16 @@ class EditStudentViewModel(
         }
     }
 
+    private fun isNameValid(): Boolean {
+        return _editStudentState.value.name.isNotBlank()
+    }
+
     suspend fun editStudent() {
         val currentState = _editStudentState.value
         val updatedStudent = currentState.storedStudent?.copy(
             name = currentState.name,
         )
-        if (updatedStudent != null) {
+        if (updatedStudent != null && isNameValid()) {
             offlineStudentRepository.removeSubjects(_editStudentState.value.subjectsToBeDeleted.map {
                 Pair(
                     studentId,
@@ -86,6 +90,9 @@ class EditStudentViewModel(
                 )
             }
             afterEdit(updatedStudent.id)
+        }
+        else{
+            _editStudentState.update{it.copy(nameError = true)}
         }
     }
 
@@ -114,5 +121,6 @@ data class EditStudentState(
     val name: String = "",
     val storedStudent: Student? = null,
     val selectedSubjects: List<Subject> = emptyList(),
-    val subjectsToBeDeleted: List<Subject> = emptyList()
+    val subjectsToBeDeleted: List<Subject> = emptyList(),
+    val nameError: Boolean = false
 )
