@@ -7,11 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.lgaieta.classmanager.students.models.Student
-import com.lgaieta.classmanager.students.models.StudentWithNote
 import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 @Dao
 interface StudentRoomDao {
