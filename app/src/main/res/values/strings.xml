@@ -19,8 +19,7 @@
     <string name="save_subject">Guardar materia</string>
     <string name="delete">Eliminar</string>
     <string name="delete_subject_question">¿Deseas eliminar esta materia?</string>
-    <string name="_label">Tareas y exámenes</string>
-    <string name="tasks_label">Tareas y exámenes</string>
+    <string name="tasks_label">Tareas</string>
     <string name="subject_name_label">Nombre de la materia</string>
     <string name="course_label">Curso</string>
     <string name="subjects_list_title">Materias</string>
@@ -93,4 +92,5 @@
     <string name="error_empty_student_name">El nombre del alumno no puede estar vacio</string>
     <string name="error_empty_subject_name">El nombre de la materia no puede estar vacio</string>
     <string name="error_empty_task_name">El nombre de la tarea no puede estar vacio</string>
+    <string name="task_list_nav_item_label">Tareas</string>
 </resources>
