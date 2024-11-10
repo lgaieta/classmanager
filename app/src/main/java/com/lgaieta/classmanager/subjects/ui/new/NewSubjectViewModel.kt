@@ -44,19 +44,22 @@ class NewSubjectViewModel(
     }
 
     suspend fun saveSubject() {
-        if (isNameValid() && isInfoValid()) {
+        if (isNameValid()) {
             offlineSubjectRepository.insert(uiState.value.toSubject())
             _uiState.update {
                 it.copy(name = "", info = "")
             }
             afterSave()
+        }else{
+            _uiState.update { it.copy(nameError = true) }
         }
     }
 }
 
 data class NewSubjectState(
     val name: String = "",
-    val info: String = ""
+    val info: String = "",
+    val nameError: Boolean = false
 ) {
     fun toSubject() = Subject(id = 0, name = name, info = info)
 }

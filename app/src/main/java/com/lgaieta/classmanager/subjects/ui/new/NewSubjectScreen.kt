@@ -55,6 +55,7 @@ fun NewSubjectScreen(
             Spacer(modifier = Modifier.height(48.dp))
             NewSubjectForm(
                 nameValue = uiState.name,
+                nameError = uiState.nameError,
                 onNameChange = { newSubjectViewModel.changeName(it) },
                 infoValue = uiState.info,
                 onInfoChange = { newSubjectViewModel.changeInfo(it) },
