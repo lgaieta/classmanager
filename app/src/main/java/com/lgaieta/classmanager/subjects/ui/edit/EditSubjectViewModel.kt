@@ -43,16 +43,23 @@ class EditSubjectViewModel(
         }
     }
 
+    private fun isNameValid(): Boolean {
+        return _editSubjectState.value.name.isNotBlank()
+    }
+
     suspend fun editSubject() {
         val currentState = _editSubjectState.value
         val updatedSubject = currentState.storedSubject?.copy(
             name = currentState.name,
             info = currentState.info
         )
-        if (updatedSubject != null) {
+        if (updatedSubject != null && isNameValid()) {
             offlineSubjectRepository.update(updatedSubject)
             afterEdit(updatedSubject.id)
+        }else{
+            _editSubjectState.update{it.copy(nameError = true)}
         }
+
     }
 
     fun cancel() {
@@ -64,4 +71,5 @@ data class EditSubjectState(
     val name: String = "",
     val info: String = "",
     val storedSubject: Subject? = null,
+    val nameError: Boolean = false
 )

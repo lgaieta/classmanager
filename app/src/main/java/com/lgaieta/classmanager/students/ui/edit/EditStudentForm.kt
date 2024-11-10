@@ -21,6 +21,7 @@ import com.lgaieta.classmanager.subjects.models.Subject
 @Composable
 fun EditStudentForm(
     nameValue: String,
+    nameError: Boolean,
     onNameChange: (name: String) -> Unit,
     onSubmit: () -> Unit,
     availableSubjects: List<Subject>,
@@ -31,7 +32,7 @@ fun EditStudentForm(
     onCancel: () -> Unit
 ) {
     Column {
-        NameField(value = nameValue, onValueChange = onNameChange)
+        NameField(value = nameValue, onValueChange = onNameChange, showError = nameError)
         Spacer(modifier = Modifier.height(24.dp))
         EditStudentSubjectSelect(
             availableSubjects = availableSubjects,
@@ -48,7 +49,7 @@ fun EditStudentForm(
 }
 
 @Composable
-private fun NameField(value: String, onValueChange: (value: String) -> Unit) {
+private fun NameField(value: String, onValueChange: (value: String) -> Unit, showError: Boolean) {
     OutlinedTextField(
         value = value,
         modifier = Modifier.fillMaxWidth(),
@@ -59,6 +60,16 @@ private fun NameField(value: String, onValueChange: (value: String) -> Unit) {
                 text = stringResource(R.string.student_name_label),
                 style = MaterialTheme.typography.bodyLarge
             )
+        },
+        isError = showError,
+        supportingText = {
+            if (showError) {
+                Text(
+                    text = stringResource(R.string.error_empty_student_name),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
         }
     )
 }

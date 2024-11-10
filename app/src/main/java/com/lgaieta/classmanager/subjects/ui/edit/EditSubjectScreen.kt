@@ -49,6 +49,7 @@ fun EditSubjectScreen(
             Spacer(modifier = Modifier.height(48.dp))
             EditSubjectForm(
                 nameValue = uiState.name,
+                nameError = uiState.nameError,
                 onNameChange = { editSubjectViewModel.changeName(it) },
                 infoValue = uiState.info,
                 onInfoChange = { editSubjectViewModel.changeInfo(it) },

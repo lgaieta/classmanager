@@ -92,4 +92,8 @@
     <string name="select_note_for">Seleccionar nota para</string>
     <string name="save_note">Guardar nota</string>
     <string name="no_note">Sin nota</string>
+    <string name="error_empty_name">El nombre no puede estar vacio</string>
+    <string name="error_empty_student_name">El nombre del alumno no puede estar vacio</string>
+    <string name="error_empty_subject_name">El nombre de la materia no puede estar vacio</string>
+    <string name="error_empty_task_name">El nombre de la tarea no puede estar vacio</string>
 </resources>

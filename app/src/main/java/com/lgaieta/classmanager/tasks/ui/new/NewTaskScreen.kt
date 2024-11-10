@@ -56,6 +56,7 @@ fun NewTaskScreen(
             Spacer(modifier = Modifier.height(48.dp))
             NewTaskForm(
                 nameValue = uiState.name,
+                nameError = uiState.nameError,
                 onNameChange = { newTaskViewModel.changeName(it) },
                 descValue = uiState.description,
                 onDescChange = { newTaskViewModel.changeDescription(it) },

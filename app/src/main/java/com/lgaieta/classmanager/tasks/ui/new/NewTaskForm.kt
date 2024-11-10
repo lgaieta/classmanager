@@ -21,6 +21,7 @@ import com.lgaieta.classmanager.R
 @Composable
 fun NewTaskForm(
     nameValue: String,
+    nameError: Boolean,
     onNameChange: (name: String) -> Unit,
     descValue: String,
     onDescChange: (description: String) -> Unit,
@@ -28,7 +29,7 @@ fun NewTaskForm(
     onCancel: () -> Unit,
 ) {
     Column {
-        NameField(value = nameValue, onValueChange = onNameChange)
+        NameField(value = nameValue, onValueChange = onNameChange, showError = nameError)
         Spacer(modifier = Modifier.height(16.dp))
         DescField(value = descValue, onValueChange = onDescChange)
         Spacer(modifier = Modifier.height(32.dp))
@@ -41,7 +42,7 @@ fun NewTaskForm(
 }
 
 @Composable
-private fun NameField(value: String, onValueChange: (value: String) -> Unit) {
+private fun NameField(value: String, onValueChange: (value: String) -> Unit, showError: Boolean) {
     OutlinedTextField(
         value = value,
         modifier = Modifier.fillMaxWidth(),
@@ -53,6 +54,16 @@ private fun NameField(value: String, onValueChange: (value: String) -> Unit) {
                 style = MaterialTheme.typography.bodyLarge
             )
         },
+        isError = showError,
+        supportingText = {
+            if(showError){
+                Text(
+                    text = stringResource(R.string.error_empty_task_name),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+        }
     )
 }
 

@@ -49,6 +49,7 @@ fun EditTaskScreen(
             Spacer(modifier = Modifier.height(48.dp))
             EditTaskForm(
                 nameValue = uiState.name,
+                nameError = uiState.nameError,
                 onNameChange = { editTaskViewModel.changeName(it) },
                 descValue = uiState.description,
                 onDescChange = { editTaskViewModel.changeDescription(it) },

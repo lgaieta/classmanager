@@ -49,6 +49,7 @@ fun EditStudentScreen(
             item {
                 EditStudentForm(
                     nameValue = uiState.name,
+                    nameError = uiState.nameError,
                     onNameChange = { editStudentViewModel.changeName(it) },
                     onSubmit = {
                         coroutineScope.launch {

@@ -59,6 +59,7 @@ fun NewStudentScreen(
             item {
                 NewStudentForm(
                     nameValue = uiState.name,
+                    nameError = uiState.nameError,
                     onNameChange = { newStudentViewModel.changeName(it) },
                     onSubmit = {
                         coroutineScope.launch {
@@ -72,6 +73,8 @@ fun NewStudentScreen(
                     },
                     onCancel = { newStudentViewModel.cancel() }
                 )
+
+
             }
             item {
                 Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
