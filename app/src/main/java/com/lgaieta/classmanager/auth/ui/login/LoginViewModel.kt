@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.register.ui
+package com.lgaieta.classmanager.auth.ui.register
 
 import androidx.lifecycle.ViewModel
 import com.lgaieta.classmanager.models.SessionManager
@@ -6,11 +6,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class RegisterViewModel(
+class LoginViewModel(
     private val sessionManager: SessionManager,
-    private val afterRegister: () -> Unit = {}
+    private val afterLogin: () -> Unit = {},
+    private val onRegisterClick: () -> Unit = {}
 ) : ViewModel() {
-    private val _state = MutableStateFlow(RegisterState())
+    private val _state = MutableStateFlow(LoginState())
     val state = _state.asStateFlow()
 
     fun onEmailChange(email: String) = _state.update { it.copy(email = email) }
@@ -21,7 +22,7 @@ class RegisterViewModel(
             _state.update { it.copy(error = "Debe completar todos los campos.") }
             return
         }
-        sessionManager.registerWithEmailAndPassword(
+        sessionManager.loginWithEmailAndPassword(
             _state.value.email,
             _state.value.password,
             onFailure = {
@@ -29,13 +30,17 @@ class RegisterViewModel(
             },
             onSuccess = {
                 _state.update { it.copy(error = null) }
-                afterRegister()
+                afterLogin()
             }
         )
     }
+
+    fun onRegister() {
+        onRegisterClick()
+    }
 }
 
-data class RegisterState(
+data class LoginState(
     val email: String = "",
     val password: String = "",
     val error: String? = null

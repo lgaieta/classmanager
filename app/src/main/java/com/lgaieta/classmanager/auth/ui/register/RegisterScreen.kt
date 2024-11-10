@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.register.ui
+package com.lgaieta.classmanager.auth.ui.register
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -45,7 +45,8 @@ fun RegisterScreen(modifier: Modifier = Modifier, registerViewModel: RegisterVie
                 onEmailChange = { registerViewModel.onEmailChange(it) },
                 password = state.password,
                 onPasswordChange = { registerViewModel.onPasswordChange(it) },
-                onSubmit = { registerViewModel.onSubmit() }
+                onSubmit = { registerViewModel.onSubmit() },
+                onLogin = { registerViewModel.onLogin() }
             )
             Spacer(modifier = Modifier.height(16.dp))
             state.error?.let {

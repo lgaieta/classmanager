@@ -8,6 +8,7 @@ import com.lgaieta.classmanager.ui.BottomNavBarActions
 
 enum class ClassManagerScreen {
     Register,
+    Login,
     SubjectsList,
     NewSubject,
     EditSubject,
@@ -35,7 +36,7 @@ fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavB
 fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = ClassManagerScreen.Register.name,
+        startDestination = ClassManagerScreen.Login.name,
     ) {
         authNavigationScreens(navController)
         studentNavigationScreens(navController)

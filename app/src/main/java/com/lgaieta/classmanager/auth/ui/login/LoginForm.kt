@@ -1,4 +1,4 @@
-package com.lgaieta.classmanager.register.ui
+package com.lgaieta.classmanager.auth.ui.login
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,12 +21,13 @@ import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 
 @Composable
-fun RegisterForm(
+fun LoginForm(
     email: String,
     onEmailChange: (String) -> Unit,
     password: String,
     onPasswordChange: (String) -> Unit,
     onSubmit: () -> Unit,
+    onRegister: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Title()
@@ -35,13 +37,15 @@ fun RegisterForm(
         PasswordField(password, onPasswordChange)
         Spacer(modifier = Modifier.height(16.dp))
         SubmitButton(onSubmit)
+        Spacer(modifier = Modifier.height(8.dp))
+        RegisterButton(onClick = onRegister)
     }
 }
 
 @Composable
 private fun Title() {
     Text(
-        text = stringResource(R.string.create_account),
+        text = stringResource(R.string.login),
         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
     )
 }
@@ -87,7 +91,21 @@ private fun SubmitButton(onSubmit: () -> Unit) {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            stringResource(R.string.create_account),
+            stringResource(R.string.login),
+            modifier = Modifier.padding(8.dp)
+        )
+    }
+}
+
+@Composable
+private fun RegisterButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    TextButton(
+        onClick = onClick,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = stringResource(R.string.dont_have_account),
             modifier = Modifier.padding(8.dp)
         )
     }
