@@ -22,8 +22,8 @@ class DefaultStudentModelsContainer(private val context: Context) : StudentModel
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            val subject1 = Student(id = 1, name = "Aieta Luciano", note = 6)
-            val subject2 = Student(id = 2, name = "Tello Elias", note = 5)
+            val subject1 = Student(id = 1, name = "Aieta Luciano")
+            val subject2 = Student(id = 2, name = "Tello Elias")
 
             offlineStudentRepository.insert(subject1)
             offlineStudentRepository.insert(subject2)

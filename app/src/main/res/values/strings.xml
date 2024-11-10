@@ -88,6 +88,9 @@
     <string name="confirm_remove_student_title">¿Estás seguro de querer quitar este alumno del curso?</string>
     <string name="confirm_remove_student_description">Se borrarán sus notas asignadas a aquellas tareas que pertenezcan a esta materia.</string>
     <string name="no_subjects">Este alumno no pertenece a ninguna materia, haz click en el botón Editar para agregarlo a una.</string>
+    <string name="select_note_for">Seleccionar nota para</string>
+    <string name="save_note">Guardar nota</string>
+    <string name="no_note">Sin nota</string>
     <string name="error_empty_name">El nombre no puede estar vacio</string>
     <string name="error_empty_student_name">El nombre del alumno no puede estar vacio</string>
     <string name="error_empty_subject_name">El nombre de la materia no puede estar vacio</string>

@@ -71,5 +71,5 @@ data class NewStudentState(
     val nameError: Boolean = false
 
 ) {
-    fun toStudent() = Student(id = 0, name = name, note = 0)
+    fun toStudent() = Student(id = 0, name = name)
 }

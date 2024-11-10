@@ -1,37 +1,54 @@
 package com.lgaieta.classmanager.tasks.ui.details
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
+import com.lgaieta.classmanager.students.models.StudentWithNote
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 import kotlinx.coroutines.launch
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
-import com.lgaieta.classmanager.students.models.Student
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
 fun TaskDetailsScreen(
@@ -39,69 +56,56 @@ fun TaskDetailsScreen(
     bottomNavBarActions: BottomNavBarActions,
     modifier: Modifier = Modifier,
 ) {
-    val taskDetailsState by taskDetailsViewModel.taskDetailsState.collectAsState()
+    val taskState by taskDetailsViewModel.taskDetailsState.collectAsState()
     val subjectState by taskDetailsViewModel.subjectState.collectAsState()
     val studentsState by taskDetailsViewModel.studentsState.collectAsState()
-    val isNotFound = taskDetailsState.task == null
+    val isNotFound = taskState == null
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         bottomBar = { BottomNavBar(bottomNavBarActions) }
     ) { innerPadding ->
-        LazyColumn(
+        Column(
             modifier = modifier
                 .padding(
                     start = HorizontalPagePadding,
                     end = HorizontalPagePadding,
                 )
                 .fillMaxSize()
-                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
         ) {
-            item{
-            Spacer(modifier = Modifier.height(TopPagePadding ))
-            }
-
+            Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
             if (!isNotFound) {
-                item{
-                    if (subjectState != null) {
-                        SubjectBadge(name = subjectState!!.name)
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
+                if (subjectState != null) {
+                    SubjectBadge(name = subjectState!!.name)
                 }
-                item{
-                    TaskDetailsHeader(title = taskDetailsState.task!!.name)
-                    Spacer(modifier = Modifier.height(36.dp))
-                }
-                item{
-                    TaskDetailsButtons(
-                        onEdit = { taskDetailsViewModel.onEdit() },
-                        onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
-                    )
+                Spacer(modifier = Modifier.height(16.dp))
+                TaskDetailsHeader(title = taskState!!.name)
+                Spacer(modifier = Modifier.height(36.dp))
+                TaskDetailsButtons(
+                    onEdit = { taskDetailsViewModel.onEdit() },
+                    onDelete = { coroutineScope.launch { taskDetailsViewModel.onDelete() } },
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                if (taskState!!.description.isNotEmpty()) {
+                    TaskDescription(description = taskState!!.description)
                     Spacer(modifier = Modifier.height(24.dp))
                 }
-
-                if (taskDetailsState.task!!.description.isNotEmpty()) {
-                 item{
-                     TaskDescription(description = taskDetailsState.task!!.description)
-                     Spacer(modifier = Modifier.height(24.dp))
-                    }
-                }
-
-                item{
-                        Text(
-                            text = stringResource(R.string.notes),
-                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                        )
-                        TaskDetailsStudents(students = studentsState, onUpdateStudentNote = { newNote ->
-                            taskDetailsViewModel.changeNote(newNote)
-                        },  )
-                }
+                Text(
+                    text = stringResource(R.string.notes),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                TaskDetailsStudents(
+                    students = studentsState,
+                    onUpdateStudentNote = { studentWithNote ->
+                        coroutineScope.launch { taskDetailsViewModel.saveNote(studentWithNote) }
+                    },
+                )
+            } else {
+                TaskDetailsNotFound()
             }
-            else {
-                item{
-                    TaskDetailsNotFound()
-                }
-            }
+            Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
         }
     }
 }
@@ -122,12 +126,13 @@ private fun TaskDescription(description: String) {
 }
 
 @Composable
-fun TaskDetailsNotFound() {
-        Text(text = stringResource(R.string.task_not_found),
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier
-                .padding(24.dp)
-        )
+private fun TaskDetailsNotFound() {
+    Text(
+        text = stringResource(R.string.task_not_found),
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = Modifier
+            .padding(24.dp)
+    )
 }
 
 @Composable
@@ -164,33 +169,38 @@ fun TaskDetailsHeader(title: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TaskDetailsStudents(students: List<Student>, onUpdateStudentNote: (Int) -> Unit) {
-    var selectedStudent by remember { mutableStateOf<Student?>(null) }
-    var showNoteSelector by remember { mutableStateOf(false) }
+fun TaskDetailsStudents(
+    students: List<StudentWithNote>,
+    onUpdateStudentNote: (StudentWithNote) -> Unit
+) {
+    var selectedStudentId by rememberSaveable {
+        mutableStateOf<Long?>(null)
+    }
+    var showNoteSelector by rememberSaveable { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(max = 400.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(students) { student ->
+        items(students) { studentWithNote ->
             StudentCard(
-                student = student,
+                studentWithNote = studentWithNote,
                 onClick = {
-                    selectedStudent = student
+                    selectedStudentId = studentWithNote.student.id
                     showNoteSelector = true
                 }
             )
         }
     }
 
-    selectedStudent?.let {
-        if (showNoteSelector) {
+    if (showNoteSelector) {
+        students.find { it.student.id == selectedStudentId }?.let {
             ShowNoteSelectorDialog(
-                student = it,
+                studentWithNote = it,
                 onSaveNote = { note ->
-                    onUpdateStudentNote(note)
+                    onUpdateStudentNote(StudentWithNote(student = it.student, note = note))
                     showNoteSelector = false
                 },
                 onDismiss = { showNoteSelector = false }
@@ -202,103 +212,101 @@ fun TaskDetailsStudents(students: List<Student>, onUpdateStudentNote: (Int) -> U
 
 @Composable
 fun ShowNoteSelectorDialog(
-    student: Student,
-    onSaveNote: (Int) -> Unit,
+    studentWithNote: StudentWithNote,
+    onSaveNote: (Float) -> Unit,
     onDismiss: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = "Seleccionar nota para ${student.name}") },
+        title = { Text(text = stringResource(R.string.select_note_for) + "  ${studentWithNote.student.name}") },
         text = {
             NoteSelector(
-                initialNote = student.note,
+                initialNote = studentWithNote.note,
                 onSaveNote = onSaveNote
             )
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = "Cerrar")
+                Text(text = stringResource(id = R.string.cancel))
             }
         }
     )
 }
 
 @Composable
-fun NoteSelector(initialNote: Int, onSaveNote: (Int) -> Unit) {
-    var note by rememberSaveable { mutableStateOf(initialNote) }
+fun NoteSelector(initialNote: Float?, onSaveNote: (Float) -> Unit) {
+    var note by rememberSaveable { mutableStateOf(initialNote?.toString() ?: "1") }
+    var isInvalid by rememberSaveable { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(
-                onClick = { if (note > 0) note-- },
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Reducir nota")
-            }
+            OutlinedTextField(
+                value = note,
+                onValueChange = { newValue ->
+                    val isNumericOrFloat = newValue.matches(Regex("^\\d*\\.?\\d*\$"))
 
-            Text(
-                text = note.toString(),
-                style = MaterialTheme.typography.displayMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                    val parsedValue = newValue.toFloatOrNull()
+
+                    if (newValue.isEmpty()) note = ""
+                    else if (isNumericOrFloat && parsedValue != null && parsedValue in 0.0..10.0) {
+                        note = newValue
+                        isInvalid = false
+                    }
+                },
+                isError = isInvalid,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
-
-            IconButton(
-                onClick = { if (note < 10) note++ },
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(Icons.Default.KeyboardArrowUp, contentDescription = "Aumentar nota")
-            }
         }
-
         Spacer(modifier = Modifier.height(16.dp))
-
         Button(
-            onClick = { onSaveNote(note) },
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            onClick = {
+                if (note.isEmpty()) isInvalid = true
+                if (note.isNotEmpty()) onSaveNote(note.toFloat())
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
         ) {
-            Text(text = "Guardar nota")
+            Text(text = stringResource(R.string.save_note))
         }
     }
 }
 
 @Composable
-fun StudentCard(student: Student, onClick: () -> Unit) {
-    val noteBackgroundColor = when {
-        student.note >= 7 -> Color.Green
-        student.note in 0..6 -> Color.Red
-        else -> Color.Gray
-    }
+private fun StudentCard(studentWithNote: StudentWithNote, onClick: () -> Unit) {
+    val note = studentWithNote.note
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(12.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = student.name,
-                style = MaterialTheme.typography.labelLarge,
+                text = studentWithNote.student.name,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(8.dp)
             )
-
             Box(
                 modifier = Modifier
-                    .background(noteBackgroundColor, shape = RoundedCornerShape(8.dp))
-                    .padding(12.dp)
+                    .size(32.dp)
             ) {
                 Text(
-                    text = student.note.toString(),
-                    style = MaterialTheme.typography.labelLarge.copy(color = Color.White)
+                    text = if (note == null || note <= 0f) "0" else note.toString(),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
         }

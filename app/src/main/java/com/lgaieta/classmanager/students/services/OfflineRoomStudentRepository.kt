@@ -2,6 +2,7 @@ package com.lgaieta.classmanager.students.services
 
 import com.lgaieta.classmanager.students.models.StudentRepository
 import com.lgaieta.classmanager.students.models.Student
+import com.lgaieta.classmanager.students.models.StudentWithNote
 import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,11 +18,8 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
     override fun getStudentStream(id: Long): Flow<Student?> =
         studentDao.getStudent(id).map { it?.toStudent() }
 
-    override fun getStudentsStream(subjectId: Int) : Flow<List<Student>> =
-        studentDao.getStudents(subjectId)
-
-    override fun getStudentsTaskStream(subjectId: Int) : Flow<List<Student>> =
-        studentDao.getStudentsByTask(subjectId)
+    override fun getStudentsStream(subjectId: Int): Flow<List<Student>> =
+        studentDao.getStudents(subjectId).map { list -> list.map { it.toStudent() } }
 
     override fun getSubjectsStream(studentId: Long): Flow<List<Subject>> =
         studentDao.getSubjects(studentId)
@@ -30,6 +28,13 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
         studentDao.getAllStudentsInSubject(subjectId).map { list ->
             list.map {
                 it.toStudent()
+            }
+        }
+
+    override fun getByTask(taskId: Int): Flow<List<StudentWithNote>> =
+        studentDao.getByTask(taskId).map { list ->
+            list.map {
+                it.toStudentWithNote()
             }
         }
 
@@ -63,4 +68,13 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
                 subjectId = it.second
             )
         })
+
+    override suspend fun updateNote(studentWithNote: StudentWithNote, taskId: Int) =
+        studentDao.updateNote(
+            TaskStudentCrossRef(
+                studentId = studentWithNote.student.id,
+                taskId = taskId,
+                note = studentWithNote.note ?: 0f
+            )
+        )
 }

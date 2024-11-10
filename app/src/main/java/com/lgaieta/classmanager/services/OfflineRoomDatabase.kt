@@ -7,14 +7,15 @@ import androidx.room.Database
 import com.lgaieta.classmanager.students.services.StudentRoomDao
 import com.lgaieta.classmanager.students.services.StudentRoomEntity
 import com.lgaieta.classmanager.students.services.SubjectStudentCrossRef
+import com.lgaieta.classmanager.students.services.TaskStudentCrossRef
 import com.lgaieta.classmanager.subjects.services.SubjectRoomDao
 import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
 import com.lgaieta.classmanager.tasks.services.TaskRoomDao
 import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
 
 @Database(
-    entities = [SubjectRoomEntity::class, TaskRoomEntity::class, StudentRoomEntity::class, SubjectStudentCrossRef::class],
-    version = 10,
+    entities = [SubjectRoomEntity::class, TaskRoomEntity::class, StudentRoomEntity::class, SubjectStudentCrossRef::class, TaskStudentCrossRef::class],
+    version = 11,
     exportSchema = false
 )
 abstract class OfflineRoomDatabase : RoomDatabase() {
