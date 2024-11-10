@@ -41,6 +41,8 @@ class NewTaskViewModel(
                 it.copy(name = "", description = "")
             }
             afterCreate()
+        }else{
+            _uiState.update{it.copy(nameError = true)}
         }
     }
 
@@ -51,7 +53,8 @@ class NewTaskViewModel(
 
 data class NewTaskState(
     val name: String = "",
-    val description: String = ""
+    val description: String = "",
+    val nameError: Boolean = false
 ) {
     fun toTask() = Task(id = 0, name =  name,description = description, subjectId = 0)
 }

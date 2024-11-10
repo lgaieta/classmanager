@@ -45,15 +45,21 @@ class EditTaskViewModel(
         }
     }
 
+    private fun isNameValid(): Boolean {
+        return _editTaskState.value.name.isNotBlank()
+    }
+
     suspend fun editTask() {
         val currentState = _editTaskState.value
         val updatedTask = currentState.storedTask?.copy(
             name = currentState.name,
             description = currentState.description,
         )
-        if (updatedTask != null) {
+        if (updatedTask != null && isNameValid()) {
             offlineTaskRepository.update(updatedTask)
             afterEdit(updatedTask.id)
+        }else{
+            _editTaskState.update{it.copy(nameError = true)}
         }
     }
 
@@ -66,4 +72,5 @@ data class EditTaskState(
     val name: String = "",
     val description : String = "",
     val storedTask: Task? = null,
+    val nameError: Boolean = false
 )
