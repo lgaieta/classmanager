@@ -27,6 +27,7 @@ fun BottomNavBar(actions: BottomNavBarActions) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -42,6 +43,22 @@ fun BottomNavBar(actions: BottomNavBarActions) {
                     contentDescription = stringResource(R.string.subject_list_nav_item_label)
                 )
                 Text(text = stringResource(R.string.subject_list_nav_item_label), style = MaterialTheme.typography.bodySmall)
+            }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        actions.onTasksClick()
+                    }
+                    .fillMaxHeight()
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.list_check_24),
+                    contentDescription = stringResource(R.string.task_list_nav_item_label)
+                )
+                Text(text = stringResource(R.string.task_list_nav_item_label), style = MaterialTheme.typography.bodySmall)
             }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,5 +83,6 @@ fun BottomNavBar(actions: BottomNavBarActions) {
 data class BottomNavBarActions(
     val onHomeClick: () -> Unit,
     val onSubjectsClick: () -> Unit,
+    val onTasksClick: () -> Unit,
     val onStudentsClick: () -> Unit
 )

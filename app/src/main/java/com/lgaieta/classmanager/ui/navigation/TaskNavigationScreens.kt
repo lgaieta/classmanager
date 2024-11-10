@@ -26,10 +26,13 @@ fun NavGraphBuilder.taskNavigationScreens(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    composable(route = ClassManagerScreen.TaskList.name) {
+    composable(
+        route = ClassManagerScreen.TaskList.name
+    ) {backStackEntry ->
         TaskNavigationScreens.TasksListScreenInitializer(
             navController = navController,
-            modifier = modifier
+            backStackEntry = backStackEntry,
+            modifier = modifier,
         )
     }
     composable(
@@ -71,13 +74,18 @@ class TaskNavigationScreens {
         @Composable
         fun TasksListScreenInitializer(
             navController: NavHostController,
+            backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+            val taskId =
+                backStackEntry.arguments?.getInt(TASK_ID_ARGUMENT) ?: return
+
             val tasksListViewModel =
                 viewModel<TasksListViewModel>(factory = viewModelFactory {
                     TasksListViewModel(
-                        offlineTaskRepository = ClassManagerApplication.taskModelsContainer.offlineTaskRepository
-                    )
+                        offlineTaskRepository = ClassManagerApplication.taskModelsContainer.offlineTaskRepository,
+                        taskId = taskId
+                        )
                 })
             TasksListScreen(
                 modifier = modifier,

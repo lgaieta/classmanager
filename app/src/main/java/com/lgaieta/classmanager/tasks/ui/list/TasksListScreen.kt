@@ -10,6 +10,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -28,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.BottomNavBar
 import com.lgaieta.classmanager.ui.BottomNavBarActions
+import com.lgaieta.classmanager.ui.theme.BottomPagePadding
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import com.lgaieta.classmanager.ui.theme.TopPagePadding
 
@@ -52,31 +55,37 @@ fun TasksListScreen(
         }
     )
     { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = modifier.padding(
-                horizontal = HorizontalPagePadding,
-                vertical = TopPagePadding + innerPadding.calculateTopPadding()
+                start = HorizontalPagePadding,
+                end = HorizontalPagePadding
             )
         ) {
-            TaskHeader()
-            Spacer(modifier = Modifier.height(48.dp))
-            if (listState.tasks.isEmpty())  {
-                Text(
-                    text = stringResource(R.string.empty_tasks_list),
-                    textAlign = TextAlign.Center,
-                )
+            item{
+                Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
             }
-            LazyColumn(
-                modifier = Modifier
-
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
+            item{
+                TaskHeader()
+                Spacer(modifier = Modifier.height(48.dp))
+            }
+            if (listState.tasks.isNotEmpty() )  {
                 items(listState.tasks) { task ->
-                    TaskItem(task, onClick = onTaskClick)
+                    TaskItem(task, onClick = onTaskClick )
+                    Spacer(modifier = Modifier.height(48.dp))
+                }
+
+            }else{
+                item{
+                        Text(
+                            text = stringResource(R.string.empty_tasks_list),
+                            textAlign = TextAlign.Center,
+                        )
                 }
             }
-            Spacer(modifier = Modifier.height(48.dp))
+            item {
+                Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
+            }
+
         }
     }
 }
@@ -97,7 +106,13 @@ fun TaskHeader() {
 
 @Composable
 fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    FloatingActionButton(onClick = onClick, modifier = modifier) {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        shape = MaterialTheme.shapes.extraLarge)
+    {
         Icon(Icons.Filled.Add, stringResource(R.string.new_task))
     }
 }
