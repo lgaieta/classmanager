@@ -173,7 +173,9 @@ fun TaskDetailsStudents(
     students: List<StudentWithNote>,
     onUpdateStudentNote: (StudentWithNote) -> Unit
 ) {
-    var selectedStudentWithNote by rememberSaveable { mutableStateOf<StudentWithNote?>(null) }
+    var selectedStudentId by rememberSaveable {
+        mutableStateOf<Long?>(null)
+    }
     var showNoteSelector by rememberSaveable { mutableStateOf(false) }
 
     LazyColumn(
@@ -186,7 +188,7 @@ fun TaskDetailsStudents(
             StudentCard(
                 studentWithNote = studentWithNote,
                 onClick = {
-                    selectedStudentWithNote = studentWithNote
+                    selectedStudentId = studentWithNote.student.id
                     showNoteSelector = true
                 }
             )
@@ -194,7 +196,7 @@ fun TaskDetailsStudents(
     }
 
     if (showNoteSelector) {
-        selectedStudentWithNote?.let {
+        students.find { it.student.id == selectedStudentId }?.let {
             ShowNoteSelectorDialog(
                 studentWithNote = it,
                 onSaveNote = { note ->
