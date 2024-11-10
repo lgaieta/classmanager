@@ -60,8 +60,8 @@
     <string name="create_student">Guardar Alumno</string>
     <string name="student_not_found">El alumno que estás buscando no existe.</string>
     <string name="edit">Editar</string>
-    <string name="confirm_delete_student_title">¿Estás seguro de borrar el alumno?\n</string>
-    <string name="confirm_delete_student_description">Los datos se eliminarán permanentemente.</string>
+    <string name="confirm_delete_student_title">¿Estás seguro de querer borrar el alumno?\n</string>
+    <string name="confirm_delete_student_description">Al borrar el alumno no podrás recuperarla.</string>
     <string name="delete_student_fab_description">Eliminar alumno</string>
     <string name="edit_student">Editar alumno</string>
     <string name="save_changes">Guardar cambios</string>
@@ -96,4 +96,5 @@
     <string name="error_empty_subject_name">El nombre de la materia no puede estar vacio</string>
     <string name="error_empty_task_name">El nombre de la tarea no puede estar vacio</string>
     <string name="task_list_nav_item_label">Tareas</string>
+    <string name="confirm_delete_student_button">Borrar</string>
 </resources>
