@@ -91,4 +91,7 @@ interface StudentRoomDao {
             removeSubject(pair.studentId, pair.subjectId)
         }
     }
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateNote(taskStudentCrossRef: TaskStudentCrossRef)
 }

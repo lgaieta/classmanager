@@ -17,4 +17,5 @@ interface StudentRepository {
     suspend fun assignSubjects(studentSubjectPairs: List<Pair<Long, Int>>)
     suspend fun removeSubject(studentId: Long, subjectId: Int)
     suspend fun removeSubjects(studentSubjectPairs: List<Pair<Long, Int>>)
+    suspend fun updateNote(studentWithNote: StudentWithNote, taskId: Int)
 }

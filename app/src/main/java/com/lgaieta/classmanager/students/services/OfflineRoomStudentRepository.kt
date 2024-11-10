@@ -68,4 +68,13 @@ class OfflineRoomStudentRepository(private val studentDao: StudentRoomDao) : Stu
                 subjectId = it.second
             )
         })
+
+    override suspend fun updateNote(studentWithNote: StudentWithNote, taskId: Int) =
+        studentDao.updateNote(
+            TaskStudentCrossRef(
+                studentId = studentWithNote.student.id,
+                taskId = taskId,
+                note = studentWithNote.note ?: 0f
+            )
+        )
 }

@@ -2,7 +2,6 @@ package com.lgaieta.classmanager.tasks.ui.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lgaieta.classmanager.students.models.Student
 import com.lgaieta.classmanager.students.models.StudentRepository
 import com.lgaieta.classmanager.students.models.StudentWithNote
 import com.lgaieta.classmanager.subjects.models.Subject
@@ -19,11 +18,12 @@ import kotlinx.coroutines.launch
 
 class TaskDetailsViewModel(
     private val offlineTaskRepository: TaskRepository,
-    offlineStudentRepository: StudentRepository,
+    private val offlineStudentRepository: StudentRepository,
     offlineSubjectRepository: SubjectRepository,
     private val taskId: Int,
     private val afterEdit: (id: Int) -> Unit = {},
-    private val afterDelete: (task: Task) -> Unit = {}
+    private val afterDelete: (task: Task) -> Unit = {},
+    private val afterUpdateNote: (studentWithNote: StudentWithNote) -> Unit = {}
 ) : ViewModel() {
     val taskDetailsState: StateFlow<Task?> =
         offlineTaskRepository.getTaskStream(taskId)
@@ -57,7 +57,9 @@ class TaskDetailsViewModel(
                 println("Students: ${it.value}")
             }
 
-    fun changeNote(studentWithNote: StudentWithNote) {
+    suspend fun saveNote(studentWithNote: StudentWithNote) {
+        offlineStudentRepository.updateNote(studentWithNote, taskId)
+        afterUpdateNote(studentWithNote)
     }
 
     fun onEdit() {
