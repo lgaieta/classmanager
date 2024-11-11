@@ -36,8 +36,8 @@ fun SubjectItem(subject: Subject, modifier: Modifier = Modifier, onClick: (id: I
                 .fillMaxWidth()
                 .padding(top = ItemPadding, start = ItemPadding, end = ItemPadding)
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        if (subject.info != null) {
+        if (!subject.info.isNullOrEmpty()) {
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = subject.info,
                 style = MaterialTheme.typography.bodyMedium,
@@ -46,6 +46,10 @@ fun SubjectItem(subject: Subject, modifier: Modifier = Modifier, onClick: (id: I
                     .fillMaxWidth()
                     .padding(start = ItemPadding, end = ItemPadding, bottom = ItemPadding)
             )
+        }
+        else{
+            Spacer(modifier = Modifier.height(ItemPadding))
+
         }
     }
 }
