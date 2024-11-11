@@ -147,7 +147,7 @@ private fun TaskStudentsNotFound() {
         text = stringResource(R.string.students_not_found),
         style = MaterialTheme.typography.bodyMedium,
         modifier = Modifier
-            .padding(24.dp)
+            .padding(12.dp)
     )
 }
 
