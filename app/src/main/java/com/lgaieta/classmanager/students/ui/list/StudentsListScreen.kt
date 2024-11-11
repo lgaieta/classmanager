@@ -72,7 +72,7 @@ fun StudentsListScreen(
             }
             items(listState.students) { student ->
                 StudentItem(student, onClick = onStudentClick)
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
             }
             item {
                 Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))

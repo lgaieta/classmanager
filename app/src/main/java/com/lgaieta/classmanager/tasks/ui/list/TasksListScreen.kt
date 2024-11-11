@@ -66,7 +66,7 @@ fun TasksListScreen(
             if (listState.tasks.isNotEmpty() )  {
                 items(listState.tasks) { task ->
                     TaskItem(task, onClick = onTaskClick )
-                    Spacer(modifier = Modifier.height(48.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
 
             }else{
