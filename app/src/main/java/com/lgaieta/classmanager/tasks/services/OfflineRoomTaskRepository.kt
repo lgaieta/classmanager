@@ -1,4 +1,3 @@
-import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.tasks.models.Task
 import kotlinx.coroutines.flow.Flow
 import com.lgaieta.classmanager.tasks.models.TaskRepository

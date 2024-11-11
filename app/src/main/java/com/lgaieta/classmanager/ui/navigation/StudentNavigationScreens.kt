@@ -10,7 +10,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
-import com.lgaieta.classmanager.models.SessionManager
 import com.lgaieta.classmanager.services.FirebaseSessionManager
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsScreen
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsViewModel

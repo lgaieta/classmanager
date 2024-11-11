@@ -40,7 +40,6 @@ import androidx.compose.ui.window.Dialog
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.subjects.models.Subject
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditStudentSubjectSelect(
     availableSubjects: List<Subject>,

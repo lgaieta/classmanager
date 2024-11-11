@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.lgaieta.classmanager.ui.theme.HorizontalPagePadding
 import androidx.compose.runtime.*
-
 import androidx.compose.ui.res.stringResource
 import com.lgaieta.classmanager.R
 import com.lgaieta.classmanager.ui.BottomNavBar

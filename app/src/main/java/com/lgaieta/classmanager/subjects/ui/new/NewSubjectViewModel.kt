@@ -39,10 +39,6 @@ class NewSubjectViewModel(
         return _uiState.value.name.isNotBlank()
     }
 
-    private fun isInfoValid(): Boolean {
-        return _uiState.value.info.isNotBlank()
-    }
-
     suspend fun saveSubject() {
         if (isNameValid()) {
             offlineSubjectRepository.insert(uiState.value.toSubject())

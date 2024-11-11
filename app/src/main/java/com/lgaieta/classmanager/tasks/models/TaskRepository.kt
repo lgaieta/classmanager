@@ -1,6 +1,5 @@
 package com.lgaieta.classmanager.tasks.models
 
-import com.lgaieta.classmanager.subjects.models.Subject
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {

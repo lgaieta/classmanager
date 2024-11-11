@@ -1,15 +1,11 @@
 package com.lgaieta.classmanager.tasks.services
 
-import com.lgaieta.classmanager.tasks.services.TaskRoomEntity
-
-
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
 import kotlinx.coroutines.flow.Flow
 

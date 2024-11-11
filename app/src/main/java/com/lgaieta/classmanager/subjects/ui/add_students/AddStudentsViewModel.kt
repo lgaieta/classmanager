@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgaieta.classmanager.students.models.StudentRepository
 import com.lgaieta.classmanager.students.ui.list.StudentsListState
-import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

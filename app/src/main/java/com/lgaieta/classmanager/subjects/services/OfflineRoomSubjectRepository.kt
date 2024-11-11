@@ -4,7 +4,6 @@ import com.lgaieta.classmanager.subjects.services.SubjectRoomDao
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import com.lgaieta.classmanager.subjects.services.SubjectRoomEntity
 import com.lgaieta.classmanager.tasks.models.Task
-import com.lgaieta.classmanager.students.models.Student
 import kotlinx.coroutines.flow.map
 
 class OfflineRoomSubjectRepository(private val subjectDao: SubjectRoomDao) : SubjectRepository {

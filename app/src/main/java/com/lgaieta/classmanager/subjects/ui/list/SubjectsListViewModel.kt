@@ -6,7 +6,6 @@ import com.lgaieta.classmanager.subjects.models.Subject
 import com.lgaieta.classmanager.subjects.models.SubjectRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class SubjectsListViewModel(offlineSubjectRepository: SubjectRepository) : ViewModel() {
