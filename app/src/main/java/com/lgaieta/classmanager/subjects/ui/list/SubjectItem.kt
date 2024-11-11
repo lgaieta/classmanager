@@ -36,8 +36,8 @@ fun SubjectItem(subject: Subject, modifier: Modifier = Modifier, onClick: (id: I
                 .fillMaxWidth()
                 .padding(top = ItemPadding, start = ItemPadding, end = ItemPadding)
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        if (subject.info != null) {
+            Spacer(modifier = Modifier.height(ItemPadding))
+        if (!subject.info.isNullOrEmpty()) {
             Text(
                 text = subject.info,
                 style = MaterialTheme.typography.bodyMedium,
