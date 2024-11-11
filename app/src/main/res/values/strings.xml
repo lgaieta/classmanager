@@ -105,4 +105,6 @@
     <string name="dont_have_account">No tengo cuenta</string>
     <string name="already_have_account">Ya tengo cuenta</string>
     <string name="login">Iniciar sesión</string>
+    <string name="my_account">Mi cuenta</string>
+    <string name="logout">Cerrar sesión</string>
 </resources>

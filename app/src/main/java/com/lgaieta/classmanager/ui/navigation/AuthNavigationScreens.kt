@@ -4,6 +4,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.lgaieta.classmanager.auth.ui.account.AccountScreen
+import com.lgaieta.classmanager.auth.ui.account.AccountViewModel
 import com.lgaieta.classmanager.auth.ui.login.LoginScreen
 import com.lgaieta.classmanager.auth.ui.register.LoginViewModel
 import com.lgaieta.classmanager.services.FirebaseSessionManager
@@ -44,5 +46,18 @@ fun NavGraphBuilder.authNavigationScreens(navController: NavHostController) {
                 })
         })
         LoginScreen(loginViewModel = loginViewModel)
+    }
+    composable(route = ClassManagerScreen.Account.name) {
+        val accountViewModel: AccountViewModel = viewModel(factory = viewModelFactory {
+            AccountViewModel(
+                sessionManager = FirebaseSessionManager(),
+                afterLogout = {navController.navigate(ClassManagerScreen.Login.name)}
+            )
+        })
+
+        AccountScreen(
+            bottomNavBarActions = getDefaultBottomNavBarActions(navController),
+            accountViewModel = accountViewModel
+        )
     }
 }

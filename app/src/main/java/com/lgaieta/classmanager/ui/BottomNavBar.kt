@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -20,7 +22,7 @@ import com.lgaieta.classmanager.R
 @Composable
 fun BottomNavBar(actions: BottomNavBarActions) {
     BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
         Row(
@@ -76,13 +78,29 @@ fun BottomNavBar(actions: BottomNavBarActions) {
                 )
                 Text(text = stringResource(R.string.students_list_nav_item_label), style = MaterialTheme.typography.bodySmall)
             }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        actions.onAccountClick()
+                    }
+                    .fillMaxHeight()
+            ) {
+                Icon(
+                    Icons.Filled.Person,
+                    contentDescription = stringResource(R.string.my_account)
+                )
+                Text(text = stringResource(R.string.my_account), style = MaterialTheme.typography.bodySmall)
+            }
         }
     }
 }
 
 data class BottomNavBarActions(
-    val onHomeClick: () -> Unit,
     val onSubjectsClick: () -> Unit,
     val onTasksClick: () -> Unit,
-    val onStudentsClick: () -> Unit
+    val onStudentsClick: () -> Unit,
+    val onAccountClick: () -> Unit
 )

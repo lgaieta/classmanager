@@ -15,5 +15,7 @@ interface SessionManager {
         onFailure: () -> Unit
     )
 
+    fun logout()
+
     fun isLoggedIn(): Boolean
 }

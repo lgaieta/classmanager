@@ -36,6 +36,10 @@ class FirebaseSessionManager : SessionManager {
         }
     }
 
+    override fun logout() {
+        auth.signOut()
+    }
+
     override fun isLoggedIn(): Boolean {
         return auth.currentUser != null
     }

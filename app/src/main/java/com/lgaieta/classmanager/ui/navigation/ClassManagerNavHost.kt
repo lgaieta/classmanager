@@ -13,7 +13,7 @@ enum class ClassManagerScreen {
     NewSubject,
     EditSubject,
     SubjectDetails,
-    Home,
+    Account,
     StudentsList,
     TaskList,
     NewTask,
@@ -26,10 +26,10 @@ enum class ClassManagerScreen {
 }
 
 fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(
-    onHomeClick = { navController.navigate(ClassManagerScreen.Home.name) },
     onSubjectsClick = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
     onTasksClick = {navController.navigate(ClassManagerScreen.TaskList.name)},
-    onStudentsClick = { navController.navigate(ClassManagerScreen.StudentsList.name) }
+    onStudentsClick = { navController.navigate(ClassManagerScreen.StudentsList.name) },
+    onAccountClick = { navController.navigate(ClassManagerScreen.Account.name) }
 )
 
 @Composable
