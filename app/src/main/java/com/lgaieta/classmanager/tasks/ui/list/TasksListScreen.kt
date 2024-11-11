@@ -56,31 +56,27 @@ fun TasksListScreen(
                 end = HorizontalPagePadding
             )
         ) {
-            item{
+            item {
                 Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
-            }
-            item{
                 TaskHeader()
                 Spacer(modifier = Modifier.height(48.dp))
             }
-            if (listState.tasks.isNotEmpty() )  {
-                items(listState.tasks) { task ->
-                    TaskItem(task, onClick = onTaskClick )
+            if (listState.isNotEmpty()) {
+                items(listState) { task ->
+                    TaskItem(task, onClick = onTaskClick)
                     Spacer(modifier = Modifier.height(12.dp))
                 }
-
-            }else{
-                item{
-                        Text(
-                            text = stringResource(R.string.empty_tasks_list),
-                            textAlign = TextAlign.Center,
-                        )
+            } else {
+                item {
+                    Text(
+                        text = stringResource(R.string.empty_tasks_list),
+                        textAlign = TextAlign.Center,
+                    )
                 }
             }
             item {
                 Spacer(modifier = Modifier.height(BottomPagePadding + innerPadding.calculateBottomPadding()))
             }
-
         }
     }
 }
@@ -106,7 +102,8 @@ fun NewTaskButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
-        shape = MaterialTheme.shapes.extraLarge)
+        shape = MaterialTheme.shapes.extraLarge
+    )
     {
         Icon(Icons.Filled.Add, stringResource(R.string.new_task))
     }

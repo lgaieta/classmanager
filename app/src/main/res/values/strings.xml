@@ -97,4 +97,12 @@
     <string name="error_empty_task_name">El nombre de la tarea no puede estar vacio</string>
     <string name="task_list_nav_item_label">Tareas</string>
     <string name="confirm_delete_student_button">Borrar</string>
+    <string name="main_subtitle">Tu trabajo organizado en un solo lugar.</string>
+    <string name="classmanager">ClassManager</string>
+    <string name="password">Contraseña</string>
+    <string name="email">Email</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="dont_have_account">No tengo cuenta</string>
+    <string name="already_have_account">Ya tengo cuenta</string>
+    <string name="login">Iniciar sesión</string>
 </resources>
