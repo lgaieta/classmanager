@@ -2,6 +2,7 @@ package com.lgaieta.classmanager.ui.navigation
 
 import EditSubjectViewModel
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -11,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
+import com.lgaieta.classmanager.services.FirebaseSessionManager
 import com.lgaieta.classmanager.subjects.ui.details.SubjectDetailsScreen
 import com.lgaieta.classmanager.subjects.ui.details.SubjectDetailsViewModel
 import com.lgaieta.classmanager.subjects.ui.edit.EditSubjectScreen
@@ -53,6 +55,7 @@ fun NavGraphBuilder.subjectNavigationScreens(navController: NavHostController) {
     composable(route = ClassManagerScreen.NewSubject.name) {
         SubjectNavigationScreens.NewSubjectScreenInitializer(navController = navController)
     }
+
 }
 
 class SubjectNavigationScreens {
@@ -62,6 +65,15 @@ class SubjectNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            }
+
             val subjectsListViewModel =
                 viewModel<SubjectsListViewModel>(factory = viewModelFactory {
                     SubjectsListViewModel(
@@ -83,6 +95,14 @@ class SubjectNavigationScreens {
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
+
             val subjectId =
                 backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
 
@@ -122,6 +142,14 @@ class SubjectNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
+
             val newSubjectViewModel =
                 viewModel<NewSubjectViewModel>(factory = viewModelFactory {
                     NewSubjectViewModel(
@@ -144,6 +172,13 @@ class SubjectNavigationScreens {
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val subjectId =
                 backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
 

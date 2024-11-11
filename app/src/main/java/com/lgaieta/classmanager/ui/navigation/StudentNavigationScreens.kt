@@ -1,6 +1,7 @@
 package com.lgaieta.classmanager.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -9,6 +10,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
+import com.lgaieta.classmanager.models.SessionManager
+import com.lgaieta.classmanager.services.FirebaseSessionManager
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsScreen
 import com.lgaieta.classmanager.students.ui.details.StudentDetailsViewModel
 import com.lgaieta.classmanager.students.ui.edit.EditStudentScreen
@@ -74,6 +77,13 @@ class StudentNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val studentsListViewModel =
                 viewModel<StudentsListViewModel>(factory = viewModelFactory {
                     StudentsListViewModel(
@@ -96,6 +106,13 @@ class StudentNavigationScreens {
             navController: NavHostController,
             backStackEntry: NavBackStackEntry,
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val studentId =
                 backStackEntry.arguments?.getLong(SUBJECT_ID_ARGUMENT) ?: return
 
@@ -121,6 +138,13 @@ class StudentNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val newStudentViewModel =
                 viewModel<NewStudentViewModel>(factory = viewModelFactory {
                     NewStudentViewModel(
@@ -142,6 +166,13 @@ class StudentNavigationScreens {
             backStackEntry: NavBackStackEntry,
             navController: NavHostController
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val studentId = backStackEntry.arguments?.getLong(STUDENT_ID_ARGUMENT) ?: return
 
             val editStudentViewModel = viewModel<EditStudentViewModel>(factory = viewModelFactory {
@@ -166,6 +197,13 @@ class StudentNavigationScreens {
             backStackEntry: NavBackStackEntry,
             navController: NavHostController
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val subjectId = backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
 
             val addStudentsViewModel = viewModel<AddStudentsViewModel>(factory = viewModelFactory {
@@ -173,7 +211,7 @@ class StudentNavigationScreens {
                     offlineStudentRepository = ClassManagerApplication.studentModelsContainer.offlineStudentRepository,
                     afterStudentClick = {},
                     subjectId = subjectId,
-                    afterSubmit = {navController.popBackStack()}
+                    afterSubmit = { navController.popBackStack() }
                 )
             })
 
