@@ -40,7 +40,5 @@ fun TaskItem(task: Task, modifier: Modifier = Modifier, onClick: (id: Int) -> Un
                 .fillMaxWidth()
                 .padding(top = 32.dp, bottom = 32.dp , start = 32.dp, end = 32.dp)
         )
-        Spacer(modifier = Modifier.height(8.dp))
-
     }
 }
