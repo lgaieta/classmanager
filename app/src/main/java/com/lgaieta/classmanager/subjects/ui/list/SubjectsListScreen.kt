@@ -60,12 +60,10 @@ fun SubjectsListScreen(
         ) {
             item {
                 Spacer(modifier = Modifier.height(TopPagePadding + innerPadding.calculateTopPadding()))
-            }
-            item {
                 SubjectHeader()
                 Spacer(modifier = Modifier.height(48.dp))
             }
-            if (listState.subjects.isEmpty()) {
+            if (listState.isEmpty()) {
                 item {
                     Text(
                         text = stringResource(R.string.empty_subjects_list),
@@ -73,7 +71,7 @@ fun SubjectsListScreen(
                     )
                 }
             }
-            items(listState.subjects) { subject ->
+            items(listState) { subject ->
                 SubjectItem(subject, onClick = onSubjectClick)
                 Spacer(modifier = Modifier.height(12.dp))
             }

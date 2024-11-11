@@ -10,15 +10,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class SubjectsListViewModel(offlineSubjectRepository: SubjectRepository) : ViewModel() {
-    val subjectListState: StateFlow<SubjectListState> =
-        offlineSubjectRepository.getAllSubjectsStream().map { SubjectListState(subjects = it) }
+    val subjectListState: StateFlow<List<Subject>> =
+        offlineSubjectRepository.getAllSubjectsStream()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
-                initialValue = SubjectListState()
+                initialValue = emptyList()
             )
 }
-
-data class SubjectListState(
-    val subjects: List<Subject> = emptyList()
-)
