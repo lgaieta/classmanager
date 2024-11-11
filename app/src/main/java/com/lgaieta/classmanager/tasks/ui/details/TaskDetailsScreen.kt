@@ -60,6 +60,7 @@ fun TaskDetailsScreen(
     val subjectState by taskDetailsViewModel.subjectState.collectAsState()
     val studentsState by taskDetailsViewModel.studentsState.collectAsState()
     val isNotFound = taskState == null
+    val studentsNotFound = studentsState.isEmpty()
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -96,12 +97,17 @@ fun TaskDetailsScreen(
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                 )
                 Spacer(modifier = Modifier.height(4.dp))
+                if(!studentsNotFound){
                 TaskDetailsStudents(
                     students = studentsState,
                     onUpdateStudentNote = { studentWithNote ->
                         coroutineScope.launch { taskDetailsViewModel.saveNote(studentWithNote) }
                     },
                 )
+                }
+                    else{
+                     TaskStudentsNotFound()
+                    }
             } else {
                 TaskDetailsNotFound()
             }
@@ -129,6 +135,16 @@ private fun TaskDescription(description: String) {
 private fun TaskDetailsNotFound() {
     Text(
         text = stringResource(R.string.task_not_found),
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = Modifier
+            .padding(24.dp)
+    )
+}
+
+@Composable
+private fun TaskStudentsNotFound() {
+    Text(
+        text = stringResource(R.string.students_not_found),
         style = MaterialTheme.typography.bodyMedium,
         modifier = Modifier
             .padding(24.dp)
