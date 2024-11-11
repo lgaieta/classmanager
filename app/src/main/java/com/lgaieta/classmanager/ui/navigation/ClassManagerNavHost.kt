@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.lgaieta.classmanager.services.FirebaseSessionManager
 import com.lgaieta.classmanager.ui.BottomNavBarActions
 
 enum class ClassManagerScreen {
@@ -27,7 +28,7 @@ enum class ClassManagerScreen {
 
 fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavBarActions(
     onSubjectsClick = { navController.navigate(ClassManagerScreen.SubjectsList.name) },
-    onTasksClick = {navController.navigate(ClassManagerScreen.TaskList.name)},
+    onTasksClick = { navController.navigate(ClassManagerScreen.TaskList.name) },
     onStudentsClick = { navController.navigate(ClassManagerScreen.StudentsList.name) },
     onAccountClick = { navController.navigate(ClassManagerScreen.Account.name) }
 )
@@ -36,7 +37,7 @@ fun getDefaultBottomNavBarActions(navController: NavHostController) = BottomNavB
 fun ClassManagerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = ClassManagerScreen.Login.name,
+        startDestination = if (FirebaseSessionManager().isLoggedIn()) ClassManagerScreen.SubjectsList.name else ClassManagerScreen.Login.name,
     ) {
         authNavigationScreens(navController)
         studentNavigationScreens(navController)

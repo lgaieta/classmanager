@@ -57,16 +57,25 @@ fun NavGraphBuilder.authNavigationScreens(navController: NavHostController) {
     }
 
     composable(route = ClassManagerScreen.Account.name) {
-        val accountViewModel: AccountViewModel = viewModel(factory = viewModelFactory {
-            AccountViewModel(
-                sessionManager = FirebaseSessionManager(),
-                afterLogout = { navController.navigate(ClassManagerScreen.Login.name) }
-            )
-        })
+        val sessionManager = FirebaseSessionManager()
+        if (!sessionManager.isLoggedIn()) {
+            LaunchedEffect(Unit) {
+                navController.navigate(ClassManagerScreen.Login.name) {
+                    popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                }
+            }
+        } else {
+            val accountViewModel: AccountViewModel = viewModel(factory = viewModelFactory {
+                AccountViewModel(
+                    sessionManager = FirebaseSessionManager(),
+                    afterLogout = { navController.navigate(ClassManagerScreen.Login.name) }
+                )
+            })
 
-        AccountScreen(
-            bottomNavBarActions = getDefaultBottomNavBarActions(navController),
-            accountViewModel = accountViewModel
-        )
+            AccountScreen(
+                bottomNavBarActions = getDefaultBottomNavBarActions(navController),
+                accountViewModel = accountViewModel
+            )
+        }
     }
 }

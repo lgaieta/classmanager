@@ -1,6 +1,7 @@
 package com.lgaieta.classmanager.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -10,6 +11,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.lgaieta.classmanager.ClassManagerApplication
+import com.lgaieta.classmanager.services.FirebaseSessionManager
 import com.lgaieta.classmanager.tasks.ui.details.TaskDetailsScreen
 import com.lgaieta.classmanager.tasks.ui.details.TaskDetailsViewModel
 import com.lgaieta.classmanager.tasks.ui.edit.EditTaskScreen
@@ -67,7 +69,6 @@ fun NavGraphBuilder.taskNavigationScreens(
     }
 }
 
-
 class TaskNavigationScreens {
     companion object {
         @Composable
@@ -75,6 +76,13 @@ class TaskNavigationScreens {
             navController: NavHostController,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val tasksListViewModel =
                 viewModel<TasksListViewModel>(factory = viewModelFactory {
                     TasksListViewModel(
@@ -96,6 +104,13 @@ class TaskNavigationScreens {
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val taskId =
                 backStackEntry.arguments?.getInt(TASK_ID_ARGUMENT) ?: return
 
@@ -124,6 +139,13 @@ class TaskNavigationScreens {
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val subjectId =
                 backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
 
@@ -151,6 +173,13 @@ class TaskNavigationScreens {
             backStackEntry: NavBackStackEntry,
             modifier: Modifier = Modifier
         ) {
+            LaunchedEffect(Unit) {
+                if (!FirebaseSessionManager().isLoggedIn()) {
+                    navController.navigate(ClassManagerScreen.Login.name) {
+                        popUpTo(ClassManagerScreen.Login.name) { inclusive = true }
+                    }
+                }
+            }
             val taskId =
                 backStackEntry.arguments?.getInt(SUBJECT_ID_ARGUMENT) ?: return
 
